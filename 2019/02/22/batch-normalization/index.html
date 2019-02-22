@@ -96,25 +96,27 @@
 
 
 
-  <meta name="description" content="这是一篇有关论文写作的文章。 Abstract and paperabstract是对文章的精炼，读者可能不会读整篇文章，而通过阅读你的abstract来进行判断，abstract应该包含你文章里的关键贡献和关键内容。 Introduction可以对abstract中的部分内容进行重复，用一种通俗的方法来解释这个问题你是如何解决的，不要太技术化；解释你为什么研究的这个问题，如何入手的，就是你的研究">
-<meta name="keywords" content="论文写作,CS">
+  <meta name="description" content="机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。 　　接下来一步一步的理解什么是BN。 　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个">
+<meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="科技论文写作">
-<meta property="og:url" content="http://yoursite.com/2019/01/29/科技论文写作/index.html">
+<meta property="og:title" content="batch_normalization 批标准化">
+<meta property="og:url" content="http://yoursite.com/2019/02/22/batch-normalization/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="这是一篇有关论文写作的文章。 Abstract and paperabstract是对文章的精炼，读者可能不会读整篇文章，而通过阅读你的abstract来进行判断，abstract应该包含你文章里的关键贡献和关键内容。 Introduction可以对abstract中的部分内容进行重复，用一种通俗的方法来解释这个问题你是如何解决的，不要太技术化；解释你为什么研究的这个问题，如何入手的，就是你的研究">
+<meta property="og:description" content="机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。 　　接下来一步一步的理解什么是BN。 　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-01-29T07:30:12.585Z">
+<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1200px-Logistic-curve.svg.png">
+<meta property="og:updated_time" content="2019-02-22T08:56:12.275Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="科技论文写作">
-<meta name="twitter:description" content="这是一篇有关论文写作的文章。 Abstract and paperabstract是对文章的精炼，读者可能不会读整篇文章，而通过阅读你的abstract来进行判断，abstract应该包含你文章里的关键贡献和关键内容。 Introduction可以对abstract中的部分内容进行重复，用一种通俗的方法来解释这个问题你是如何解决的，不要太技术化；解释你为什么研究的这个问题，如何入手的，就是你的研究">
+<meta name="twitter:title" content="batch_normalization 批标准化">
+<meta name="twitter:description" content="机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。 　　接下来一步一步的理解什么是BN。 　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个">
+<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1200px-Logistic-curve.svg.png">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/01/29/科技论文写作/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/22/batch-normalization/">
 
 
 
@@ -124,7 +126,7 @@
   };
 </script>
 
-  <title>科技论文写作 | Dewey's blog</title>
+  <title>batch_normalization 批标准化 | Dewey's blog</title>
   
 
 
@@ -344,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/29/科技论文写作/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/batch-normalization/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -361,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">科技论文写作
+          <h1 class="post-title" itemprop="name headline">batch_normalization 批标准化
 
               
             
@@ -387,7 +389,7 @@
                 
               
 
-              <time title="创建时间：2019-01-29 13:19:52 / 修改时间：15:30:12" itemprop="dateCreated datePublished" datetime="2019-01-29T13:19:52+08:00">2019-01-29</time>
+              <time title="创建时间：2019-02-22 16:30:22 / 修改时间：16:56:12" itemprop="dateCreated datePublished" datetime="2019-02-22T16:30:22+08:00">2019-02-22</time>
             
 
             
@@ -409,7 +411,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/论文写作/" itemprop="url" rel="index"><span itemprop="name">论文写作</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
 
                 
                 
@@ -444,18 +446,13 @@
       
 
       
-        <p>这是一篇有关论文写作的文章。</p>
-<h3 id="Abstract-and-paper"><a href="#Abstract-and-paper" class="headerlink" title="Abstract and paper"></a>Abstract and paper</h3><p>abstract是对文章的精炼，读者可能不会读整篇文章，而通过阅读你的abstract来进行判断，abstract应该包含你文章里的关键贡献和关键内容。</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>可以对abstract中的部分内容进行重复，用一种通俗的方法来解释这个问题你是如何解决的，不要太技术化；解释你为什么研究的这个问题，如何入手的，就是你的研究历程；解释你的创新点，你的工作与前人的任工作有何不同？为什么你的工作优于他们？简要介绍你文章的分布，使得结构更加清晰，尤其要把你的创新部分着重说一下。<br><a id="more"></a></p>
-<h3 id="Related-works"><a href="#Related-works" class="headerlink" title="Related works"></a>Related works</h3><p>这部分介绍要包含所有与你研究内容相关的其他人的研究工作，不要总结每一部分，而是去分析他们，比如，他们哪部分做的好，哪部分做的不太行，采用了什么结构解决了什么东西，或者没解决什么，要说出他们的局限，你的工作必须在某方面做得要更好，与前人的工作做出对比，你这某方面是优于他们的。还有就是你采用了人家的某些方法，你要解释他们的这些工作，你是如何用的，为什么要用这个方法，阐述清楚。</p>
-<h3 id="Theory-methods"><a href="#Theory-methods" class="headerlink" title="Theory(methods)"></a>Theory(methods)</h3><p>陈述这些理论是如何解决你的问题，清晰的阐明你的结果，举一些适当的例子的来辅证你的方法</p>
-<h3 id="Algorithm"><a href="#Algorithm" class="headerlink" title="Algorithm"></a>Algorithm</h3><p>说清楚这个算法是如何解决你的问题的，说清楚算法的输入，输出，给出伪代码，或者可以用流程图或表格来说明你的算法，一些网络的话，就要说清楚网络结构，输入输出，以及如何训练，数据集的划分，loss function的构造，以及他们的作用，意义。</p>
-<h3 id="Experimental-results"><a href="#Experimental-results" class="headerlink" title="Experimental results"></a>Experimental results</h3><p>你做的每个实验都要有你自己的目的，即做这个实验我能证明什么，说清楚这个实验的参数设置，以及输出，时间代价等等。最后总结从实验中，得出了什么结论。</p>
-<h3 id="Conclusions"><a href="#Conclusions" class="headerlink" title="Conclusions"></a>Conclusions</h3><p>总结你的创新点，解释为什么你的结果很重要且有用。</p>
-<h3 id="Figures"><a href="#Figures" class="headerlink" title="Figures"></a>Figures</h3><p>每张图都要有目的，更清晰的帮你说明你文章的内容，或者能够证明实验的结果，对每张图要给一个简短的描述，尽量把图和你要讲的内容放在一起，确保图不会误导读者。</p>
-<h3 id="Other-issues"><a href="#Other-issues" class="headerlink" title="Other issues"></a>Other issues</h3><p>对于method，不要只讲他是怎么work的，而是要讲出为什么要用它，它为什么比别的方法要值得采用，以及它会带来的好处。</p>
-<p>对于同一术语，尽量保持一致；参数尽量一致</p>
-<p>stating something &amp; explaining something</p>
+        <p>机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。</p>
+<p>　　接下来一步一步的理解什么是BN。</p>
+<p>　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个在DL领域很接近本质的好问题。很多论文都是解决这个问题的，比如ReLU激活函数，再比如Residual Network，BN本质上也是解释并从某个不同的角度来解决这个问题的。<br><a id="more"></a></p>
+<h3 id="Batch-Norm的本质思想"><a href="#Batch-Norm的本质思想" class="headerlink" title="Batch Norm的本质思想"></a>Batch Norm的本质思想</h3><p>激活输入值（就是那个x=WU+B，U是输入）随着网络深度加深或者在训练过程中，其分布逐渐发生偏移或者变动，之所以训练收敛慢，一般是整体分布逐渐往非线性函数的取值区间的上下限两端靠近（对于Sigmoid函数来说，意味着激活输入值WU+B是大的负值或正值），所以这导致反向传播时低层神经网络的梯度消失，这是训练深层神经网络收敛越来越慢的本质原因，<strong>而BN就是通过一定的规范化手段，把每层神经网络任意神经元这个输入值的分布强行拉回到均值为0方差为1的标准正态分布，</strong>其实就是把越来越偏的分布强制拉回比较标准的分布，这样使得激活输入值落在非线性函数对输入比较敏感的区域，这样输入的小变化就会导致损失函数较大的变化，意思是这样让梯度变大，避免梯度消失问题产生，而且梯度变大意味着学习收敛速度快，能大大加快训练速度。</p>
+<p><div align="center">sigmoid(x)</div><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1200px-Logistic-curve.svg.png" alt="sigmoid(x)"></p>
+<p>假设没有经过BN调整前x的原先正态分布均值是-6，方差是1，那么意味着95%的值落在了[-8,-4]之间，那么对应的Sigmoid（x）函数的值明显接近于0，这是典型的梯度饱和区，在这个区域里梯度变化很慢，为什么是梯度饱和区？请看下sigmoid(x)如果取值接近0或者接近于1的时候对应导数函数取值，接近于0，意味着梯度变化很小甚至消失。而假设经过BN后，均值是0，方差是1，那么意味着95%的x值落在了[-2,2]区间内，很明显这一段是sigmoid(x)函数接近于线性变换的区域，意味着x的小变化会导致非线性函数值较大的变化，也即是梯度变化较大，对应导数函数图中明显大于0的区域，就是梯度非饱和区。</p>
+<p>但是很明显，看到这里，稍微了解神经网络的读者一般会提出一个疑问：如果都通过BN，那么不就跟把非线性函数替换成线性函数效果相同了？这意味着什么？我们知道，如果是多层的线性函数变换其实这个深层是没有意义的，因为多层线性网络跟一层线性网络是等价的。这意味着网络的表达能力下降了，这也意味着深度的意义就没有了。<strong>所以BN为了保证非线性的获得，对变换后的满足均值为0方差为1的x又进行了scale加上shift操作(y=scale*x+shift)，</strong>每个神经元增加了两个参数scale和shift参数，这两个参数是通过训练学习到的，意思是通过scale和shift把这个值从标准正态分布左移或者右移一点并长胖一点或者变瘦一点，每个实例挪动的程度不一样，这样等价于非线性函数的值从正中心周围的线性区往非线性区动了动。<strong>核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢。</strong></p>
 
       
     </div>
@@ -479,9 +476,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/论文写作/" rel="tag"># 论文写作</a>
-          
-            <a href="/tags/CS/" rel="tag"># CS</a>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -494,15 +489,15 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
+              <a href="/2019/01/29/科技论文写作/" rel="next" title="科技论文写作">
+                <i class="fa fa-chevron-left"></i> 科技论文写作
+              </a>
+            
           </div>
 
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/02/22/batch-normalization/" rel="prev" title="batch_normalization 批标准化">
-                batch_normalization 批标准化 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -670,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract-and-paper"><span class="nav-number">1.</span> <span class="nav-text">Abstract and paper</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Related-works"><span class="nav-number">3.</span> <span class="nav-text">Related works</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Theory-methods"><span class="nav-number">4.</span> <span class="nav-text">Theory(methods)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Algorithm"><span class="nav-number">5.</span> <span class="nav-text">Algorithm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Experimental-results"><span class="nav-number">6.</span> <span class="nav-text">Experimental results</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Conclusions"><span class="nav-number">7.</span> <span class="nav-text">Conclusions</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Figures"><span class="nav-number">8.</span> <span class="nav-text">Figures</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Other-issues"><span class="nav-number">9.</span> <span class="nav-text">Other issues</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Norm的本质思想"><span class="nav-number">1.</span> <span class="nav-text">Batch Norm的本质思想</span></a></li></ol></div>
             
 
           </div>
