@@ -96,23 +96,32 @@
 
 
 
-  <meta name="description" content="record my life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dewey&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+  <meta name="description" content="卷积与互相关在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。">
+<meta name="keywords" content="深度学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="卷积相关知识">
+<meta property="og:url" content="http://yoursite.com/2019/02/25/卷积相关知识/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="record my life">
+<meta property="og:description" content="卷积与互相关在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://wx4.sinaimg.cn/mw690/007Epu9Pgy1g0igur5fr8j30og0h2ab9.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Ply1g0ih1z0bigj30og0hvq4b.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ih9e1cgcj30d80ergm0.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ih9e1cgcj30d80ergm0.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ihenozyvj30og0nfmyj.jpg">
+<meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ihenlv4sj30og0k1ta3.jpg">
+<meta property="og:updated_time" content="2019-02-25T03:32:57.738Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dewey&#39;s blog">
-<meta name="twitter:description" content="record my life">
+<meta name="twitter:title" content="卷积相关知识">
+<meta name="twitter:description" content="卷积与互相关在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。">
+<meta name="twitter:image" content="https://wx4.sinaimg.cn/mw690/007Epu9Pgy1g0igur5fr8j30og0h2ab9.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/25/卷积相关知识/">
 
 
 
@@ -122,7 +131,7 @@
   };
 </script>
 
-  <title>Dewey's blog</title>
+  <title>卷积相关知识 | Dewey's blog</title>
   
 
 
@@ -170,8 +179,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -213,7 +221,7 @@
         
         
           
-          <li class="menu-item menu-item-home menu-item-active">
+          <li class="menu-item menu-item-home">
 
     
     
@@ -326,9 +334,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -360,10 +368,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/25/卷积相关知识/" class="post-title-link" itemprop="url">卷积相关知识</a>
+          <h1 class="post-title" itemprop="name headline">卷积相关知识
+
               
             
           </h1>
@@ -445,20 +451,23 @@
       
 
       
-        
-          <h3 id="卷积与互相关"><a href="#卷积与互相关" class="headerlink" title="卷积与互相关"></a>卷积与互相关</h3><p>在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/25/卷积相关知识/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
+        <h3 id="卷积与互相关"><a href="#卷积与互相关" class="headerlink" title="卷积与互相关"></a>卷积与互相关</h3><p>在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。<br><a id="more"></a><br><img src="https://wx4.sinaimg.cn/mw690/007Epu9Pgy1g0igur5fr8j30og0h2ab9.jpg" width="50%" height="50%"><br>在深度学习中，卷积中的过滤器不经过反转。严格来说，这是互相关。我们本质上是执行逐元素乘法和加法。但在深度学习中，直接将其称之为卷积更加方便。这没什么问题，因为过滤器的权重是在训练阶段学习到的。如果上面例子中的反转函数 g 是正确的函数，那么经过训练后，学习得到的过滤器看起来就会像是反转后的函数 g。因此，在训练之前，没必要像在真正的卷积中那样首先反转过滤器。</p>
+<h3 id="3D卷积"><a href="#3D卷积" class="headerlink" title="3D卷积"></a>3D卷积</h3><p>3D卷积的过滤器在三个方向（图像的高度，宽度，通道）上移动。在每个位置，逐元素的乘法和加法都会提供一个数值。因为过滤器是滑过一个 3D 空间，所以输出数值也按 3D 空间排布。也就是说输出是一个 3D 数据。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/007Epu9Ply1g0ih1z0bigj30og0hvq4b.jpg" width="50%" height="50%"></p>
+<h3 id="转置卷积（去卷积）"><a href="#转置卷积（去卷积）" class="headerlink" title="转置卷积（去卷积）"></a>转置卷积（去卷积）</h3><p>对于很多网络架构的很多应用而言，我们往往需要进行与普通卷积方向相反的转换，即我们希望执行上采样。例子包括生成高分辨率图像以及将低维特征图映射到高维空间，比如在自动编码器或形义分割中。（在后者的例子中，形义分割首先会提取编码器中的特征图，然后在解码器中恢复原来的图像大小，使其可以分类原始图像中的每个像素。）</p>
+<p>实现上采样的传统方法是应用插值方案或人工创建规则。而神经网络等现代架构则倾向于让网络自己自动学习合适的变换，无需人类干预。为了做到这一点，我们可以使用转置卷积。</p>
+<p>转置卷积在文献中也被称为去卷积或 fractionally strided convolution。但是，需要指出「去卷积（deconvolution）」这个名称并不是很合适，因为转置卷积并非信号/图像处理领域定义的那种真正的去卷积。从技术上讲，信号处理中的去卷积是卷积运算的逆运算。但这里却不是这种运算。因此，某些作者强烈反对将转置卷积称为去卷积。人们称之为去卷积主要是因为这样说很简单。后面我们会介绍为什么将这种运算称为转置卷积更自然且更合适。</p>
+<p>我们一直都可以使用直接的卷积实现转置卷积。对于下图的例子，我们在一个 2×2 的输入（周围加了 2×2 的单位步长的零填充）上应用一个 3×3 核的转置卷积。上采样输出的大小是 4×4。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ih9e1cgcj30d80ergm0.jpg" width="50%" height="50%"><br>有趣的是，通过应用各种填充和步长，我们可以将同样的 2×2 输入图像映射到不同的图像尺寸。下面，转置卷积被用在了同一张 2×2 输入上（输入之间插入了一个零，并且周围加了 2×2 的单位步长的零填充），所得输出的大小是 5×5。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ih9e1cgcj30d80ergm0.jpg" width="50%" height="50%"></p>
+<p>观察上述例子中的转置卷积能帮助我们构建起一些直观认识。但为了泛化其应用，了解其可以如何通过计算机的矩阵乘法实现是有益的。从这一点上我们也可以看到为何「转置卷积」才是合适的名称。</p>
+<p>在卷积中，我们定义 C 为卷积核，Large 为输入图像，Small 为输出图像。经过卷积（矩阵乘法）后，我们将大图像下采样为小图像。这种矩阵乘法的卷积的实现遵照：C x Large = Small。</p>
+<p>下面的例子展示了这种运算的工作方式。它将输入平展为 16×1 的矩阵，并将卷积核转换为一个稀疏矩阵（4×16）。然后，在稀疏矩阵和平展的输入之间使用矩阵乘法。之后，再将所得到的矩阵（4×1）转换为 2×2 的输出。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ihenozyvj30og0nfmyj.jpg" width="50%" height="50%"><br>现在，如果我们在等式的两边都乘上矩阵的转置 CT，并借助「一个矩阵与其转置矩阵的乘法得到一个单位矩阵」这一性质，那么我们就能得到公式 CT x Small = Large，如下图所示。</p>
+<p><img src="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ihenlv4sj30og0k1ta3.jpg" width="50%" height="50%"><br>这就是转置卷积的由来~</p>
+
       
-    </p></div>
+    </div>
 
     
 
@@ -477,352 +486,36 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/batch-normalization/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dewey">
-      <meta itemprop="description" content="record my life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dewey's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/02/22/batch-normalization/" class="post-title-link" itemprop="url">batch_normalization 批标准化</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-
-            
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-02-22 16:30:22 / 修改时间：16:59:02" itemprop="dateCreated datePublished" datetime="2019-02-22T16:30:22+08:00">2019-02-22</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。</p>
-<p>　　接下来一步一步的理解什么是BN。</p>
-<p>　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个在DL领域很接近本质的好问题。很多论文都是解决这个问题的，比如ReLU激活函数，再比如Residual Network，BN本质上也是解释并从某个不同的角度来解决这个问题的。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/02/22/batch-normalization/#more" rel="contents">
-                阅读全文 &raquo;
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/02/22/batch-normalization/" rel="next" title="batch_normalization 批标准化">
+                <i class="fa fa-chevron-left"></i> batch_normalization 批标准化
               </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/01/29/科技论文写作/">
-
-    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Dewey">
-      <meta itemprop="description" content="record my life">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Dewey's blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2019/01/29/科技论文写作/" class="post-title-link" itemprop="url">科技论文写作</a>
-              
             
-          </h1>
-        
+          </div>
 
-        <div class="post-meta">
-          <span class="post-time">
+          <span class="post-nav-divider"></span>
 
+          <div class="post-nav-prev post-nav-item">
             
-            
-            
-
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-
-              
-                
-              
-
-              <time title="创建时间：2019-01-29 13:19:52 / 修改时间：15:30:12" itemprop="dateCreated datePublished" datetime="2019-01-29T13:19:52+08:00">2019-01-29</time>
-            
-
-            
-              
-
-              
-            
-          </span>
-
-          
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/论文写作/" itemprop="url" rel="index"><span itemprop="name">论文写作</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
+          </div>
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
       
 
       
-        
-          <p>这是一篇有关论文写作的文章。</p>
-<h3 id="Abstract-and-paper"><a href="#Abstract-and-paper" class="headerlink" title="Abstract and paper"></a>Abstract and paper</h3><p>abstract是对文章的精炼，读者可能不会读整篇文章，而通过阅读你的abstract来进行判断，abstract应该包含你文章里的关键贡献和关键内容。</p>
-<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>可以对abstract中的部分内容进行重复，用一种通俗的方法来解释这个问题你是如何解决的，不要太技术化；解释你为什么研究的这个问题，如何入手的，就是你的研究历程；解释你的创新点，你的工作与前人的任工作有何不同？为什么你的工作优于他们？简要介绍你文章的分布，使得结构更加清晰，尤其要把你的创新部分着重说一下。<br>
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2019/01/29/科技论文写作/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -832,14 +525,15 @@
   </article>
 
 
-    
-  </section>
-
-  
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -860,8 +554,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -963,6 +666,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积与互相关"><span class="nav-number">1.</span> <span class="nav-text">卷积与互相关</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3D卷积"><span class="nav-number">2.</span> <span class="nav-text">3D卷积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转置卷积（去卷积）"><span class="nav-number">3.</span> <span class="nav-text">转置卷积（去卷积）</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -1092,6 +812,10 @@
 
 
   
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
 
   
 
@@ -1102,6 +826,8 @@
 
   
 
+
+  
 
 
   
