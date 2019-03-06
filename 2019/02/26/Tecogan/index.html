@@ -96,27 +96,25 @@
 
 
 
-  <meta name="description" content="机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。 　　接下来一步一步的理解什么是BN。 　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个">
-<meta name="keywords" content="深度学习">
+  <meta name="description" content="Abstract对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。">
+<meta name="keywords" content="论文笔记,超分辨率,深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="batch_normalization 批标准化">
-<meta property="og:url" content="http://yoursite.com/2019/02/22/batch-normalization/index.html">
+<meta property="og:title" content="Tecogan论文笔记">
+<meta property="og:url" content="http://yoursite.com/2019/02/26/Tecogan/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。 　　接下来一步一步的理解什么是BN。 　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个">
+<meta property="og:description" content="Abstract对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1200px-Logistic-curve.svg.png">
-<meta property="og:updated_time" content="2019-02-22T08:59:02.422Z">
+<meta property="og:updated_time" content="2019-03-06T02:39:00.103Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="batch_normalization 批标准化">
-<meta name="twitter:description" content="机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。 　　接下来一步一步的理解什么是BN。 　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个">
-<meta name="twitter:image" content="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1200px-Logistic-curve.svg.png">
+<meta name="twitter:title" content="Tecogan论文笔记">
+<meta name="twitter:description" content="Abstract对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/22/batch-normalization/">
+  <link rel="canonical" href="http://yoursite.com/2019/02/26/Tecogan/">
 
 
 
@@ -126,7 +124,7 @@
   };
 </script>
 
-  <title>batch_normalization 批标准化 | Dewey's blog</title>
+  <title>Tecogan论文笔记 | Dewey's blog</title>
   
 
 
@@ -346,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/22/batch-normalization/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/Tecogan/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -363,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">batch_normalization 批标准化
+          <h1 class="post-title" itemprop="name headline">Tecogan论文笔记
 
               
             
@@ -389,12 +387,24 @@
                 
               
 
-              <time title="创建时间：2019-02-22 16:30:22 / 修改时间：16:59:02" itemprop="dateCreated datePublished" datetime="2019-02-22T16:30:22+08:00">2019-02-22</time>
+              <time title="创建时间：2019-02-26 21:36:27" itemprop="dateCreated datePublished" datetime="2019-02-26T21:36:27+08:00">2019-02-26</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-03-06 10:39:00" itemprop="dateModified" datetime="2019-03-06T10:39:00+08:00">2019-03-06</time>
               
             
           </span>
@@ -411,7 +421,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/论文笔记/" itemprop="url" rel="index"><span itemprop="name">论文笔记</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/论文笔记/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
 
                 
                 
@@ -446,15 +463,20 @@
       
 
       
-        <p>机器学习领域有个很重要的假设：IID独立同分布假设，就是假设训练数据和测试数据是满足相同分布的，这是通过训练数据获得的模型能够在测试集获得好的效果的一个基本保障。那BatchNorm的作用是什么呢？BatchNorm就是在深度神经网络训练过程中使得每一层神经网络的输入保持相同分布的。</p>
-<p>　　接下来一步一步的理解什么是BN。</p>
-<p>　　为什么深度神经网络随着网络深度加深，训练起来越困难，收敛越来越慢？这是个在DL领域很接近本质的好问题。很多论文都是解决这个问题的，比如ReLU激活函数，再比如Residual Network，BN本质上也是解释并从某个不同的角度来解决这个问题的。<br><a id="more"></a></p>
-<h3 id="Batch-Norm的本质思想"><a href="#Batch-Norm的本质思想" class="headerlink" title="Batch Norm的本质思想"></a>Batch Norm的本质思想</h3><p>激活输入值（就是那个x=WU+B，U是输入）随着网络深度加深或者在训练过程中，其分布逐渐发生偏移或者变动，之所以训练收敛慢，一般是整体分布逐渐往非线性函数的取值区间的上下限两端靠近（对于Sigmoid函数来说，意味着激活输入值WU+B是大的负值或正值），所以这导致反向传播时低层神经网络的梯度消失，这是训练深层神经网络收敛越来越慢的本质原因，<strong>而BN就是通过一定的规范化手段，把每层神经网络任意神经元这个输入值的分布强行拉回到均值为0方差为1的标准正态分布，</strong>其实就是把越来越偏的分布强制拉回比较标准的分布，这样使得激活输入值落在非线性函数对输入比较敏感的区域，这样输入的小变化就会导致损失函数较大的变化，意思是这样让梯度变大，避免梯度消失问题产生，而且梯度变大意味着学习收敛速度快，能大大加快训练速度。<br><img src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/88/Logistic-curve.svg/1200px-Logistic-curve.svg.png" alt="sigmoid(x)"></p>
-<div align="center">sigmoid(x)</div>
-
-<p>假设没有经过BN调整前x的原先正态分布均值是-6，方差是1，那么意味着95%的值落在了[-8,-4]之间，那么对应的Sigmoid（x）函数的值明显接近于0，这是典型的梯度饱和区，在这个区域里梯度变化很慢，为什么是梯度饱和区？请看下sigmoid(x)如果取值接近0或者接近于1的时候对应导数函数取值，接近于0，意味着梯度变化很小甚至消失。而假设经过BN后，均值是0，方差是1，那么意味着95%的x值落在了[-2,2]区间内，很明显这一段是sigmoid(x)函数接近于线性变换的区域，意味着x的小变化会导致非线性函数值较大的变化，也即是梯度变化较大，对应导数函数图中明显大于0的区域，就是梯度非饱和区。</p>
-<p>但是很明显，看到这里，稍微了解神经网络的读者一般会提出一个疑问：如果都通过BN，那么不就跟把非线性函数替换成线性函数效果相同了？这意味着什么？我们知道，如果是多层的线性函数变换其实这个深层是没有意义的，因为多层线性网络跟一层线性网络是等价的。这意味着网络的表达能力下降了，这也意味着深度的意义就没有了。<strong>所以BN为了保证非线性的获得，对变换后的满足均值为0方差为1的x又进行了scale加上shift操作(y=scale*x+shift)，</strong>每个神经元增加了两个参数scale和shift参数，这两个参数是通过训练学习到的，意思是通过scale和shift把这个值从标准正态分布左移或者右移一点并长胖一点或者变瘦一点，每个实例挪动的程度不一样，这样等价于非线性函数的值从正中心周围的线性区往非线性区动了动。<strong>核心思想应该是想找到一个线性和非线性的较好平衡点，既能享受非线性的较强表达能力的好处，又避免太靠非线性区两头使得网络收敛速度太慢。</strong></p>
-
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。<br><a id="more"></a><br>对于生成器，我们用一个循环，残差框架，这个框架能保证时域上一致。对于对抗训练，我们提出一种新颖的时空判别器和一个运动补偿结构来保证图片的真实性和时间上的一致性。此外，我们还在循环网络中识别了一类时间伪影，并提出了ping-pong loss来消除他们。对图像超分辨率任务的时间相干性进行量化也没有得到过解决。我们提出了一组度量标准来评估时间进化的准确性和感知质量，并通过生成具有自然时间变化的真实和详细的图像来证明我们的方法优于以前的工作。</p>
+<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h3><h3 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2 Related Work"></a>2 Related Work</h3><h3 id="3-Temporally-Coherent-Video-Super-Resolution"><a href="#3-Temporally-Coherent-Video-Super-Resolution" class="headerlink" title="3 Temporally Coherent Video Super-Resolution"></a>3 Temporally Coherent Video Super-Resolution</h3><p>针对VSR，我们提出一个循环对抗训练，有三个组成部分：循环生成器，流估计网络和一个时空判别器。生成器G输入低分辨率帧，循环生成高分辨率视频帧。流估计网络F学习帧之间的运动补偿，辅助生成器和时空判别器。在训练时，生成器和流估计网路络一同训练来欺骗判别器。判别器是我们方法的核心，因为它可以考虑时间和空间两方面，在图像内有过度平滑的情况时，判别器会惩罚这种不真实，时间不连续的情况。这样，G就需要生成与前一帧相一致的高频细节。经过训练后，判别器的额外复杂度不再起作用，只需要G和F的训练模型即可推断出新的超分辨率视频输出。</p>
+<h4 id="3-1-神经网络架构"><a href="#3-1-神经网络架构" class="headerlink" title="3.1 神经网络架构"></a>3.1 神经网络架构</h4><h5 id="生成网络"><a href="#生成网络" class="headerlink" title="生成网络"></a>生成网络</h5><p>我们的生成网络G是基于一个循环卷积栈和一个运动补偿网络F。</p>
+<p>生成器从低分辨率（LR）帧xt产生高分辨率（HR）的输出gt，同时循环利用先前生成的HR输出gt-1。在我们的例子中，输出的分辨率是输入的4倍。生成器可以很容易地重用前一帧的细节，从而生成连贯的图像。训练F用于估计帧xt-1和xt的运动。虽然我们估计的是低分辨率的运动vt，我们可以对其重采样，来对高分辨率帧gt-1的运动补偿。warp帧W(gt-1,vt)和低分辨率帧xt一起作为G的输入。</p>
+<p>与以前的VSR方法不同，我们建议训练生成器只学习残差内容，然后将其添加到双三次插值的低分辨率输入中。与单图像处理的方法一样，学习残差使得训练更加稳定，因为网络并不与图像的内容过拟合，而是专注于对双三次插值得到的估计进行细化。</p>
+<h5 id="对抗网络"><a href="#对抗网络" class="headerlink" title="对抗网络"></a>对抗网络</h5><p>该方法的核心新颖之处在于判别器网络的结构。与以往的VSR方法相比，我们提出了一种判别器，它接收三个低分辨率和高分辨率的输入，以学习一个损失函数。重要的是，这个训练的损失函数可以为生成器提供关于空间细节的真实性以及时间变化的梯度信息。<br>他接受两种输入：groundtruth和生成的东西。两者都有相似的结构：它们包含三个相邻的HR帧，三个对应的双立方上采样LR帧，以及三个warp的HR帧。</p>
+<hr>
+<p>ground truth：{INx,INy,INwy} &amp;&amp; 生成帧：{INx,INg,INwg}<br>warp帧：三个都是代表当前的帧，{正向运动补偿得到此刻的帧，此刻的帧，逆向运动补偿得到此刻的帧}（算时域）</p>
+<p>（时域）INwg 和 INwy要匹配<br>（空域）INg 和 INy 比较：INg 若 包含的空间细节少或者有不真实的残影， discriminator会惩罚generator</p>
+<p>HR image（INy INg）：当motion estimation变得不可靠时，判别器可以回退</p>
+<hr>
+<p>相比于INy，若INg包含的空间细节少或者有不真实的残影，判别器就会惩罚生成器。这里，INx作为一个条件输入。同时INwg应当与INwy在时域上匹配。通过对邻近帧进行运动补偿，warp输入INwg和INwy通常能更好的对齐，这简化了判别器对输入数据随时间的真实和非自然变化进行分类的任务。判别器还接受原始HR帧，当motion estimation变得不可靠时，判别器可以回退。</p>
+<p>通过同时考虑空间和时间输入，我们的判别器自动平衡空间和时间方面，避免不一致的锐度和过于平滑的结果。我们将在下面证明，随着时间的推移，判别器接收信息是至关重要的。另外，与使用多个判频器的GAN相比，这种单一的时空判别器使得网络规模更小，并且不需要赋予时域和空域的权重。</p>
+<h4 id="3-2-损失函数"><a href="#3-2-损失函数" class="headerlink" title="3.2 损失函数"></a>3.2 损失函数</h4><h5 id="3-2-1-长期时间细节漂移"><a href="#3-2-1-长期时间细节漂移" class="headerlink" title="3.2.1 长期时间细节漂移"></a>3.2.1 长期时间细节漂移</h5>
       
     </div>
 
@@ -477,6 +499,10 @@
       
         <div class="post-tags">
           
+            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
+          
+            <a href="/tags/超分辨率/" rel="tag"># 超分辨率</a>
+          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
@@ -490,8 +516,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/01/29/科技论文写作/" rel="next" title="科技论文写作">
-                <i class="fa fa-chevron-left"></i> 科技论文写作
+              <a href="/2019/02/25/卷积相关知识/" rel="next" title="卷积相关知识">
+                <i class="fa fa-chevron-left"></i> 卷积相关知识
               </a>
             
           </div>
@@ -500,8 +526,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/02/25/卷积相关知识/" rel="prev" title="卷积相关知识">
-                卷积相关知识 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/03/06/python之super理解/" rel="prev" title="python之super理解">
+                python之super理解 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -678,7 +704,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Batch-Norm的本质思想"><span class="nav-number">1.</span> <span class="nav-text">Batch Norm的本质思想</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Related-Work"><span class="nav-number">3.</span> <span class="nav-text">2 Related Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Temporally-Coherent-Video-Super-Resolution"><span class="nav-number">4.</span> <span class="nav-text">3 Temporally Coherent Video Super-Resolution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-神经网络架构"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 神经网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成网络"><span class="nav-number">4.1.1.</span> <span class="nav-text">生成网络</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对抗网络"><span class="nav-number">4.1.2.</span> <span class="nav-text">对抗网络</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-损失函数"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-长期时间细节漂移"><span class="nav-number">4.2.1.</span> <span class="nav-text">3.2.1 长期时间细节漂移</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
