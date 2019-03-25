@@ -105,7 +105,7 @@
 <meta property="og:description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1f047co85j20hd0bzdgk.jpg">
-<meta property="og:updated_time" content="2019-03-25T07:33:34.978Z">
+<meta property="og:updated_time" content="2019-03-25T07:41:03.563Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="non_local_neural_network笔记">
 <meta name="twitter:description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的">
@@ -389,7 +389,7 @@
                 
               
 
-              <time title="创建时间：2019-03-25 10:37:13 / 修改时间：15:33:34" itemprop="dateCreated datePublished" datetime="2019-03-25T10:37:13+08:00">2019-03-25</time>
+              <time title="创建时间：2019-03-25 10:37:13 / 修改时间：15:41:03" itemprop="dateCreated datePublished" datetime="2019-03-25T10:37:13+08:00">2019-03-25</time>
             
 
             
@@ -493,15 +493,20 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
 <li>可以通过去除 $\theta$ 和 $\phi$ 来实现 vanilla 高斯版本，并且可以通过使用1/N缩放替换softmax来实现dot-product版本</li>
 </ul>
 <p>由于我们考虑的是图片，故可以直接设置T=1，或者说不存在。首先网络输入是$X= (batch,h,w,1024)$，经过Embedded Gaussian中的两个嵌入权重变换 $W<em>\theta,W</em>\phi 得到$(batch,h,w,512) , (batch,h,w,512)$ ,其实这里的目的是降低通道数，减少计算量；然后分别对这两个输出进行reshape操作，变成 $(batch,h×w,512)$；然后对这两个输出进行矩阵乘(其中一个要转置)，计算相似性，得到 $(batch，h×w，h×w)$ ；然后在第2个维度即最后一个维度上进行softmax操作，得到 $(batch，h×w，h×w)$ ，注意这样做就是位置注意力，相当于找到了当前图片或特征图中每个像素与其他所有位置像素的归一化相关性；然后将g也采用一样的操作，先通道降维，然后reshape；然后和 $(batch，h×w，h×w)$ 进行矩阵乘，得到 $(batch,h×w,512)$ ，即将位置或者空间注意力机制应用到了所有通道的每张特征图对应位置上，本质就是输出的每个位置值都是其他所有位置的加权平均值，通过softmax操作可以进一步突出共性。最后经过一个1x1卷积恢复输出通道，保证输入输出尺度完全相同。</p>
-<h4 id="Non-local-block的实现方法"><a href="#Non-local-block的实现方法" class="headerlink" title="Non-local block的实现方法"></a>Non-local block的实现方法</h4><p>我们设置 $W<em>g,W</em>\Theta和W_\Phi$ ，x通道的一半,这遵循了RESnet的瓶颈设计，将一个块的计算量减少了大约一半。$Eq(2)$ 中的权值矩阵 $W_z$ 计算在 $y_i$ 上的位置嵌入，与x的通道数匹配，如图2所示。</p>
 <h4 id="子采样技巧可以进一步减少计算量"><a href="#子采样技巧可以进一步减少计算量" class="headerlink" title="子采样技巧可以进一步减少计算量"></a>子采样技巧可以进一步减少计算量</h4><ul>
-<li>我们将方程<br>$y<em>i= \frac{1}{C(x)} \sum</em>{\forall{j}} f(x<em>i,xj)g(xj)$ 修改为 $y_i= \frac{1}{C(\bar{x})} \sum</em>{\forall{j}} f(x_i,\bar{xj})g(\bar{xj})$</li>
+<li>我们将方程 <script type="math/tex; mode=display">y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script>修改为 <script type="math/tex; mode=display">y_i= \frac{1}{C(\bar{x})} \sum_{\forall{j}} f(x_i,\bar{xj})g(\bar{xj})</script></li>
 <li>在空间域中执行此操作，这可以将成对计算量减少1/4</li>
 <li>这个技巧不会改变非局部行为，但会使计算更加稀疏。</li>
 <li>可以通过在图2中的 $\phi$ 和 $g$ 之后添加最大池化层来实现</li>
 </ul>
 <hr>
-<p><strong>Self-attention:</strong><br>在机器翻译中，自我注意模块通过关注所有位置并在嵌入空间中取其加权平均值来计算序列（例如，句子）中的位置处的响应，在CV中那就是通过关注图片中(可以是特征图)所有位置并在嵌入空间中取其加权平均值来表示图片中某位置处的响应。嵌入空间可以认为是一个更抽象的图片空间表达，目的是汇聚更多的信息，提高计算效率。</p>
+<p>1 <strong>Self-attention:</strong></p>
+<p>在机器翻译中，自我注意模块通过关注所有位置并在嵌入空间中取其加权平均值来计算序列（例如，句子）中的位置处的响应，在CV中那就是通过关注图片中(可以是特征图)所有位置并在嵌入空间中取其加权平均值来表示图片中某位置处的响应。嵌入空间可以认为是一个更抽象的图片空间表达，目的是汇聚更多的信息，提高计算效率。</p>
+<p>2 <strong>首先我们来看一下文章说的local是什么意思。</strong></p>
+<p>Local这个词主要是针对感受野(receptive field)来说的。以卷积操作为例，它的感受野大小就是卷积核大小，而我们一般都选用3<em>3，5</em>5之类的卷积核，它们只考虑局部区域，因此都是local的运算。同理，池化(Pooling)也是。相反的，non-local指的就是感受野可以很大，而不是一个局部领域。</p>
+<p>那我们碰到过什么non-local的操作吗？有的，全连接就是non-local的，而且是global的。但是全连接带来了大量的参数，给优化带来困难。这也是深度学习(主要指卷积神经网络)近年来流行的原因，考虑局部区域，参数大大减少了，能够训得动了。</p>
+<p>那我们为什么还需要non-local？</p>
+<p>我们知道，卷积层的堆叠可以增大感受野，但是如果看特定层的卷积核在原图上的感受野，它毕竟是有限的。这是local运算不能避免的。然而有些任务，它们可能需要原图上更多的信息，比如attention。如果在某些层能够引入全局的信息，就能很好地解决local操作无法看清全局的情况，为后面的层带去更丰富的信息。</p>
 
       
     </div>
@@ -724,7 +729,7 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Related-works"><span class="nav-number">2.</span> <span class="nav-text">2.Related works</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-local-image-process"><span class="nav-number">2.1.</span> <span class="nav-text">Non-local image process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#graphical-models"><span class="nav-number">2.2.</span> <span class="nav-text">graphical models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention"><span class="nav-number">2.3.</span> <span class="nav-text">self-attention</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Non-local-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">3.Non-local Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Formulation"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Formulation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Instantiations"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Instantiations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Non-local-Block"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Non-local Block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-local-block的实现方法"><span class="nav-number">3.4.</span> <span class="nav-text">Non-local block的实现方法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子采样技巧可以进一步减少计算量"><span class="nav-number">3.5.</span> <span class="nav-text">子采样技巧可以进一步减少计算量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Related-works"><span class="nav-number">2.</span> <span class="nav-text">2.Related works</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-local-image-process"><span class="nav-number">2.1.</span> <span class="nav-text">Non-local image process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#graphical-models"><span class="nav-number">2.2.</span> <span class="nav-text">graphical models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention"><span class="nav-number">2.3.</span> <span class="nav-text">self-attention</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Non-local-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">3.Non-local Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Formulation"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Formulation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Instantiations"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Instantiations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Non-local-Block"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Non-local Block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子采样技巧可以进一步减少计算量"><span class="nav-number">3.4.</span> <span class="nav-text">子采样技巧可以进一步减少计算量</span></a></li></ol></li></ol></div>
             
 
           </div>
