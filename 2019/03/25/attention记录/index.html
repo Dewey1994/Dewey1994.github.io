@@ -96,17 +96,21 @@
 
 
 
-  <meta name="description" content="record my life">
+  <meta name="description" content="视觉注意力机制是人类视觉所特有的大脑信号处理机制。人类视觉通过快速扫描全局图像，获得需要重点关注的目标区域，也就是一般所说的注意力焦点，而后对这一区域投入更多注意力资源，以获取更多所需要关注目标的细节信息，而抑制其他无用信息。 深度学习中的注意力机制从本质上讲和人类的选择性视觉注意力机制类似，核心目标也是从众多信息中选择出对当前任务目标更关键的信息。 Attention的本质思想 attentio">
+<meta name="keywords" content="深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="attention记录">
 <meta property="og:url" content="http://yoursite.com/2019/03/25/attention记录/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="record my life">
+<meta property="og:description" content="视觉注意力机制是人类视觉所特有的大脑信号处理机制。人类视觉通过快速扫描全局图像，获得需要重点关注的目标区域，也就是一般所说的注意力焦点，而后对这一区域投入更多注意力资源，以获取更多所需要关注目标的细节信息，而抑制其他无用信息。 深度学习中的注意力机制从本质上讲和人类的选择性视觉注意力机制类似，核心目标也是从众多信息中选择出对当前任务目标更关键的信息。 Attention的本质思想 attentio">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-25T12:22:56.130Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1fbzbhld7j20hs07m74j.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1fc9e1ntij20fs0dygmv.jpg">
+<meta property="og:updated_time" content="2019-03-25T13:25:02.910Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="attention记录">
-<meta name="twitter:description" content="record my life">
+<meta name="twitter:description" content="视觉注意力机制是人类视觉所特有的大脑信号处理机制。人类视觉通过快速扫描全局图像，获得需要重点关注的目标区域，也就是一般所说的注意力焦点，而后对这一区域投入更多注意力资源，以获取更多所需要关注目标的细节信息，而抑制其他无用信息。 深度学习中的注意力机制从本质上讲和人类的选择性视觉注意力机制类似，核心目标也是从众多信息中选择出对当前任务目标更关键的信息。 Attention的本质思想 attentio">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1fbzbhld7j20hs07m74j.jpg">
 
 
 
@@ -386,9 +390,13 @@
                 
               
 
-              <time title="创建时间：2019-03-25 20:22:56" itemprop="dateCreated datePublished" datetime="2019-03-25T20:22:56+08:00">2019-03-25</time>
+              <time title="创建时间：2019-03-25 20:22:56 / 修改时间：21:25:02" itemprop="dateCreated datePublished" datetime="2019-03-25T20:22:56+08:00">2019-03-25</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -421,7 +429,27 @@
       
 
       
-        
+        <p>视觉注意力机制是人类视觉所特有的大脑信号处理机制。人类视觉通过快速扫描全局图像，获得需要重点关注的目标区域，也就是一般所说的注意力焦点，而后对这一区域投入更多注意力资源，以获取更多所需要关注目标的细节信息，而抑制其他无用信息。</p>
+<p>深度学习中的注意力机制从本质上讲和人类的选择性视觉注意力机制类似，核心目标也是从众多信息中选择出对当前任务目标更关键的信息。</p>
+<h2 id="Attention的本质思想"><a href="#Attention的本质思想" class="headerlink" title="Attention的本质思想"></a>Attention的本质思想</h2><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1fbzbhld7j20hs07m74j.jpg" alt="Attention的本质思想"></p>
+<div align="center">attention的本质思想</div>
+
+<p>我们可以这样来看待Attention机制（参考上图）：将Source中的构成元素想象成是由一系列的<key,value>数据对构成，此时给定Target中的某个元素Query，通过计算Query和各个Key的相似性或者相关性，得到每个Key对应Value的权重系数，然后对Value进行加权求和，即得到了最终的Attention数值。所以本质上Attention机制是对Source中元素的Value值进行加权求和，而Query和Key用来计算对应Value的权重系数。即可以将其本质思想改写为如下公式：</key,value></p>
+<script type="math/tex; mode=display">Attention(Query,Source)=\sum_{i=1}^{L_x}Similarity(Query,key_i)*Value_i</script><p>其中$L_x=source$代表Source的长度，即输入。当然，从概念上理解，把Attention仍然理解为从大量信息中有选择地筛选出少量重要信息并聚焦到这些重要信息上，忽略大多不重要的信息，这种思路仍然成立。聚焦的过程体现在权重系数的计算上，权重越大越聚焦于其对应的Value值上，即权重代表了信息的重要性，而Value是其对应的信息。</p>
+<p>还有另外一种理解，也可以将Attention看作一种软寻址。Source可以看作存储器内存储的内容，元素由地址Key和值Value组成，当前有个Key=Query的查询，目的是取出存储器中对应的Value值，即Attention数值。通过Query和存储器内元素Key的地址进行相似性比较来寻址，之所以说是软寻址，指的不像一般寻址只从存储内容里面找出一条内容，而是可能从每个Key地址都会取出内容，取出内容的重要性根据Query和Key的相似性来决定，之后对Value进行加权求和，这样就可以取出最终的Value值，也即Attention值。所以不少研究人员将Attention机制看作软寻址的一种特例，这也是非常有道理的。</p>
+<p>至于Attention机制的具体计算过程，如果对目前大多数方法进行抽象的话，可以将其归纳为两个过程：第一个过程是根据Query和Key计算权重系数，第二个过程根据权重系数对Value进行加权求和。而第一个过程又可以细分为两个阶段：第一个阶段根据Query和Key计算两者的相似性或者相关性；第二个阶段对第一阶段的原始分值进行归一化处理；这样，可以将Attention的计算过程抽象为如图10展示的三个阶段。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1fc9e1ntij20fs0dygmv.jpg" alt="三阶段attention计算过程"></p>
+<p><div align="center">三阶段attention计算过程</div><br>在第一个阶段，可以引入不同的函数和计算机制，根据Query和某个Key_i，计算两者的相似性或者相关性，最常见的方法包括：求两者的向量点积、求两者的向量Cosine相似性或者通过再引入额外的神经网络来求值，即如下方式：</p>
+<p>点积：$Similarity(Query,Key_i)=Query\cdot{Key_i}$</p>
+<p>Cosine相似性：$Similarity(Query,Key_i)= \frac{Query\cdot{Key_i}}{\Vert{Query}\Vert\cdot\Vert{Key_i}\Vert}$</p>
+<p>MLP网络：$Similarity(Query,Key_i)=MLP(Query,Key_i)$</p>
+<p>第一阶段产生的分值根据具体产生的方法不同其数值取值范围也不一样，第二阶段引入类似SoftMax的计算方式对第一阶段的得分进行数值转换，一方面可以进行归一化，将原始计算分值整理成所有元素权重之和为1的概率分布；另一方面也可以通过SoftMax的内在机制更加突出重要元素的权重。即一般采用如下公式计算：</p>
+<p>$a<em>i=softmax(Sim_i)=\frac{e^{Sim_i}}{\sum</em>{j=1}^{L_x}e^{Sim_i}}$</p>
+<p>第二阶段的计算结果a_i即为value_i对应的权重系数，然后进行加权求和即可得到Attention数值：</p>
+<p>$Attention(Query,Source)=\sum_{i=1}^{L_x}a_i\cdot(Value_i)$</p>
+<p>通过如上三个阶段的计算，即可求出针对Query的Attention数值，目前绝大多数具体的注意力机制计算方法都符合上述的三阶段抽象计算过程。</p>
+<h2 id="self-attention"><a href="#self-attention" class="headerlink" title="self attention"></a>self attention</h2><p>Attention顾名思义，指的不是Target和Source之间的Attention机制，而是Source内部元素之间或者Target内部元素之间发生的Attention机制，也可以理解为Target=Source这种特殊情况下的注意力计算机制。其具体计算过程是一样的，只是计算对象发生了变化而已，所以此处不再赘述其计算过程细节。</p>
+
       
     </div>
 
@@ -441,6 +469,12 @@
     
 
     <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+        </div>
       
 
       
@@ -504,8 +538,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -617,6 +660,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Attention的本质思想"><span class="nav-number">1.</span> <span class="nav-text">Attention的本质思想</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#self-attention"><span class="nav-number">2.</span> <span class="nav-text">self attention</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -754,7 +814,7 @@
   
 
 
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
 
 
 
@@ -784,6 +844,43 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
   
 
 
