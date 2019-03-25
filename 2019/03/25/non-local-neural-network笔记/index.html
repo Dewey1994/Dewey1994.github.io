@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的  卷积操作和递归操作都会在空间或时间上处理一个局部邻域；因此，只有反复应用这些操作，逐步通过数据传播信号时，才能捕捉到长距离依赖关系。 但重复进行本地操作会有几个限制  首先，计">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-25T03:22:04.388Z">
+<meta property="og:updated_time" content="2019-03-25T04:40:04.049Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="non_local_neural_network笔记">
 <meta name="twitter:description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的  卷积操作和递归操作都会在空间或时间上处理一个局部邻域；因此，只有反复应用这些操作，逐步通过数据传播信号时，才能捕捉到长距离依赖关系。 但重复进行本地操作会有几个限制  首先，计">
@@ -387,7 +387,7 @@
                 
               
 
-              <time title="创建时间：2019-03-25 10:37:13 / 修改时间：11:22:04" itemprop="dateCreated datePublished" datetime="2019-03-25T10:37:13+08:00">2019-03-25</time>
+              <time title="创建时间：2019-03-25 10:37:13 / 修改时间：12:40:04" itemprop="dateCreated datePublished" datetime="2019-03-25T10:37:13+08:00">2019-03-25</time>
             
 
             
@@ -453,8 +453,16 @@
 <h3 id="2-Related-works"><a href="#2-Related-works" class="headerlink" title="2.Related works"></a>2.Related works</h3><h4 id="Non-local-image-process"><a href="#Non-local-image-process" class="headerlink" title="Non-local image process"></a>Non-local image process</h4><p><strong>BM3D:</strong>它首先把图像分成一定大小的块，根据图像块之间的相似性，把具有相似结构的二维图像块组合在一起形成三维数组，然后用联合滤波的方法对这些三维数组进行处理，最后，通过逆变换，把处理后的结果返回到原图像中，从而得到去噪后的图像。</p>
 <h4 id="graphical-models"><a href="#graphical-models" class="headerlink" title="graphical models"></a>graphical models</h4><p><strong>CRF,MRF</strong>‘</p>
 <h4 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h4><p><strong>后面再补</strong></p>
-<h3 id="3-Non-local-Neural-Networks"><a href="#3-Non-local-Neural-Networks" class="headerlink" title="3.Non-local Neural Networks"></a>3.Non-local Neural Networks</h3><p>Simple inline $a = b + c$.</p>
-
+<h3 id="3-Non-local-Neural-Networks"><a href="#3-Non-local-Neural-Networks" class="headerlink" title="3.Non-local Neural Networks"></a>3.Non-local Neural Networks</h3><script type="math/tex; mode=display">\frac{\partial u}{\partial t}
+= h^2 \left( \frac{\partial^2 u}{\partial x^2} +
+\frac{\partial^2 u}{\partial y^2} +
+\frac{\partial^2 u}{\partial z^2}\right)</script><script type="math/tex; mode=display">
+\begin{eqnarray}
+\nabla\cdot\vec{E} &=& \frac{\rho}{\epsilon_0} \\
+\nabla\cdot\vec{B} &=& 0 \\
+\nabla\times\vec{E} &=& -\frac{\partial B}{\partial t} \\
+\nabla\times\vec{B} &=& \mu_0\left(\vec{J}+\epsilon_0\frac{\partial E}{\partial t} \right)
+\end{eqnarray}</script>
       
     </div>
 
@@ -819,53 +827,73 @@
   
 
 
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Config("");
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
 </script>
 
 <script type="text/x-mathjax-config">
   MathJax.Hub.Queue(function() {
     var all = MathJax.Hub.getAllJax(), i;
-    for(i=0; i < all.length; i += 1) {
-      all[i].SourceElement().parentNode.className += ' has-jax';
-    }
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
   });
 </script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
 
-<script type="text/javascript" src="custom_mathjax_source">
-</script>
-<!-- End: Injected MathJax -->
-<!-- hexo-inject:end -->
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
-
-
-  
-
-
-  
-
-
-  
-
-
-
-
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-
-  
-  
-
+    
   
 
 
