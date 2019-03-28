@@ -96,25 +96,28 @@
 
 
 
-  <meta name="description" content="Abstract对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。">
-<meta name="keywords" content="深度学习,论文笔记,超分辨率">
+  <meta name="description" content="Sub-GAN: An Unsupervised Generative Model via Subspaces文章指出由于环境空间的高维度，很难充分利用复杂数据的分布，提出用一个clusterer(聚类器)来分解多个潜空间，同时能够生成多样的样本。与传统的生成模型不同，所 提出的Sub-GAN可以通过多个学习的子空间来控制所生成的样本的多样性。 下面对CGAN进行分析，指出CGAN中的标签只是数据">
+<meta name="keywords" content="GAN,深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Tecogan论文笔记">
-<meta property="og:url" content="http://yoursite.com/2019/02/26/Tecogan/index.html">
+<meta property="og:title" content="SUB-GAN">
+<meta property="og:url" content="http://yoursite.com/2019/03/28/SUB-GAN/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="Abstract对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。">
+<meta property="og:description" content="Sub-GAN: An Unsupervised Generative Model via Subspaces文章指出由于环境空间的高维度，很难充分利用复杂数据的分布，提出用一个clusterer(聚类器)来分解多个潜空间，同时能够生成多样的样本。与传统的生成模型不同，所 提出的Sub-GAN可以通过多个学习的子空间来控制所生成的样本的多样性。 下面对CGAN进行分析，指出CGAN中的标签只是数据">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-06T02:39:00.103Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1iqeanfo0j20h107rmz8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1iqfz1998j20jl0budjr.jpg">
+<meta property="og:updated_time" content="2019-03-28T13:13:47.897Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Tecogan论文笔记">
-<meta name="twitter:description" content="Abstract对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。">
+<meta name="twitter:title" content="SUB-GAN">
+<meta name="twitter:description" content="Sub-GAN: An Unsupervised Generative Model via Subspaces文章指出由于环境空间的高维度，很难充分利用复杂数据的分布，提出用一个clusterer(聚类器)来分解多个潜空间，同时能够生成多样的样本。与传统的生成模型不同，所 提出的Sub-GAN可以通过多个学习的子空间来控制所生成的样本的多样性。 下面对CGAN进行分析，指出CGAN中的标签只是数据">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1iqeanfo0j20h107rmz8.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/02/26/Tecogan/">
+  <link rel="canonical" href="http://yoursite.com/2019/03/28/SUB-GAN/">
 
 
 
@@ -124,7 +127,7 @@
   };
 </script>
 
-  <title>Tecogan论文笔记 | Dewey's blog</title>
+  <title>SUB-GAN | Dewey's blog</title>
   
 
 
@@ -344,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/02/26/Tecogan/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/28/SUB-GAN/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -361,7 +364,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Tecogan论文笔记
+          <h1 class="post-title" itemprop="name headline">SUB-GAN
 
               
             
@@ -387,24 +390,12 @@
                 
               
 
-              <time title="创建时间：2019-02-26 21:36:27" itemprop="dateCreated datePublished" datetime="2019-02-26T21:36:27+08:00">2019-02-26</time>
+              <time title="创建时间：2019-03-28 18:56:50 / 修改时间：21:13:47" itemprop="dateCreated datePublished" datetime="2019-03-28T18:56:50+08:00">2019-03-28</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-06 10:39:00" itemprop="dateModified" datetime="2019-03-06T10:39:00+08:00">2019-03-06</time>
               
             
           </span>
@@ -421,14 +412,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/论文笔记/" itemprop="url" rel="index"><span itemprop="name">论文笔记</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/论文笔记/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/GAN/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
 
                 
                 
@@ -463,20 +454,27 @@
       
 
       
-        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>对抗训练在图像超分辨率领域取得了很大的成功。它被证明能产生相当真实和精细的结果。尽管取得了这样的成功，但许多最先进的视频超分辨率方法仍然倾向于更简单的规范，例如L2而不是对抗性损失函数。直接向量范数会导致时间上的平滑，缺乏空间细节就更容易形成时域上的连续。在我们的工作中，我们提出用对抗训练来做视频超分辨率，这种训练可以在不牺牲空间细节的情况下实现时间上的连贯的解决方案。<br><a id="more"></a><br>对于生成器，我们用一个循环，残差框架，这个框架能保证时域上一致。对于对抗训练，我们提出一种新颖的时空判别器和一个运动补偿结构来保证图片的真实性和时间上的一致性。此外，我们还在循环网络中识别了一类时间伪影，并提出了ping-pong loss来消除他们。对图像超分辨率任务的时间相干性进行量化也没有得到过解决。我们提出了一组度量标准来评估时间进化的准确性和感知质量，并通过生成具有自然时间变化的真实和详细的图像来证明我们的方法优于以前的工作。</p>
-<h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1 Introduction"></a>1 Introduction</h3><h3 id="2-Related-Work"><a href="#2-Related-Work" class="headerlink" title="2 Related Work"></a>2 Related Work</h3><h3 id="3-Temporally-Coherent-Video-Super-Resolution"><a href="#3-Temporally-Coherent-Video-Super-Resolution" class="headerlink" title="3 Temporally Coherent Video Super-Resolution"></a>3 Temporally Coherent Video Super-Resolution</h3><p>针对VSR，我们提出一个循环对抗训练，有三个组成部分：循环生成器，流估计网络和一个时空判别器。生成器G输入低分辨率帧，循环生成高分辨率视频帧。流估计网络F学习帧之间的运动补偿，辅助生成器和时空判别器。在训练时，生成器和流估计网路络一同训练来欺骗判别器。判别器是我们方法的核心，因为它可以考虑时间和空间两方面，在图像内有过度平滑的情况时，判别器会惩罚这种不真实，时间不连续的情况。这样，G就需要生成与前一帧相一致的高频细节。经过训练后，判别器的额外复杂度不再起作用，只需要G和F的训练模型即可推断出新的超分辨率视频输出。</p>
-<h4 id="3-1-神经网络架构"><a href="#3-1-神经网络架构" class="headerlink" title="3.1 神经网络架构"></a>3.1 神经网络架构</h4><h5 id="生成网络"><a href="#生成网络" class="headerlink" title="生成网络"></a>生成网络</h5><p>我们的生成网络G是基于一个循环卷积栈和一个运动补偿网络F。</p>
-<p>生成器从低分辨率（LR）帧xt产生高分辨率（HR）的输出gt，同时循环利用先前生成的HR输出gt-1。在我们的例子中，输出的分辨率是输入的4倍。生成器可以很容易地重用前一帧的细节，从而生成连贯的图像。训练F用于估计帧xt-1和xt的运动。虽然我们估计的是低分辨率的运动vt，我们可以对其重采样，来对高分辨率帧gt-1的运动补偿。warp帧W(gt-1,vt)和低分辨率帧xt一起作为G的输入。</p>
-<p>与以前的VSR方法不同，我们建议训练生成器只学习残差内容，然后将其添加到双三次插值的低分辨率输入中。与单图像处理的方法一样，学习残差使得训练更加稳定，因为网络并不与图像的内容过拟合，而是专注于对双三次插值得到的估计进行细化。</p>
-<h5 id="对抗网络"><a href="#对抗网络" class="headerlink" title="对抗网络"></a>对抗网络</h5><p>该方法的核心新颖之处在于判别器网络的结构。与以往的VSR方法相比，我们提出了一种判别器，它接收三个低分辨率和高分辨率的输入，以学习一个损失函数。重要的是，这个训练的损失函数可以为生成器提供关于空间细节的真实性以及时间变化的梯度信息。<br>他接受两种输入：groundtruth和生成的东西。两者都有相似的结构：它们包含三个相邻的HR帧，三个对应的双立方上采样LR帧，以及三个warp的HR帧。</p>
-<hr>
-<p>ground truth：{INx,INy,INwy} &amp;&amp; 生成帧：{INx,INg,INwg}<br>warp帧：三个都是代表当前的帧，{正向运动补偿得到此刻的帧，此刻的帧，逆向运动补偿得到此刻的帧}（算时域）</p>
-<p>（时域）INwg 和 INwy要匹配<br>（空域）INg 和 INy 比较：INg 若 包含的空间细节少或者有不真实的残影， discriminator会惩罚generator</p>
-<p>HR image（INy INg）：当motion estimation变得不可靠时，判别器可以回退</p>
-<hr>
-<p>相比于INy，若INg包含的空间细节少或者有不真实的残影，判别器就会惩罚生成器。这里，INx作为一个条件输入。同时INwg应当与INwy在时域上匹配。通过对邻近帧进行运动补偿，warp输入INwg和INwy通常能更好的对齐，这简化了判别器对输入数据随时间的真实和非自然变化进行分类的任务。判别器还接受原始HR帧，当motion estimation变得不可靠时，判别器可以回退。</p>
-<p>通过同时考虑空间和时间输入，我们的判别器自动平衡空间和时间方面，避免不一致的锐度和过于平滑的结果。我们将在下面证明，随着时间的推移，判别器接收信息是至关重要的。另外，与使用多个判频器的GAN相比，这种单一的时空判别器使得网络规模更小，并且不需要赋予时域和空域的权重。</p>
-<h4 id="3-2-损失函数"><a href="#3-2-损失函数" class="headerlink" title="3.2 损失函数"></a>3.2 损失函数</h4><h5 id="3-2-1-长期时间细节漂移"><a href="#3-2-1-长期时间细节漂移" class="headerlink" title="3.2.1 长期时间细节漂移"></a>3.2.1 长期时间细节漂移</h5>
+        <h2 id="Sub-GAN-An-Unsupervised-Generative-Model-via-Subspaces"><a href="#Sub-GAN-An-Unsupervised-Generative-Model-via-Subspaces" class="headerlink" title="Sub-GAN: An Unsupervised Generative Model via Subspaces"></a>Sub-GAN: An Unsupervised Generative Model via Subspaces</h2><p>文章指出由于环境空间的高维度，很难充分利用复杂数据的分布，提出用一个<strong>clusterer(聚类器)</strong>来分解多个潜空间，同时能够生成多样的样本。与传统的生成模型不同，所 提出的Sub-GAN可以通过多个学习的子空间来控制所生成的样本的多样性。</p>
+<p>下面对CGAN进行分析，指出CGAN中的标签只是数据特征的一小部分，只是相当于把数据的标签的特征的生成提高了优先级，但数据中还有很多潜在的特征并没有得到发掘，如果能对这些潜在特征进行发掘，那么mode collapse可能会得到一定的解决。</p>
+<p>下面作者引出自己的观点，高维数据总是可以建模为低维子空间的并集。现在已经有许多用子空间聚类方法来探索高维数据分布。低维子空间的解缠可以作为一种指导来近似数据分布，并且可以促进复杂数据空间的生成。</p>
+<h3 id="SUBGAN结构详解"><a href="#SUBGAN结构详解" class="headerlink" title="SUBGAN结构详解"></a>SUBGAN结构详解</h3><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1iqeanfo0j20h107rmz8.jpg" alt="network"></p>
+<div align="center">网络结构</div>
+
+<p>SUB GAN中包含3个部分：<strong>generator，discriminator，clusterer(聚类器)</strong></p>
+<h4 id="clusterer"><a href="#clusterer" class="headerlink" title="clusterer"></a>clusterer</h4><p>我们考虑把样本$X$分为$K$个簇，通过对簇个数的划分，用户能够控制样本的松散和紧致程度。首先我们通过子空间聚类初始$\hat{P}$，然后我们计算预测任务$P$和辅助目标分布$T$之间的$KL$散度。</p>
+<p>那么我们在对数据分布聚类时，我们分为两步。我们用self-representation和graph clustering技术来确定K个子空间。首先我们用L1正则化来计算数据样本的self-representation，公式如下：</p>
+<script type="math/tex; mode=display">\min\limits_{C} \parallel{X-XC}\parallel_2^2+\lambda\parallel{C}\parallel_1, s.t. diag(C)=0</script><p>$C$是一个系数矩阵，表示$x<em>i$和$x_j$的相似性,$X$是数据样本，之后，用C来定义一个有向图G，然后在用矩阵W构造一个平衡图$\hat{G}$，而 $W=\mid{C}\mid+\mid{C^T}\mid$，再接着计算该图的Laplacian matrix $M$，$M=D-W$，$D</em>{ii}=\sum<em>jW</em>{ij}$，接着计算M的特征向量e，最终使用K-means来初始化$\hat{P}$。初始化过后就在训练中不断迭代$P$，最后用一个KL散度来优化子空间聚类。</p>
+<h4 id="generator"><a href="#generator" class="headerlink" title="generator"></a>generator</h4><p>$l=z\oplus{e}\oplus{\hat{y}}$</p>
+<p>$\oplus$代表concat操作，$\hat{y}$是当前子空间分布的一个one-hot向量，$e$是$M$的特征向量，$M$是由$C$所计算而得，在每次迭代中$C$会更新，因此$e$也会在每次迭代中更新。<br>$z$是由(0,1)正态分布构成的噪声。</p>
+<h4 id="discriminator"><a href="#discriminator" class="headerlink" title="discriminator"></a>discriminator</h4><script type="math/tex; mode=display">L(D,G,C)=E_{x\sim{p_s(x)}}[logD(x)]+E_{l\sim{p_L(l)}}[log(1-D(G(l)))]+KL(Q_s\parallel{P_s})</script><p>其中$S$是每次迭代预测的子空间</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1iqfz1998j20jl0budjr.jpg" alt="算法"></p>
+<div align="center">算法</div>
+
+<h3 id="contribution"><a href="#contribution" class="headerlink" title="contribution"></a>contribution</h3><ul>
+<li>我们提出了一个联合无监督框架，以同时学习聚类样本子空间并相应地生成实例，其中两个任务是相互优化的。</li>
+<li>我们通过指定不同子空间的数量来解决模式崩溃问题，我们从中生成相应的聚类信息和有意义和多样化的图像。</li>
+</ul>
+
       
     </div>
 
@@ -499,11 +497,9 @@
       
         <div class="post-tags">
           
+            <a href="/tags/GAN/" rel="tag"># GAN</a>
+          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
-            <a href="/tags/论文笔记/" rel="tag"># 论文笔记</a>
-          
-            <a href="/tags/超分辨率/" rel="tag"># 超分辨率</a>
           
         </div>
       
@@ -516,8 +512,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/02/25/卷积相关知识/" rel="next" title="卷积相关知识">
-                <i class="fa fa-chevron-left"></i> 卷积相关知识
+              <a href="/2019/03/27/WGAN-GP/" rel="next" title="WGAN-GP">
+                <i class="fa fa-chevron-left"></i> WGAN-GP
               </a>
             
           </div>
@@ -525,10 +521,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/06/python之super理解/" rel="prev" title="python之super理解">
-                python之super理解 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -716,7 +708,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">2.</span> <span class="nav-text">1 Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Related-Work"><span class="nav-number">3.</span> <span class="nav-text">2 Related Work</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Temporally-Coherent-Video-Super-Resolution"><span class="nav-number">4.</span> <span class="nav-text">3 Temporally Coherent Video Super-Resolution</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-神经网络架构"><span class="nav-number">4.1.</span> <span class="nav-text">3.1 神经网络架构</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#生成网络"><span class="nav-number">4.1.1.</span> <span class="nav-text">生成网络</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#对抗网络"><span class="nav-number">4.1.2.</span> <span class="nav-text">对抗网络</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-损失函数"><span class="nav-number">4.2.</span> <span class="nav-text">3.2 损失函数</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-1-长期时间细节漂移"><span class="nav-number">4.2.1.</span> <span class="nav-text">3.2.1 长期时间细节漂移</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sub-GAN-An-Unsupervised-Generative-Model-via-Subspaces"><span class="nav-number">1.</span> <span class="nav-text">Sub-GAN: An Unsupervised Generative Model via Subspaces</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SUBGAN结构详解"><span class="nav-number">1.1.</span> <span class="nav-text">SUBGAN结构详解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#clusterer"><span class="nav-number">1.1.1.</span> <span class="nav-text">clusterer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#generator"><span class="nav-number">1.1.2.</span> <span class="nav-text">generator</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#discriminator"><span class="nav-number">1.1.3.</span> <span class="nav-text">discriminator</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#contribution"><span class="nav-number">1.2.</span> <span class="nav-text">contribution</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -859,7 +851,7 @@
   
 
 
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
 
 
 
@@ -889,6 +881,43 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
   
 
 
