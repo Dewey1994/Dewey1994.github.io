@@ -510,7 +510,7 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
 <li>这里我们展示了嵌入式高斯版本，其中有512个通道的瓶颈层</li>
 <li>可以通过去除 $\theta$ 和 $\phi$ 来实现 vanilla 高斯版本，并且可以通过使用1/N缩放替换softmax来实现dot-product版本</li>
 </ul>
-<p>由于我们考虑的是图片，故可以直接设置T=1，或者说不存在。首先网络输入是$X= (batch,h,w,1024)$，经过Embedded Gaussian中的两个嵌入权重变换 $W<em>\theta,W</em>\phi 得到$(batch,h,w,512) , (batch,h,w,512)$ ,其实这里的目的是降低通道数，减少计算量；然后分别对这两个输出进行reshape操作，变成 $(batch,h×w,512)$；然后对这两个输出进行矩阵乘(其中一个要转置)，计算相似性，得到 $(batch，h×w，h×w)$ ；然后在第2个维度即最后一个维度上进行softmax操作，得到 $(batch，h×w，h×w)$ ，注意这样做就是位置注意力，相当于找到了当前图片或特征图中每个像素与其他所有位置像素的归一化相关性；然后将g也采用一样的操作，先通道降维，然后reshape；然后和 $(batch，h×w，h×w)$ 进行矩阵乘，得到 $(batch,h×w,512)$ ，即将位置或者空间注意力机制应用到了所有通道的每张特征图对应位置上，本质就是输出的每个位置值都是其他所有位置的加权平均值，通过softmax操作可以进一步突出共性。最后经过一个1x1卷积恢复输出通道，保证输入输出尺度完全相同。</p>
+<p>由于我们考虑的是图片，故可以直接设置T=1，或者说不存在。首先网络输入是$X= (batch,h,w,1024)$，经过Embedded Gaussian中的两个嵌入权重变换 $W_\theta,W_\phi 得到$(batch,h,w,512) , (batch,h,w,512)$ ,其实这里的目的是降低通道数，减少计算量；然后分别对这两个输出进行reshape操作，变成 $(batch,h×w,512)$；然后对这两个输出进行矩阵乘(其中一个要转置)，计算相似性，得到 $(batch，h×w，h×w)$ ；然后在第2个维度即最后一个维度上进行softmax操作，得到 $(batch，h×w，h×w)$ ，注意这样做就是位置注意力，相当于找到了当前图片或特征图中每个像素与其他所有位置像素的归一化相关性；然后将g也采用一样的操作，先通道降维，然后reshape；然后和 $(batch，h×w，h×w)$ 进行矩阵乘，得到 $(batch,h×w,512)$ ，即将位置或者空间注意力机制应用到了所有通道的每张特征图对应位置上，本质就是输出的每个位置值都是其他所有位置的加权平均值，通过softmax操作可以进一步突出共性。最后经过一个1x1卷积恢复输出通道，保证输入输出尺度完全相同。</p>
 <h4 id="子采样技巧可以进一步减少计算量"><a href="#子采样技巧可以进一步减少计算量" class="headerlink" title="子采样技巧可以进一步减少计算量"></a>子采样技巧可以进一步减少计算量</h4><ul>
 <li>我们将方程 <script type="math/tex; mode=display">y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script>修改为 <script type="math/tex; mode=display">y_i= \frac{1}{C(\bar{x})} \sum_{\forall{j}} f(x_i,\bar{xj})g(\bar{xj})</script></li>
 <li>在空间域中执行此操作，这可以将成对计算量减少1/4</li>

@@ -461,7 +461,7 @@
 <p>Cosine相似性：$Similarity(Query,Key_i)= \frac{Query\cdot{Key_i}}{\Vert{Query}\Vert\cdot\Vert{Key_i}\Vert}$</p>
 <p>MLP网络：$Similarity(Query,Key_i)=MLP(Query,Key_i)$</p>
 <p>第一阶段产生的分值根据具体产生的方法不同其数值取值范围也不一样，第二阶段引入类似SoftMax的计算方式对第一阶段的得分进行数值转换，一方面可以进行归一化，将原始计算分值整理成所有元素权重之和为1的概率分布；另一方面也可以通过SoftMax的内在机制更加突出重要元素的权重。即一般采用如下公式计算：</p>
-<p>$a<em>i=softmax(Sim_i)=\frac{e^{Sim_i}}{\sum</em>{j=1}^{L_x}e^{Sim_i}}$</p>
+<p>$a_i=softmax(Sim_i)=\frac{e^{Sim_i}}{\sum_{j=1}^{L_x}e^{Sim_i}}$</p>
 <p>第二阶段的计算结果a_i即为value_i对应的权重系数，然后进行加权求和即可得到Attention数值：</p>
 <p>$Attention(Query,Source)=\sum_{i=1}^{L_x}a_i\cdot(Value_i)$</p>
 <p>通过如上三个阶段的计算，即可求出针对Query的Attention数值，目前绝大多数具体的注意力机制计算方法都符合上述的三阶段抽象计算过程。</p>
