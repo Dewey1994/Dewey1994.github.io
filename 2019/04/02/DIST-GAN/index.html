@@ -97,17 +97,21 @@
 
 
   <meta name="description" content="这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。">
-<meta name="keywords" content="深度学习,GAN">
+<meta name="keywords" content="GAN,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="DIST-GAN">
 <meta property="og:url" content="http://yoursite.com/2019/04/02/DIST-GAN/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-04-02T12:55:43.345Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1ofjzs45zj20lr09742d.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1okykwd69j20v90eaacq.jpg">
+<meta property="og:updated_time" content="2019-04-02T13:00:01.525Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="DIST-GAN">
 <meta name="twitter:description" content="这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg">
 
 
 
@@ -387,7 +391,7 @@
                 
               
 
-              <time title="创建时间：2019-04-02 15:55:46 / 修改时间：20:55:43" itemprop="dateCreated datePublished" datetime="2019-04-02T15:55:46+08:00">2019-04-02</time>
+              <time title="创建时间：2019-04-02 15:55:46 / 修改时间：21:00:01" itemprop="dateCreated datePublished" datetime="2019-04-02T15:55:46+08:00">2019-04-02</time>
             
 
             
@@ -454,7 +458,7 @@
         <p>这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。</p>
 <a id="more"></a>
 <h3 id="Visual-mode-collapse-in-latent-space"><a href="#Visual-mode-collapse-in-latent-space" class="headerlink" title="Visual mode collapse in latent space"></a>Visual mode collapse in latent space</h3><p>以前的mode collapse是通过观察坍塌样本，然而，data space(就是指那些生成的图片或者数据集中的图片)是高维度的，很难在data space可视化一些<strong>点</strong>(这些点就表示数据的多样性，同样的点越多，说明数据的多样性越差，这篇论文中用同样颜色的点来表示同一数据)，但latent space是低维度的且容易控制，因此可以通过latent space来可视化其所代表的2D/3D空间。所以我们可以通过latent space来检验这些数据是否model collapse。但是有个问题就是，生成的图片数据，无法再映射回到latent space。因此我们采用一个现成的分类器，这个分类器预测生成样本的标签，我们最终可视化这个标签(我感觉这个可视化就是对生成的数据有个更直观的感受，其实就是把生成的数据聚类，然后显式的用图表示出来而已)</p>
-<p><a href="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg" target="_blank" rel="noopener">可视化</a></p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg" alt="可视化"></p>
 <h3 id="Distance-constraint：Motivation"><a href="#Distance-constraint：Motivation" class="headerlink" title="Distance constraint：Motivation"></a>Distance constraint：Motivation</h3><p>Even some latent samples reside very far apart from each other, they map to the same digit.</p>
 <p>对上面这句话的理解：就是图中，两个点距离很远，他们本不应该属于同一类，但是最终结果却把他们分为同一类，我们可以认为这样的情况就已经是mode collapse了，因此我们要提出一种距离度量来保证类之间的最小距离</p>
 <h3 id="Improving-GAN-using-Distance-Constraints"><a href="#Improving-GAN-using-Distance-Constraints" class="headerlink" title="Improving GAN using Distance Constraints"></a>Improving GAN using Distance Constraints</h3><p>我们应用$eq.(1)$通过AE(autoencoder)来改善生成器。首先，我们先训练AE(encoder$E_\omega$和decoder$G_\gamma\theta$)，然后我们再训练判别器$D_\gamma$和生成器$G_\theta$。$\omega,\theta,\gamma$分别是encoder，生成器和判别器的参数。训练AE的reconstruction loss为：</p>
@@ -464,7 +468,7 @@
 <li>(ii) fix $E_\omega$, $G_\theta$, and train $D_\gamma$ to minimize $(Eq. 2)$ </li>
 <li>(iii) fix $E_\omega$, $D_\gamma$ and train $G_\theta$ to minimize $(Eq. 3)$</li>
 </ul>
-<p><a href="http://ww1.sinaimg.cn/large/7211dbc2ly1g1ofjzs45zj20lr09742d.jpg" target="_blank" rel="noopener">network structure</a></p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1ofjzs45zj20lr09742d.jpg" alt="network structure"></p>
 <p>当我们在训练生成器时，最大化原来生成器函数$E_z\sigma(D_\gamma(G_\theta(z)))$会很容易导致model collapse。在此处，我们用我们提出的L1 distance对齐重构样本分布和真实样本分布，对齐分布的loss为：</p>
 <script type="math/tex; mode=display">\min\limits_{\theta}L_G(\theta)=\mid \mathbb{E}_x\sigma(D_\gamma(x))-\mathbb{E}_z\sigma(D_\gamma(G_\theta(z)))\mid \tag{2}</script><p>$\sigma$代表sigmoid函数</p>
 <p>我对上面这段话的理解是一味的最大化判别器对生成样本的分数，即让分数趋近于1，会使得网络变得懒惰，造成mode collapse。而对齐分布其实就是让判别器对生成样本和真实样本的分数尽可能接近，也就是分布尽可能接近，也就是不管真是样本如何，都让生成的和真实的靠近。</p>
@@ -473,7 +477,7 @@
 <p>这部分，我们讨论latent-data distance约束来正则化AE目的是减少生成器的mode collapse。特别的，我们用噪声输入来约束encoder的输出，同时用重构样本来约束生成器的输出，因此，为了减少mode collapse，我们要实现，如果latent space(潜在空间)中两个latent variables $g(z_i,z_j)$的距离小(大)，那么data space(数据空间)中的相关距离$f(x_i,x_j)$也应该小(大)。我们提出latent-data distance正则化表达式为：</p>
 <script type="math/tex; mode=display">L_W(\omega,\theta)=\parallel f(x,G_\theta(z))-\lambda_wg(E_\omega(x),z)\parallel^2_2 \tag{4}</script><p>其中$f,g$是计算data space和latent space距离函数。我们不能直接用L1-norm这种来直接计算两个数据分布的距离，因此我们提出用称为matching score的函数来计算距离</p>
 <script type="math/tex; mode=display">f(x,G_\theta(z))=M_d(\mathbb{E}_xG_\theta(E_\omega(x))-\mathbb{E}_zG_\theta(z)) \tag{5}</script><script type="math/tex; mode=display">g(E_\omega(x),z)=M_d(\mathbb{E}_xE_\omega(x)-\mathbb{E}_zz) \tag{6}</script><p>$M_d$计算的是输入的所有维度的平均值。根据经验$\lambda_w=\sqrt{\frac{d_z}{d_x}}$,其中$d_z,d_x$是latent和data样本的维度。其实$f$算的是生成的样本和重构样本的距离，$g$算的是初始随机噪声$z$和由原始样本encoder的latent space的距离。</p>
-<p><a href="http://ww1.sinaimg.cn/large/7211dbc2ly1g1okykwd69j20v90eaacq.jpg" target="_blank" rel="noopener">algorithm</a></p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1okykwd69j20v90eaacq.jpg" alt="algorithm"></p>
 
       
     </div>
@@ -497,9 +501,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
             <a href="/tags/GAN/" rel="tag"># GAN</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
