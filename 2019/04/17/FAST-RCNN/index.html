@@ -1,0 +1,1001 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="fast R-CNN &amp;amp; faster R-CNN今天我也要入坑目标检测和跟踪了。。。。。下面正题。。。。。">
+<meta name="keywords" content="深度学习,目标检测">
+<meta property="og:type" content="article">
+<meta property="og:title" content="FAST-RCNN">
+<meta property="og:url" content="http://yoursite.com/2019/04/17/FAST-RCNN/index.html">
+<meta property="og:site_name" content="Dewey&#39;s blog">
+<meta property="og:description" content="fast R-CNN &amp;amp; faster R-CNN今天我也要入坑目标检测和跟踪了。。。。。下面正题。。。。。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g25yqpvni6j20pe09w7di.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g272up5w89j20fq0hltb9.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g27qcf0p8ej218h09uwo7.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g27qd1pgpxj20lg07gjsh.jpg">
+<meta property="og:updated_time" content="2019-04-19T05:05:04.841Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="FAST-RCNN">
+<meta name="twitter:description" content="fast R-CNN &amp;amp; faster R-CNN今天我也要入坑目标检测和跟踪了。。。。。下面正题。。。。。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g25yqpvni6j20pe09w7di.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/17/FAST-RCNN/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>FAST-RCNN | Dewey's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dewey's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Better to run than curse the road.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/17/FAST-RCNN/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">FAST-RCNN
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-17 20:00:04" itemprop="dateCreated datePublished" datetime="2019-04-17T20:00:04+08:00">2019-04-17</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-19 13:05:04" itemprop="dateModified" datetime="2019-04-19T13:05:04+08:00">2019-04-19</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/目标检测/" itemprop="url" rel="index"><span itemprop="name">目标检测</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>fast R-CNN &amp; faster R-CNN<br>今天我也要入坑目标检测和跟踪了。。。。。下面正题。。。。。<br><a id="more"></a></p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>这个玩意很复杂的原因是需要精确定位物体，这带来了两个挑战。(1)必须处理多个<strong>候选对象位置也叫proposals</strong>。(2)其次这些proposals值提供粗略的估计，必须对其进行细化以实现精确定位。解决这些问题往往会影响速度，准确性和简单性。</p>
+<p>我们提出了一个single-stage的训练算法(以往的算法是多阶段的streamline)，该算法可以联合学习去分类proposals和细化使得他们的空间位置更精确。</p>
+<h4 id="R-CNN-and-SPPnet"><a href="#R-CNN-and-SPPnet" class="headerlink" title="R-CNN and SPPnet"></a>R-CNN and SPPnet</h4><p>R-CNN的缺点</p>
+<ol>
+<li>训练过程是一个多阶段的pipeline。R-CNN首先用log loss对proposals微调卷积神经网络。然后把卷积神经网络得到的特征喂给SVMs，SVMs作为目标检测器，来代替微调的softmax分类器。最后回归bbox(bounding-box)。</li>
+<li>训练在是时间和空间上的代价太高</li>
+<li>目标检测速度太慢   47s/image</li>
+</ol>
+<p>R-CNN很慢是因为它对每个object proposals都要送入卷积神经网络里计算，而不是共享计算。SPPnet的方法是计算整个图像的卷积特征，然后从feature map中提取对应的特征向量来对object proposals进行分类。SPPnet中用了空间金字塔池化。SPPnet也有缺点，像R-CNN，训练也是多阶段的pipeline，包括提取特征，用log loss来finetuning网络，训练SVMs，最后对bbox回归。但与R-CNN不同的是，finetuning不能微调spatial pyramid pooling前面的卷积层，这就限制了非常深的网络的准确性。</p>
+<h4 id="Contribution"><a href="#Contribution" class="headerlink" title="Contribution"></a>Contribution</h4><ol>
+<li>更高的检测质量</li>
+<li>训练时单阶段的，使用multi-task loss</li>
+<li>训练能更新网络的所有层</li>
+<li>特征缓存不需要存储</li>
+</ol>
+<h3 id="Fast-R-CNN的结构和训练"><a href="#Fast-R-CNN的结构和训练" class="headerlink" title="Fast R-CNN的结构和训练"></a>Fast R-CNN的结构和训练</h3><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g25yqpvni6j20pe09w7di.jpg" alt="network"></p>
+<p>输入为一张完整的图片和一系列object proposals。网络受限对图片进行卷积，池化来得到feature map，然后根据ROI从feature map中取出对应的proposals的固定长度的特征向量。然后全连接，分出两个分支，一个为softmax分类(包括背景)，另一个是输出四个值，就是坐标加长度和宽度。</p>
+<h4 id="ROI-pooling-layer"><a href="#ROI-pooling-layer" class="headerlink" title="ROI pooling layer"></a>ROI pooling layer</h4><p>ROI池化层用max pooling把ROI对应的特征转换为一个固定大小的$H$ x $W$的小特征图，ROI由一个四元组定义($r,c,h,w$)，其中($r,c$)是左上角的坐标，($h,w$)是高度和宽度。$H$和$W$是超参数。</p>
+<p>ROI max pooling的工作原理是将$h$ x $w$大小的ROI窗口划分为$H$ x $W$个子窗口网格，大小为$h/H$ x $w/W$，然后将每个子窗口的值max pooling到相应的输出网格中。ROI层是SPPnet中的spatial pyramid pooling中的特殊情况，因为它只有一层，而不是SPPnet中的金字塔构成。</p>
+<h4 id="初始化预训练网络"><a href="#初始化预训练网络" class="headerlink" title="初始化预训练网络"></a>初始化预训练网络</h4><p>我们使用三个预训练过imagenet网络进行实验，每个网络都有5个max pooling和5<br>-13个卷积层。当我们将他们作为fast R-CNN的网络使用时，他们要改变3个地方。</p>
+<ul>
+<li>首先，最后的max pooling层替换为ROI pooling层</li>
+<li>其次，网路最后的全连接层和softmax替换为前面说的两个分类(一个全连接层和softmax，其中有K+1个类别和bbox回归器)</li>
+<li>网络的输入改成一张图片和一系列ROI(object proposals)</li>
+</ul>
+<h4 id="finetuning-for-detection"><a href="#finetuning-for-detection" class="headerlink" title="finetuning for detection"></a>finetuning for detection</h4><p>后向传播来训练FAST R-CNN网络权重是一个很重要的能力，首先我们先讲一下为什么SPPnet无法更新空间金字塔池化层前的卷积层权重。</p>
+<p>根本原因是当训练样本(ROI)来自不同的图片时，SPP层就非常低效。这种低效的原因是因为每个ROI都有一个很大的感受野，经常横跨整个图片。因为前向传播要处理全部感受野，训练输入就很庞大(通常是整个图像)。</p>
+<p>我们提出一种更加高效的训练方法，即在训练时利用特征共享。在fast r-cnn训练中，SGD(随机梯度下降)分层采样，先采样N张图片，在从每张图片中采样R/N ROIS。<strong>关键是</strong>，同一张图片的ROIs在前向和后向传播中共享计算和存储。让N变小减少了mini-batch的计算。比如说，当$N=2$和$R=128$，所提出的方案比从128个不同图像中采样一个ROI大约快64倍。</p>
+<p>其中有一个小concern是这个方法可能会收敛的很慢，因为同一张图片的ROIs是相关的。但这个问题似乎没有出现，相比R-CNN，我们用$N=2$和$R=128$同时使用更少的SGD迭代得到了更好的结果。</p>
+<p><strong>multi-task loss.</strong></p>
+<p>fast R-CNN网络有两个output layer。第一个输出离散概率分布，$p=(p_0,…p_k)$，共K+1个类别(background也算一个类)。通常，$p$由全连接层softmax分类得到。第二个输出bbox回归偏置，$t^k=(t_x^k,t_y^k,t_w^k,t_h^k)$，k是目标分类的索引。multi-task loss为：</p>
+<script type="math/tex; mode=display">L(p,u,t^u,v)=L_{cls}(p,u)+\lambda[u\ge1]L_{loc}(t^u,v)</script><p>其中$u$是groundtruth类别，$v$为groundtruth的bbox回归目标，$L_{cls}(p,u)=-\log{p_u}$是一个log loss。</p>
+<p>下面说$L_{loc}$。对于类比$k^<em>$，在图片中标注了一个groundtruth坐标：$t^</em>=(t_x^<em>,t_y^</em>,t_w^<em>,t_h^</em>)$，而预测值为$t=(t_x,t_y,t_w,t_h)$，二者理论上越接近越好，这里定义损失函数：</p>
+<script type="math/tex; mode=display">L_{loc}(t^u,v)=\sum_{i\in \lbrace x,y,w,h \rbrace} smooth_{L1}(t_i^u-v_i)</script><p>其中</p>
+<script type="math/tex; mode=display">smooth_{L1}(x)=\begin{cases}
+0.5x^2 & if \mid x\mid <1 \\
+\mid x\mid-0.5 & otherwises
+\end{cases}</script><p>作者认为L1 loss你更鲁棒些，后续的就不写啦，大致溜一眼这些到底是些什么东东。。。。</p>
+<hr>
+<p>下面是faster R-CNN的学习过程</p>
+<p>faster R-CNN由两部分组成。第一部分是确定区域region的深度全卷积网络，第二部分是fast R-CNN detector，他使用前面所确定的region proposal。通过使用最近相当流行的attention机制，RPN网络告诉fast R-CNN要检测的区域。</p>
+<h3 id="region-proposal-networks-RPN"><a href="#region-proposal-networks-RPN" class="headerlink" title="region proposal networks|RPN"></a>region proposal networks|RPN</h3><p>RPN输入一张图像，输出一组长方形目标proposal，每个框都有个分数。因为我们的最终目标是与fast R-CNN对象检测网络共享计算，所以我们假设这两个网络共享一组公共的卷积层。</p>
+<p>为了生成region proposal，我们在最后一个共享卷积层的卷积特征图输出上滑动一个网络。这个网络把输入卷积特征图的一个$n$ x $n$的空间窗口作为输入，每个窗口都映射到一个低维特征。这个低维特征被喂给两个全连接层——一个box-regression layer(reg)和一个box-classification layer(cls)。由于这个网络以滑动窗口的方式运行，因此所有空间位置共享全连接层。这种体系解构很自然的使用一个$n$ x $n$卷积层实现，然后是两个同级的1 x 1卷积层(分别用于reg和cls)</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g272up5w89j20fq0hltb9.jpg" alt="RPN"></p>
+<h3 id="anchors"><a href="#anchors" class="headerlink" title="anchors"></a>anchors</h3><p>在每个滑动窗口位置上，我们同时预测多个region proposal，其中每个位置的最大可能proposals数目记为k。因此reg layer有k个盒子，且有4k个输出值，cls layer输出2k个分数来对每个proposal估计是否有目标的概率。anchor位于滑动窗口的中心，并有不同的尺度和宽高比，默认我们用3个不同尺度和3个不同的宽高比，在每个滑动位置上有$k=9$个anchors。对于一个大小为$W$ x $H$卷积feature map，共有WHk个anchors。下面贴一个对anchor的解释，这里有点晕。。。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/55824651" target="_blank" rel="noopener">目标检测中的anchor</a></p>
+<p>下面就接着论文看  同时关注anchor的作用，大致是预测 foreground or background</p>
+<h4 id="平移不变的anchor"><a href="#平移不变的anchor" class="headerlink" title="平移不变的anchor"></a>平移不变的anchor</h4><p>我们的方法中的一个重要属性就是平移不变，包括anchor平移不变和计算与anchor相关的proposal的函数也是平移不变的，如果在图像中平移一个目标，那么proposal也会跟着平移，这时，同一个函数需要能够在任何位置都预测到这个proposal。我们的犯法可以保证这种平移不变。作为比较，the multibox method使用K聚类的方法生成800个anchor，这不是平移不变的。因此multibox并不保证当一个对象被平移时，会生成相同的proposal。</p>
+<p>平移不变性也减少了模型的尺寸，当anchor数量k=9时，multibox有(4+1)<em>800维全连接的输出层，而我们的方法有一个(4+2)</em>9维的卷积输出层。因此我们输出层的参数比multibox少两个数量级，如果考虑到feature projection层，我们的proposal层依旧比multibox的参数少一个数量级。</p>
+<h4 id="多尺度锚点作为回归参考"><a href="#多尺度锚点作为回归参考" class="headerlink" title="多尺度锚点作为回归参考"></a>多尺度锚点作为回归参考</h4><p>我们的锚点设计提出了一种解决多个尺度(和纵横比)的新方案。如图所示，有两种流行的多尺度预测方法。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g27qcf0p8ej218h09uwo7.jpg" alt="多尺度预测方法"></p>
+<p>(a．建立了图像和特征图的金字塔，分类器在所有的尺度上运行。b. 具有多个尺寸/大小的过滤器金字塔在feature map上运行。c. 我们在回归函数中使用了参考框的金字塔。)</p>
+<p>第一种方法是基于图像/特征金字塔，例如，在DPM和基于cnn方法的方法。这些图像在多个尺度上进行了调整，并且为每个尺度计算特征图(占用或深度卷积特性)(图1(a))。这种方法通常很有用，但很耗费时间。第二种方法是在feature map上使用多个尺度(宽高比)的滑动窗口。例如，在DPM中，不同宽高比的模型分别使用不同大小的filter(如5x7和7x5)进行单独训练。如果这种方法用于处理多个尺度，它可以被认为是一个过滤器金字塔(图1(b))。第二种方法通常是与第一种方法共同使用的</p>
+<p>相比而言，我们基于锚点的方法建立在锚点金字塔上，这更节省成本。我们的方法对多个尺度和宽高比的锚点框进行了分类和回归。它只依赖于单一尺度的图像和feature map，并使用单一大小的过滤器(feature map上的滑动窗口)。我们通过实验展示了这个方案对处理多个尺度和大小的影响(表8)。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g27qd1pgpxj20lg07gjsh.jpg" alt=""></p>
+<p>由于这种多尺度设计是基于锚点的，我们可以简单地使用在单尺度图像上计算的卷积特性，也可以使用Fast R-CNN检测器。<strong>多尺度锚点的设计是共享特性的关键组成，使处理尺度时不需要额外的成本。</strong></p>
+<h3 id="loss-function"><a href="#loss-function" class="headerlink" title="loss function"></a>loss function</h3><p>为了训练RPNs，我们将一个二进制类标签(是否是object)分配给每个锚点。将两类锚点设置为positive label：1)跟真值框的IoU(交并比)最高的，2)跟真值框的交并比大于0.7的。注意，一个真值框可以分配给多个anchor为positive label。通常情况下，第二个条件就足以确定正样本，我们还采用第一个条件的原因是，有时候第二个条件找不到正样本。如果一个anchor跟所有真值框的交并比小于0.3，那么我们就把它设为负样本。正负样本之间的这些样本对训练没有贡献。有了这些定义，我们在fast R-CNN的多任务损失之后最小化一个目标函数，损失函数定义为：</p>
+<script type="math/tex; mode=display">L(\lbrace p_i\rbrace,\lbrace t_i\rbrace)=\frac{1}{N_{cls}}\sum_i L_{cls}(p_i,p_i^*)+\lambda\frac{1}{N_{reg}}\sum_i p_i^*L_{reg}(t_i,t_i^*). \tag{1}</script><p>其中i是每个mini-batch中anchor的序号，$p_i$是anchor $i$是目标的预测概率，$p_i^<em>$是groundtruth标签只能是0和1。$t_i$是预测框的四个参数，$t_i^</em>$是positive anchor的groundtruth框的参数，也就是标定框吧。$L_{cls}$是分类损失函数(针对是否有目标)，$L_{reg}$是回归损失函数，$L_{reg}(t_i,t_i^<em>)=R(t_i,t_i^</em>)$，其中$R$是L1 loss。$p_i^<em>L_{reg}$表示回归只对正样本进行(负样本$p_i^</em>=0$)。$cls$和$reg$的输出是$p_i$和$t_i$。</p>
+<p>公式1的两部分分别由$N_{cls}$(由mini-batch决定，这里是256)和$N_{reg}$(由anchor位置数量决定，这里是2400)来规范化，并通过一个$\lambda$来平衡加权，默认情况下$\lambda=10$，通过实验证明，结果对大范围内$\lambda$不敏感，我们还注意到，上面的标准化是不需要的，可以被简化。</p>
+<h3 id="训练RPNs"><a href="#训练RPNs" class="headerlink" title="训练RPNs"></a>训练RPNs</h3><p>RPN可以通过反向传播和随机梯度下降来端到端训练。我们遵循以图像为中心的采样策略，开始训练这个网络。每个小批次都来自同一张照片，照片包含许多正负锚点示例。对所有锚点的损失函数进行优化是可行的，但这将偏向于负样本，因为它们多。相反，我们在一个图像中随机抽取256个锚点来计算一个小批的损失函数，其中采样的正和负锚点的比例是1:1。如果一个图像中有少于128个正的样本，我们用负样本填充。</p>
+<p>我们随机地初始化所有的新层，方法是用标准偏差0.01的零均值高斯分布来初始化权重。通常，所有其他层（共享卷积层）都是通过预先培训练一个用于ImageNet分类的模型来初始化的。我们对ZF网络的所有层进行调优，并对VGG网络的conv3_1层进行调优，以节省内存。我们对60 k小批量的学习速率为0.001，在PASCAL VOC数据集上的下一个20 k小批量的学习速率是0.0001。我们使用0.9的步长和0.0005的重量衰减。用Caffe实现的。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/08/attention-gan/" rel="next" title="attention-gan">
+                <i class="fa fa-chevron-left"></i> attention-gan
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dewey</p>
+              <p class="site-description motion-element" itemprop="description">record my life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Dewey1994" title="GitHub &rarr; https://github.com/Dewey1994" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:401692632@qq.com" title="Email &rarr; mailto:401692632@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">1.</span> <span class="nav-text">Introduction</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#R-CNN-and-SPPnet"><span class="nav-number">1.1.</span> <span class="nav-text">R-CNN and SPPnet</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Contribution"><span class="nav-number">1.2.</span> <span class="nav-text">Contribution</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fast-R-CNN的结构和训练"><span class="nav-number">2.</span> <span class="nav-text">Fast R-CNN的结构和训练</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ROI-pooling-layer"><span class="nav-number">2.1.</span> <span class="nav-text">ROI pooling layer</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#初始化预训练网络"><span class="nav-number">2.2.</span> <span class="nav-text">初始化预训练网络</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#finetuning-for-detection"><span class="nav-number">2.3.</span> <span class="nav-text">finetuning for detection</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#region-proposal-networks-RPN"><span class="nav-number">3.</span> <span class="nav-text">region proposal networks|RPN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#anchors"><span class="nav-number">4.</span> <span class="nav-text">anchors</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#平移不变的anchor"><span class="nav-number">4.1.</span> <span class="nav-text">平移不变的anchor</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#多尺度锚点作为回归参考"><span class="nav-number">4.2.</span> <span class="nav-text">多尺度锚点作为回归参考</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#loss-function"><span class="nav-number">5.</span> <span class="nav-text">loss function</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#训练RPNs"><span class="nav-number">6.</span> <span class="nav-text">训练RPNs</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
