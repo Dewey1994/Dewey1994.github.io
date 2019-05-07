@@ -1,0 +1,966 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="一篇2019CVPR的3D detection的文章。">
+<meta name="keywords" content="深度学习,3D detection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Stereo R-CNN based 3D Object Detection for Autonomous Driving">
+<meta property="og:url" content="http://yoursite.com/2019/04/22/stereo-r-cnn/index.html">
+<meta property="og:site_name" content="Dewey&#39;s blog">
+<meta property="og:description" content="一篇2019CVPR的3D detection的文章。">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2dsqjglt2j20zq0djqcq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2cquq4wfrj20j609pn2c.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2cqv8q3axj20ir0dfjtm.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2ctviy265j20hn06gdgl.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2cuhddmppj20jk08mn3w.jpg">
+<meta property="og:updated_time" content="2019-04-24T08:20:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Stereo R-CNN based 3D Object Detection for Autonomous Driving">
+<meta name="twitter:description" content="一篇2019CVPR的3D detection的文章。">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2dsqjglt2j20zq0djqcq.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/04/22/stereo-r-cnn/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Stereo R-CNN based 3D Object Detection for Autonomous Driving | Dewey's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dewey's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Better to run than curse the road.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/22/stereo-r-cnn/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Stereo R-CNN based 3D Object Detection for Autonomous Driving
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-04-22 19:25:30" itemprop="dateCreated datePublished" datetime="2019-04-22T19:25:30+08:00">2019-04-22</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-04-24 16:20:28" itemprop="dateModified" datetime="2019-04-24T16:20:28+08:00">2019-04-24</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/3D-detection/" itemprop="url" rel="index"><span itemprop="name">3D detection</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>一篇2019CVPR的3D detection的文章。<br><a id="more"></a></p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>我们提出了一种充分利用立体图像中稀疏、密集、语义和几何信息的自动驾驶的三维目标检测方法。我们在stereo RPN之后添加额外的分支来预测稀疏的关键点、视点和对象维数，并将其与2D left-right boxes结合来计算一个粗略的3D对象包围框。然后我们用left和right RoIs通过一个基于区域的光度对齐来恢复精确的3D bounding box。我们的方法不需要深度输入和三维位置监督，但我们的方法优于所有的完全监督的基于图像的方法。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g2dsqjglt2j20zq0djqcq.jpg" alt="network"></p>
+<h3 id="Stereo-R-CNN-Network"><a href="#Stereo-R-CNN-Network" class="headerlink" title="Stereo R-CNN Network"></a>Stereo R-CNN Network</h3><p>在本节，我们介绍Stereo R-CNN网络架构，和Faster R-CNN相比，我们的方法只需稍加修改就可以同时检测和关联左右图像的2D bbox。我们使用权重共享的resnet-101和FPN作为我们的骨干网络提取左右图像的一致性特征。</p>
+<h4 id="Stereo-RPN"><a href="#Stereo-RPN" class="headerlink" title="Stereo RPN"></a>Stereo RPN</h4><p>RPN是一种基于滑动窗口的前景检测器，在特征提取之后使用一个3 x 3的卷积层减少channel，然后用两个全连接层分别对每个输入位置进行目标分类和回归box偏置，anchor是预定义的多尺度box。与FPN类似，我们通过在多尺度feature map上评估anchor来改进原始RPN的金字塔特征。不同之处在于，我们concat每个尺度的左右feature map，然后将其喂给stereo RPN network。</p>
+<p>能使得我们同时进行目标检测和联合(association)的关键设计是给物体分类器(objectness classifier)和立体盒子回归器(stereo box regressor)不同的GTbox。如图2所示，我们把左右GTbox的联合(称为union GT box)作为目标分分类器(objectness classifier)的target。如果anchor与union GT box的一个的IoU&gt;0.7，就分配一个positive label；当anchor与任何union GT box的IoU都&lt;0.3，分配一个negative label。受益于这个设计，positive anchor倾向于包含左右的物体区域(object region)。我们计算关于目标联合GT框(target union GT box)中包含的左右GT box的positive anchor的偏移量(offset)，然后将偏移量分别分配给左右regression。回归器中有6个回归项：$[\Delta u,\Delta w,\Delta u’,\Delta w’,\Delta v,\Delta h]$，其中$u,v$是2D box的中心的横纵坐标，$w,h$是box的宽高，带$()’$的表示右图像的参数。注意到我们用同样的$v,h$的偏置$\Delta v,\Delta h$来处理左右box，因为我们用的是修正的stereo images。因此对于stereo RPN regressor我们有6个输出channel。因为左右proposal是由相同的anchor生成的，并且共享objectness score，所以他们可以自然的关联在一起。我们在左右RoIS上用非最大值抑制来减少冗余。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g2cquq4wfrj20j609pn2c.jpg" alt="fig2"></p>
+<h3 id="Stereo-R-CNN"><a href="#Stereo-R-CNN" class="headerlink" title="Stereo R-CNN"></a>Stereo R-CNN</h3><h4 id="Stereo-Regression"><a href="#Stereo-Regression" class="headerlink" title="Stereo Regression"></a>Stereo Regression</h4><p>在Stereo RPN之后，我们有左右proposals对。在适当的金字塔层上，我们分别在左右feature map上用RoI Align。将左右RoI feature concat起来，然后喂给两个顺序的全连接层(每层后面跟着一个ReLU)来提取<strong>语义信息</strong>。我们用四个分支来预测物体类别(object class)，立体bbox(stereo bounding box)，大小(dimension)和视角(viewpoint angle)。box的回归模式和前面Stereo RPN中的一样。注意到视角不等于物体的方向，下图展示了一个范例。我们$\theta$来表示相对于相机的车子方向，$\beta$来表示相对于相机中心的物体方位角。三个车子有不同的方向，但是，在corpped RoI images上他们的投影是一样的。因此我们回归视角$\alpha$定义为$\alpha=\theta+\beta$。为了避免不连续，训练目标是$[sin\alpha,cos\alpha]$对而不是原始角度。有了stereo boxes和物体尺寸，深度能直接获得，车子的方向也能通过解耦视角和3D position的关系得到。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g2cqv8q3axj20ir0dfjtm.jpg" alt="fig3"></p>
+<p>当采样RoIs时，如果左边的RoIs和左边的GT boxes的最大IoU&gt;0.5，同时右边的最大IoU&gt;0.5，我们就把左右RoIs对作为前景；如果左RoI或者右RoI的最大IoU位于[0.1,0.5]区间，则将左右RoI对视为背景。对于前景RoIs对，我们通过计算左侧RoI与左侧GT框之间的偏移量以及右侧RoI与相应右侧GT框之间的偏移量来指定回归目标。对左右RoIs，我们仍用相同的$\Delta v,\Delta h$。对于尺寸预测，我们仅仅回归GT尺寸和预先设置的尺寸的偏置。</p>
+<h4 id="Keypoint-Prediction"><a href="#Keypoint-Prediction" class="headerlink" title="Keypoint Prediction"></a>Keypoint Prediction</h4><p>除了stereo box和viewpoint angle，我们注意到投影在box中间的3D box角点能对3D box估计提供更严格的约束。如图4所示，我们定义4个3D语义关键点，他们3Dbbox底部的4个Corner。只有一个3D语义关键点可以明显地投射到box的中间(而不是左右边缘)。我们把这个语义关键点称为透视关键点。<strong>在3D box estimation中，我们展示了透视关键点是如何对3D box进行估计的。</strong>同时我们也预测了两个边界关键点，它们作为常规形状对象的实例掩码的简单替代。只有在两个边界关键点之间的区域属于现在的object和将被用于之后的dense alignment。</p>
+<p>我们用Mask R-CNN中的方法预测关键点。只有左feature map用于关键点预测。我们把14 x 14RoI对齐的feature maps喂给256维度 3 x 3的卷积层，每层后都是一个ReLU层。一个2 x 2的转置卷积层用于上采样输出结果到28 x 28。<strong>我们注意到除了2D box外，只有关键点的u坐标提供了额外的信息。（这个没太懂）</strong>。to relax the task(不知道咋翻译)，我们把输出6 x 28 x 28的height channel加起来，得到6 x 28的预测结果。结果，在RoI feature的每一列都被加起来，这有助于关键点预测。前四个channel代表这四个语义关键点投影到u坐标位置的概率；剩下两个channel代表u坐标位于左右边界的概率。注意到只有一个语义关键点可以投影到2D box的中心，因此用softmax来激励其中的那个语义关键点投影到2D BOX的中心。这种策略避免了透视关键点类型的混淆(即对应于哪一个语义关键点)。对左右边界的关键点也用softmax。</p>
+<p>在训练过程中，我们用交叉熵loss来最小化4 x 28softmax输出，用于透视关键点的预测。在4 x 28输出中，只有一个位置被标记为透视关键点目标。我们忽略了3D语义关键点投影不到box的中心的情况(比如，truncation截断和正交投影)。对于边界关键点，我们单独最小化两个1 x 28softmax输出的交叉熵loss。根据GT box之间的遮挡关系，为每个前景RoI分配左右边界关键点。</p>
+<h3 id="3D-Box-Estimation"><a href="#3D-Box-Estimation" class="headerlink" title="3D Box Estimation"></a>3D Box Estimation</h3><p>在这部分，我们用稀疏关键点和2D box信息来求解<strong>coarse 3D bounding box</strong>。3D bounding box的状态可以用$X=\lbrace x,y,z,\theta \rbrace$，分别为3D中心位置和水平方向。给定左右2D boxes，透视关键点和回归大小，通过最小化2D boxes和关键点的重投影误差来求出3D box。如图5所示，我们从stereo boxes和透视关键点中提取7个测量值$Z=\lbrace u_l,u_t,u_r,u_b,u_l’,u_r’u_p \rbrace$，代表左边2D box的左，上，右，下边，右3D box的左右边，和透视关键点的u坐标。为了简化表示，每个测量值又摄像机内部标准化。给定透视关键点，可以推断出3D box corner与2D box edge之间的对应关系，我们通过投影变化来构造2D-3D的关系。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g2ctviy265j20hn06gdgl.jpg" alt="formulation"></p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g2cuhddmppj20jk08mn3w.jpg" alt="fig5"></p>
+<p>我们把$b$定义为相机的基线长度，$w,h,l$为回归的大小。七个测量值有七个等式，$\lbrace \frac{w}{2},\frac{l}{2} \rbrace$应根据相应的3Dbox corner进行适当的更改。这些方程通过gauss-newton方程解得。不同于用单一2D box和尺寸优先 来解决3D位置和方向，我们通过用stereo boxes和回归尺寸来鲁棒的恢复3D深度信息，在遇到上述截断和正交投影是，就不会有透视关键点，因此我们用视角$\alpha$来补偿这种不可观测的状态</p>
+<script type="math/tex; mode=display">\alpha = \theta+\arctan (-\frac{x}{z})</script><p>从2D boxes和透视关键点求解，coarse 3D box有精确的投影，并能与图像很好的对齐，这使得我们能够好实现dense alignment。</p>
+<h3 id="Dense-3D-Box-Alignment"><a href="#Dense-3D-Box-Alignment" class="headerlink" title="Dense 3D Box Alignment"></a>Dense 3D Box Alignment</h3><p>左右bbox提供了物体的视差信息，因此我们能粗略得到3D bbox。然而，stereo boxes通过聚合7 x 7RoI feature maps的高级信息来回归。，由于多层卷积滤波器的原因，原始图像中的像素级信息(corner,edges)丢失了。为了实现精确的亚像素级的匹配，我们恢复原始图像利用像素级的高分辨率信息。注意到我们的任务不同于像素级的视差估计问题，其中我们的结果会在一些病态区域遇到不连续的问题，或者在边缘处过于光滑。当用密集物体匹配(dense object patch)时，我们只得到了3D bbox中心的视差，比如我们用大量的像素测量值来得到单个变量？？没懂什么鬼。</p>
+<p>把物体看作规则形状的立方体，我们就能通过3D box estimation里的方法得到每个像素和3D bbox中心的深度关系。为了排除背景和其他物体的像素，我们把有效RoI区域定义为在左右边界关键点之间的区域且位于3D box的下半部分，因为下半部分的车子更fit 3D box。对于位于左图像的有效RoI中的归一化坐标$(u_i,v_i)$的像素，可以将光度误差定义为</p>
+<script type="math/tex; mode=display">e_i=\parallel I_l(u_i,v_i)-I_r(u_i-\frac{b}{z+\Delta z_i},v_i)\parallel</script><p>$I_l,I_r$是左右图像的3通道RGB向量；$\Delta z_i=z_i-z$是像素$i$和3D box中心的深度差；$b$是基线长度。$z$是我们要求解的变量。我们使用双线性插值来得到正确图像的亚像素值。总匹配代价定义为在有效RoI区域内所有像素上的SSD(sum of squared difference平方差之和)：</p>
+<script type="math/tex; mode=display">E=\sum_{I=0}^N e_i</script><p>中心深度z可以通过最小化总匹配代价$E$来求解，我们可以有效地枚举深度来找到一个最小化代价的深度。我们在初始的时候用50个深度值间隔0.5-meter，得到一个粗略的深度，最后以0.05-meter为间隔，在粗深度周围枚举20个深度值，得到精确对齐的深度。然后我们用我们的3D box estimator对齐深度来校正整个3D box。将object RoI看作一个几何约束的整体，我们的密集对齐方法自然避免了立体深度估计中的不连续和不适定问题，并且对强度变化和亮度占主导地位的亮度具有很强的鲁棒性，因为有效RoI中的每个像素都将有助于目标深度估计。注意，这种方法是有效的，可以用于任何基于图像的三维检测的一个轻量级的插件模块，以实现深度校正。虽然三维物体对三维立方体的拟合不严格，但形状变化引起的相对深度误差要比全局深度小得多。因此，我们的几何约束密集对准提供了精确的目标中心深度估计。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/3D-detection/" rel="tag"># 3D detection</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/17/FAST-RCNN/" rel="next" title="FAST-RCNN">
+                <i class="fa fa-chevron-left"></i> FAST-RCNN
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dewey</p>
+              <p class="site-description motion-element" itemprop="description">record my life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">13</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">10</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Dewey1994" title="GitHub &rarr; https://github.com/Dewey1994" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:401692632@qq.com" title="Email &rarr; mailto:401692632@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stereo-R-CNN-Network"><span class="nav-number">2.</span> <span class="nav-text">Stereo R-CNN Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stereo-RPN"><span class="nav-number">2.1.</span> <span class="nav-text">Stereo RPN</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stereo-R-CNN"><span class="nav-number">3.</span> <span class="nav-text">Stereo R-CNN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Stereo-Regression"><span class="nav-number">3.1.</span> <span class="nav-text">Stereo Regression</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Keypoint-Prediction"><span class="nav-number">3.2.</span> <span class="nav-text">Keypoint Prediction</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3D-Box-Estimation"><span class="nav-number">4.</span> <span class="nav-text">3D Box Estimation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Dense-3D-Box-Alignment"><span class="nav-number">5.</span> <span class="nav-text">Dense 3D Box Alignment</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
