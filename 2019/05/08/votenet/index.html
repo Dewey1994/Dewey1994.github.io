@@ -1,0 +1,985 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="Abstract当前的3D目标检测方法受2D目标检测严重影响。为了利用2D检测器中的架构，它们经常将3D点云转换为常规网格，或者依赖于2D图像中的检测来提出3D框。很少有人尝试直接检测点云中的物体。在这项工作中，我们回到第一原则，为点云数据构建一个3D检测pipeline，并尽可能通用。然而，由于数据的稀疏性 - 来自3D空间中的2D流形的样本 - 当从场景点直接预测边界框参数时，我们面临一个主要">
+<meta name="keywords" content="深度学习,3D detection">
+<meta property="og:type" content="article">
+<meta property="og:title" content="votenet">
+<meta property="og:url" content="http://yoursite.com/2019/05/08/votenet/index.html">
+<meta property="og:site_name" content="Dewey&#39;s blog">
+<meta property="og:description" content="Abstract当前的3D目标检测方法受2D目标检测严重影响。为了利用2D检测器中的架构，它们经常将3D点云转换为常规网格，或者依赖于2D图像中的检测来提出3D框。很少有人尝试直接检测点云中的物体。在这项工作中，我们回到第一原则，为点云数据构建一个3D检测pipeline，并尽可能通用。然而，由于数据的稀疏性 - 来自3D空间中的2D流形的样本 - 当从场景点直接预测边界框参数时，我们面临一个主要">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2wac8w4imj21330k5n6s.jpg">
+<meta property="og:updated_time" content="2019-05-11T06:46:28.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="votenet">
+<meta name="twitter:description" content="Abstract当前的3D目标检测方法受2D目标检测严重影响。为了利用2D检测器中的架构，它们经常将3D点云转换为常规网格，或者依赖于2D图像中的检测来提出3D框。很少有人尝试直接检测点云中的物体。在这项工作中，我们回到第一原则，为点云数据构建一个3D检测pipeline，并尽可能通用。然而，由于数据的稀疏性 - 来自3D空间中的2D流形的样本 - 当从场景点直接预测边界框参数时，我们面临一个主要">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g2wac8w4imj21330k5n6s.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2019/05/08/votenet/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>votenet | Dewey's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dewey's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Better to run than curse the road.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/08/votenet/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">votenet
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-05-08 15:40:59" itemprop="dateCreated datePublished" datetime="2019-05-08T15:40:59+08:00">2019-05-08</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-05-11 14:46:28" itemprop="dateModified" datetime="2019-05-11T14:46:28+08:00">2019-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/3D-detection/" itemprop="url" rel="index"><span itemprop="name">3D detection</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/3D-detection/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>当前的3D目标检测方法受2D目标检测严重影响。为了利用2D检测器中的架构，它们经常将3D点云转换为常规网格，或者依赖于2D图像中的检测来提出3D框。很少有人尝试直接检测点云中的物体。在这项工作中，我们回到第一原则，为点云数据构建一个3D检测pipeline，并尽可能通用。然而，由于数据的稀疏性 - 来自3D空间中的2D流形的样本 - 当从场景点直接预测边界框参数时，我们面临一个主要挑战：3D目标质心可能远离任何表面点，因此很难一步准确回归。为了应对这一挑战，我们提出了VoteNet，一种基于 deep point set 网络和Hough投票协同作用的端到端3D物体检测网络。我们的模型在两个大型真实3D扫描数据集上实现了最先进的3D检测，ScanNet和SUN RGB-D具有简单的设计，紧凑的模型尺寸和高效率。值得注意的是，VoteNet通过使用纯粹的几何信息而不依赖于彩色图像，优于以前的方法。</p>
+<h3 id="introduction"><a href="#introduction" class="headerlink" title="introduction"></a>introduction</h3><p>3D物体检测的目标是在3D场景中确定和识别物体，具体来说，我们要估计带方向的3Dbbox和点云对象的语义类。</p>
+<p>相比图像来说，3D点云提供了精确的几何信息和鲁棒的光照变化。另一方面，点云是非规则的，因此典型的CNN不能很好的直接处理点云。</p>
+<p>为了避免处理非规则的点云数据，现在的3D detection方法在各个方面强烈依赖基于2D的检测方法。举个例子（批斗开始），[40,12]把2D检测的框架，比如Faster/Mask R-CNN扩展到3D检测上。他们将非规则的点云体素化为规则3D网格，再用3D CNN detector，这种方式无法利用数据的稀疏性，且计算代价高昂。[4.51]把点投影到了2D鸟瞰视角的图像上，然后用2D detector来确定对象位置。这种方法牺牲了几何细节，而这些细节对杂乱的室内环境很重要。最近[18,32]提出了一个级联两步流水线，先在前视图像中检测物体，然后定位从2D框挤出的截锥点云(frustum point clouds)中的物体，这种方法非常依赖2D detector，如果没有在2D中检测到目标，则会完全丢失该目标。</p>
+<p>在这项工作中，我们提出一个聚焦3D检测的点云框架，能直接处理原始数据，不依赖任何2D detector，无论是结构和object proposal。我们的检测网络，votenet，是基于最先进的3D点云深度学习模型，且基于广义hough voting。</p>
+<p>尽管<strong>PointNet++</strong>在物体分类和语义分割上很成功，但几乎没有研究去研究用这样的结构在点云中检测3D物体。一个简单的方案是继续用2D detector，再确定物体的proposal，比如，直接(用学习到的特征)用sense point来确定3D bbox。然而，点云的固有稀疏性对这样的方法很不好。在图像中，通常在目标中心附近存在一个像素，但在点云中却不是这样。由于深度传感器只捕捉物体的表面，三维物体的中心很可能在远离任何点的空间中。因此，基于点的网络很难在目标中心附近聚集场景上下文。仅仅增加感受野并不能解决这个问题，因为当网络捕获更大的上下文时，它还会导致包含更多的附近对象和混乱。</p>
+<p>为此，我们提议将投票机制应用于点云深度网络上，类似经典的hough投票。通过投票，我们生成了靠近物体中心的新点，这些点可以分组和聚合来生成box proposal。</p>
+<p>传统的Hough投票具有多个独立的模块，难以联合优化，而votenet是一个端到端的优化方式。具体来说，由主干点云网络传递输入点云之后，我们对一组种子点进行采样，并根据他们的特征生成投票。<strong>投票的目的是到达目标中心</strong>。因此，投票簇出现在对象中心附近，然后可以通过一个学习模块进行聚合，生成box proposal。其结果是一个强大的三维物体探测器，纯粹是几何的，可以直接应用于点云。</p>
+<p>总的来说我们的贡献是：</p>
+<ul>
+<li>在通过端到端可微架构进行深度学习的背景下，重新定义了霍夫投票，我们称之为VoteNet。</li>
+<li>在SUN RGB-D和ScanNet这两个数据集上有最先进的三维物体检测性能。</li>
+<li>对点云上的3D物体检测的重要性进行了深入分析。</li>
+</ul>
+<h3 id="Deep-Hough-Voting"><a href="#Deep-Hough-Voting" class="headerlink" title="Deep Hough Voting"></a>Deep Hough Voting</h3><p>传统霍夫投票2D detector包含一个offline和online步骤。首先，给定一系列有标记bbox的图片集，codebook包含了图片块(他们的特征)和他们到相关物体中心的偏置之间的映射。在推理时，从图像中选取兴趣点，在兴趣点周围提取patch。然后将这些patch与codebook中的patch进行比较，以检索偏移量并计算选票。由于object patch倾向于一致投票，clusters将在对象中心附近形成。<strong>最后，通过将集群投票追溯到其生成补丁来检索对象边界。(没太懂)</strong>。</p>
+<p>我们确定了两种适合我们问题的两种技术方案。首先，投票针对稀疏集，之后会与点云拟合。其次，它基于自下而上原则，其中小比特的部分信息累积从而形成自信的检测（confident detection）。尽管，神经网络能潜在的从大的感受野中聚合上下文，对象的扫描也十分局限，如果没有完全聚合，这会导致模棱两可的决定。更重要的是质心附近缺少对象点，这会直接禁止上下文聚合。</p>
+<p>然而，由于传统的Hough投票包含多个独立的模块，将其集成到最先进的点云网络是一个开放的研究课题。为此，我们建议对不同的管道成分进行以下调整。</p>
+<ul>
+<li><strong>兴趣点</strong>。兴趣点由深度神经网络描述和选择，而不是依赖于手工制作的特征。</li>
+<li><strong>投票</strong>。投票生成是通过网络而不是使用码本来学习的。利用较大的感受野，投票可以减少模糊，从而更有效。此外，可以使用特征向量来扩充投票位置，以允许更好的聚合。</li>
+<li><strong>投票聚合</strong>。通过具有可训练参数的点云处理层实现投票聚合。利用投票功能，网络可以过滤掉低质量的投票并生成改进的提案。</li>
+<li><strong>object proposal</strong>。object proposal的构成：可以从聚合特征直接生成位置，维度，方向甚至语义类，<strong>从而减少追溯投票来源的需要，没太懂</strong></li>
+</ul>
+<h3 id="VoteNet-Architecture"><a href="#VoteNet-Architecture" class="headerlink" title="VoteNet Architecture"></a>VoteNet Architecture</h3><p>下面我们就把他们联合起来作为一个端到端的可训练网络，叫做VoteNet。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g2wac8w4imj21330k5n6s.jpg" alt="architecture"></p>
+<p>上图是我们端到端的检测网络。整个网络可以分为两个部分：一个处理存在的(existing points)点以生成投票；另一部分操作虚拟点来提出和分类目标。</p>
+<h4 id="Learning-to-vote-in-point-clouds"><a href="#Learning-to-vote-in-point-clouds" class="headerlink" title="Learning to vote in point clouds"></a>Learning to vote in point clouds</h4><p>N x 3大小的输入点云和对N个3D点的坐标，我们的目标是生成M个投票，其中，每一个投票有3D坐标和一个高维特征向量。有两个主要步骤，通过主干网络学习点云特征，从种子点中学习霍夫投票。</p>
+<p><strong>Point cloud feature learning.</strong> 生成一个精确的投票需要集合推理和上下文内容。我们利用最近提出的处理点云的网络[32,9,41,23]来学习点云特征的学习，而不是依赖手工特征。我们的方法并不局限于任何点云网络，我们提出了PointNet++作为我们的主干，因为它的简洁性和在正常估计，语义分割，三维目标定位上都取得了成功。</p>
+<p>主干网络有多个set-abstraction layers和具有skip connection的特征传播(上采样)层，其输出的结果是一系列输入点的XYZ坐标的和丰富的C维特征向量。M个种子点具有(3+C)个维度。每个种子点生成一个投票。</p>
+<p><strong>hough voting with deep networks.</strong> 相比传统霍夫投票由预先计算的codebook决定，我们用深度网络生成投票的模块更加有效和精准，因为他们是一起训练得到的。</p>
+<p>给定一个种子点集合$\lbrace s_i \rbrace _{i=1}^M$，其中$s_i=[x_i;f_i]$，$x_i \in \mathbb{R}^3, f_i \in \mathbb{R}^C$，每个种子独立的由共享投票模块生成投票。特别的，投票模块是一个具有全连接层，ReLU，batch normalization的多层感知机网络(MLP=multi-layer perceptron)。MLP采用种子特征$f_i$并输出欧式空间的偏移$\Delta x_i \in \mathbb{R}^3$和特征偏移$\Delta f_i \in \mathbb{R}^C$使得由种子$s_i$生成的投票$v_i=[y_i;g_i]$有$y_i=x_i+\Delta x_i和g_i=f_i+\Delta f_i$。</p>
+<p>预测3D偏置$\Delta x_i$的损失函数是</p>
+<script type="math/tex; mode=display">L_{vote-reg}=\frac{1}{M_{pos}} \sum_i \parallel \Delta x_i - \Delta x_i^* \parallel \mathbb{1} [s_i\ on\ object]</script><p>其中$1[si\ on \ object]$代表种子点$s_i$是否在物体表面，$M_{pos}$是物体表面种子的总数目。$\Delta x_i^*$是从种子位置$xi$到期所属对象bbox中的groundtruth。</p>
+<p>在张量表示中，投票和种子没有区别，但是投票不再基于物体表面。但更本质的区别是他们的位置——同一物体上的种子产生的投票比种子本身更接近彼此，这使得更容易组合来自物体的不同部分的线索。之后我们利用语义感知的位置对object proposal聚合投票特征。</p>
+<h4 id="Object-Proposal-and-Classification-from-Votes"><a href="#Object-Proposal-and-Classification-from-Votes" class="headerlink" title="Object Proposal and Classification from Votes"></a>Object Proposal and Classification from Votes</h4><p>投票为来自对象的不同部分的上下文聚合创建规范的“会合点”。在对这些投票进行聚类之后，我们会聚合它们的特征以生成object proposal并对它们进行分类。</p>
+<p><strong>Vote clustering through sampling and grouping.</strong> 尽管有很多方法聚类这些投票，我们选择了一种简单的策略，即根据空间邻近性进行均匀采样和分组。特别的，从一组投票集$\lbrace v_i=[y_i;g_i] \in \mathbb{R}^{3+C} \rbrace _{i=1}^M$，我们使用3D欧几里德空间中基于$\lbrace y_i \rbrace$的最远点采样来采样K个投票的子集，来得到$\lbrace v_{i_k} \rbrace$。然后我们通过找每个$v_{i_k}$的3D位置的邻近投票来形成K个聚类。虽然简单，这个聚类技术能很轻松的集成到端到端的网络里，表现也很好。</p>
+<p><strong>Proposal and classification from vote clusterers.</strong>由于投票聚类本质上是一组高维点，我们可以利用一个通用的点学习网络来聚合投票，从而生成object proposals。与传统的霍夫投票对目标边界识别的回溯步骤相比，该方法不仅可以从局部观测中提出一个模态边界，还可以预测方向，类等参数。</p>
+<p>在我们的实现里，我们用一个共享的PointNet来进行cluster的投票聚合和proposal。给定一个投票聚类$C= \lbrace  \omega_i \rbrace$和聚类中心$\omega_j$，其中$\omega_i=[z_i;h_i]，$其中$ z_i \in \mathbb{R}^3$作为投票位置，$h_i \in \mathbb{R}^C$作为投票特征。为了使用本地投票几何信息，我们通过$z_i’=(z_i-z_j)/r$将投票位置转换为局部归一化坐标系，然后通过类似PointNet的模块传递输入集合，生成聚类$p(C)$的object proposal：</p>
+<script type="math/tex; mode=display">p(C)=MLP_2 \lbrace \max_{i=1,...,n} \lbrace MLP_1([z_i';h_i]) \rbrace \rbrace</script><p>来自每个集群的投票由MLP1单独处理，然后最大池化到单个特征向量，并传递给MLP2，在MLP2中，来自不同投票的信息将进一步组合。我们将proposal $p$作为一个多维向量，包含客观评分，bounding box的参数(中心，薄啊普通和比例参数)和语义分类分数。</p>
+<p><strong>loss function.</strong>在proposal和分类阶段的loss function包含objectness，bounding box估计和语义分类losses。</p>
+<p>我们监督位于靠近groundtruth对象中心（0.3米内）或远离任何中心（超过0.6米）的投票的客观评分。我们认为这些投票产生的proposal有positive和negative两类。对其他proposal的客观预测不会受到惩罚。通过一个交叉熵损失函数来监督客观评分，该损失由batch中不可忽略的proposal来标准化。对于positive proposal，我们根据最近的groundtruth的bounding box进一步监督bounding box估计和分类预测。具体来说，我们采用了[32]的算法，该算法将box loss分解为中心回归。航向角估计(heading angle estimation)和box size estimation。对于语义分类，我们用标准的交叉熵损失函数。在detection loss的所有回归中，我们用L1 LOSS。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/3D-detection/" rel="tag"># 3D detection</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/22/stereo-r-cnn/" rel="next" title="Stereo R-CNN based 3D Object Detection for Autonomous Driving">
+                <i class="fa fa-chevron-left"></i> Stereo R-CNN based 3D Object Detection for Autonomous Driving
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dewey</p>
+              <p class="site-description motion-element" itemprop="description">record my life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">14</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">12</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Dewey1994" title="GitHub &rarr; https://github.com/Dewey1994" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:401692632@qq.com" title="Email &rarr; mailto:401692632@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#introduction"><span class="nav-number">2.</span> <span class="nav-text">introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Deep-Hough-Voting"><span class="nav-number">3.</span> <span class="nav-text">Deep Hough Voting</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#VoteNet-Architecture"><span class="nav-number">4.</span> <span class="nav-text">VoteNet Architecture</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Learning-to-vote-in-point-clouds"><span class="nav-number">4.1.</span> <span class="nav-text">Learning to vote in point clouds</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Object-Proposal-and-Classification-from-Votes"><span class="nav-number">4.2.</span> <span class="nav-text">Object Proposal and Classification from Votes</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
