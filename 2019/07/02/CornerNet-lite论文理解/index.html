@@ -96,27 +96,27 @@
 
 
 
-  <meta name="description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的">
-<meta name="keywords" content="深度学习">
+  <meta name="description" content="这是一篇对CornerNet和CornerNet-lite论文的解析">
+<meta name="keywords" content="目标检测,深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="non_local_neural_network笔记">
-<meta property="og:url" content="http://yoursite.com/2019/03/25/non-local-neural-network笔记/index.html">
+<meta property="og:title" content="CornerNet-lite论文理解">
+<meta property="og:url" content="http://yoursite.com/2019/07/02/CornerNet-lite论文理解/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的">
+<meta property="og:description" content="这是一篇对CornerNet和CornerNet-lite论文的解析">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1f047co85j20hd0bzdgk.jpg">
-<meta property="og:updated_time" content="2019-03-25T13:32:10.855Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4lkl00jr2j20yb0eigus.jpg">
+<meta property="og:updated_time" content="2019-07-02T11:29:45.891Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="non_local_neural_network笔记">
-<meta name="twitter:description" content="1.Introduction深层神经网络中，捕获远距离相关性是至关重要的  对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案 对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1f047co85j20hd0bzdgk.jpg">
+<meta name="twitter:title" content="CornerNet-lite论文理解">
+<meta name="twitter:description" content="这是一篇对CornerNet和CornerNet-lite论文的解析">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4lkl00jr2j20yb0eigus.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/25/non-local-neural-network笔记/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/02/CornerNet-lite论文理解/">
 
 
 
@@ -126,7 +126,7 @@
   };
 </script>
 
-  <title>non_local_neural_network笔记 | Dewey's blog</title>
+  <title>CornerNet-lite论文理解 | Dewey's blog</title>
   
 
 
@@ -346,7 +346,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/25/non-local-neural-network笔记/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/02/CornerNet-lite论文理解/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -363,7 +363,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">non_local_neural_network笔记
+          <h1 class="post-title" itemprop="name headline">CornerNet-lite论文理解
 
               
             
@@ -389,7 +389,7 @@
                 
               
 
-              <time title="创建时间：2019-03-25 10:37:13 / 修改时间：21:32:10" itemprop="dateCreated datePublished" datetime="2019-03-25T10:37:13+08:00">2019-03-25</time>
+              <time title="创建时间：2019-07-02 16:04:17 / 修改时间：19:29:45" itemprop="dateCreated datePublished" datetime="2019-07-02T16:04:17+08:00">2019-07-02</time>
             
 
             
@@ -411,7 +411,14 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/" itemprop="url" rel="index"><span itemprop="name">目标检测</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
 
                 
                 
@@ -446,85 +453,26 @@
       
 
       
-        <h3 id="1-Introduction"><a href="#1-Introduction" class="headerlink" title="1.Introduction"></a>1.Introduction</h3><p><strong>深层神经网络中，捕获远距离相关性是至关重要的</strong></p>
-<ul>
-<li>对于顺序数据(例如语音、语言)，递归操作是建模远程依赖性的主要解决方案</li>
-<li>对于图像数据，长距离依赖关系是由深层次的卷积运算所形成的大感受野来建模的<a id="more"></a>
-卷积操作和递归操作都会在空间或时间上处理一个局部邻域；因此，只有反复应用这些操作，逐步通过数据传播信号时，才能捕捉到长距离依赖关系。</li>
-</ul>
-<p><strong>但重复进行本地操作会有几个限制</strong></p>
-<ul>
-<li>首先，计算效率很低</li>
-<li>其次，会造成优化方面的困难</li>
-<li>最后，使得多跳跃的依赖性建模变得困难，例如，当需要在远程位置之间来回传递信息时。</li>
-</ul>
-<p><strong>在本文中，我们将全局运算作为一种有效的、简单的、通用的部件来使深层神经网络捕获远距离依赖关系</strong></p>
-<ul>
-<li>我们提出的全局运算是经典的全局平均运算在计算机视觉中的推广</li>
-<li>直观地说，全局操作将某个位置的响应计算为输入特征映射中所有位置的特征的加权和。</li>
-<li>位置可以是在空间、时间或时空中，这意味着我们的操作适用于图像、序列和视频问题 </li>
-</ul>
-<p><strong>使用全局操作有几个优点：</strong></p>
-<ul>
-<li>与循环和卷积操作的渐进行为相反，全局操作通过直接计算任意两个位置之间的交互关系来捕获远程依赖性，不论它们的位置距离如何</li>
-<li>全部操作效率很高，即使网络只有很少层也能取得最佳效果</li>
-<li>全局操作输入大小是非固定的，可以很容易地与其他操作相结合（例如使用的卷积操作）</li>
-</ul>
-<h3 id="2-Related-works"><a href="#2-Related-works" class="headerlink" title="2.Related works"></a>2.Related works</h3><h4 id="Non-local-image-process"><a href="#Non-local-image-process" class="headerlink" title="Non-local image process"></a>Non-local image process</h4><p><strong>BM3D:</strong>它首先把图像分成一定大小的块，根据图像块之间的相似性，把具有相似结构的二维图像块组合在一起形成三维数组，然后用联合滤波的方法对这些三维数组进行处理，最后，通过逆变换，把处理后的结果返回到原图像中，从而得到去噪后的图像。</p>
-<h4 id="graphical-models"><a href="#graphical-models" class="headerlink" title="graphical models"></a>graphical models</h4><p><strong>CRF,MRF</strong></p>
-<h4 id="self-attention"><a href="#self-attention" class="headerlink" title="self-attention"></a>self-attention</h4><p><strong>后面再补</strong></p>
-<h3 id="3-Non-local-Neural-Networks"><a href="#3-Non-local-Neural-Networks" class="headerlink" title="3.Non-local Neural Networks"></a>3.Non-local Neural Networks</h3><h4 id="3-1-Formulation"><a href="#3-1-Formulation" class="headerlink" title="3.1 Formulation"></a>3.1 Formulation</h4><p><strong>遵循非局部均值运算，我们将深层神经网络中的一般非局部运算定义为：</strong></p>
-<script type="math/tex; mode=display">
-y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj) \tag{1}</script><ul>
-<li>$i$ 是输出位置的索引（空间，时间或时空）， $j$ 是所有可能的位置的索引</li>
-<li>$x$ 是输入信号（图像，序列，视频；通常是它们的特征）， $y$ 是与 $x$ 相同大小的输出信号</li>
-<li>$f(x_i, x_j)$ 可以看作是两点之间的关联系数， $g(x_j)$计算的是位置 $j$ 处输入信号的表示</li>
-<li>即以 $f$ 为权重，将信息 $g$ 进行加权求和， $C(x)$ 为其归一化系数</li>
-</ul>
-<p>非本地操作也不同于全连接(fc)层。<strong>$Eq.(1)$根据不同位置之间的关系计算响应，而全连接层使用学习到的权重</strong>。换句话说，与非本地层不同，$xj$和$xi$之间的关系不是全连接层中输入数据的函数。此外，$Eq.(1)$中的公式支持可变大小的输入，并在输出中保持相应的大小。相反，全连接层需要固定大小的输入/输出，并且丢失了位置对应的关系<br>(例如，在位置$i$处的$xi$到$yi$的关系)</p>
-<p>非本地操作是一个灵活的构建块，可以很容易地与卷积/递归层一起使用。它可以被添加到深层神经网络的开始的部分，而不像全连接层通常在最后使用。这允许我们构建一个更丰富的层次结构，它结合了非本地和本地信息。</p>
-<h4 id="3-2-Instantiations"><a href="#3-2-Instantiations" class="headerlink" title="3.2 Instantiations"></a>3.2 Instantiations</h4><p>接下来，我们描述了 $f$ 和 $g$ 的几个版本。有趣的是，我们将通过实验证明我们的非局部模型对这些选择不敏感，这表明非局部行为才是结果得到改善的主要原因。</p>
-<p><strong>为简单起见，只考虑线性嵌入形式的 $g$ ：</strong></p>
-<ul>
-<li>$g(x_j)=W_g x_j$</li>
-<li>$W_g$ 是要学习的权重矩阵</li>
-<li>实现时只要应用空间中的1×1卷积或时空中的1×1×1卷积即可</li>
-</ul>
-<p><strong>成对函数 $f$ 形式的选择：</strong></p>
-<ul>
-<li>$Gaussian： f(x_i,x_j)=e^{x_i^T x_j}$</li>
-<li>$Embedded Gaussian： f(x_i,x_j)=e^{\theta(x_i)^T\phi(x_j)}$</li>
-<li>$Dot product： f(x_i,x_j)=\theta(x_i)^T\phi(x_j)$</li>
-<li>$Concatenation： f(x_i,x_j)=ReLU(w_f^T[\theta(x_i),\phi(x_j)])$</li>
-</ul>
-<p>上面的几个变体证明了我们通用的非局部操作的灵活性。我们相信其他的变体也是可取的，并可能改善结果。</p>
-<h4 id="3-3-Non-local-Block"><a href="#3-3-Non-local-Block" class="headerlink" title="3.3 Non-local Block"></a>3.3 Non-local Block</h4><p>我们将非局部操作包装成一个可以并入许多现有体系结构中的非局部块</p>
-<script type="math/tex; mode=display">z_i = W_z*y_i + x_i \tag{2}</script><p>其中</p>
-<script type="math/tex; mode=display">
-y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/tex; mode=display">+x_i \tag{代表残差连接}</script><p>残差连接允许在不破坏其初始化行为的情况下（例如， $W_{z}$ 被初始化为零），将新的非局部块插入到任何预先训练好的模型中。<br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1f047co85j20hd0bzdgk.jpg" alt="spacetime non_local block_fig2"></p>
-<ul>
-<li>张量形状表示特征图的尺寸，例如，$T\times H\times W\times 1024$ 表示1024个通道（有时会进行reshape）</li>
-<li>“ $\otimes$ ”表示矩阵乘法，“$\oplus$”表示逐点相加</li>
-<li>在每一行执行softmax操作</li>
-<li>蓝色框表示1×1×1卷积</li>
-<li>这里我们展示了嵌入式高斯版本，其中有512个通道的瓶颈层</li>
-<li>可以通过去除 $\theta$ 和 $\phi$ 来实现 vanilla 高斯版本，并且可以通过使用1/N缩放替换softmax来实现dot-product版本</li>
-</ul>
-<p>由于我们考虑的是图片，故可以直接设置T=1，或者说不存在。首先网络输入是$X= (batch,h,w,1024)$，经过Embedded Gaussian中的两个嵌入权重变换 $W_\theta,W_\phi 得到$(batch,h,w,512) , (batch,h,w,512)$ ,其实这里的目的是降低通道数，减少计算量；然后分别对这两个输出进行reshape操作，变成 $(batch,h×w,512)$；然后对这两个输出进行矩阵乘(其中一个要转置)，计算相似性，得到 $(batch，h×w，h×w)$ ；然后在第2个维度即最后一个维度上进行softmax操作，得到 $(batch，h×w，h×w)$ ，注意这样做就是位置注意力，相当于找到了当前图片或特征图中每个像素与其他所有位置像素的归一化相关性；然后将g也采用一样的操作，先通道降维，然后reshape；然后和 $(batch，h×w，h×w)$ 进行矩阵乘，得到 $(batch,h×w,512)$ ，即将位置或者空间注意力机制应用到了所有通道的每张特征图对应位置上，本质就是输出的每个位置值都是其他所有位置的加权平均值，通过softmax操作可以进一步突出共性。最后经过一个1x1卷积恢复输出通道，保证输入输出尺度完全相同。</p>
-<h4 id="子采样技巧可以进一步减少计算量"><a href="#子采样技巧可以进一步减少计算量" class="headerlink" title="子采样技巧可以进一步减少计算量"></a>子采样技巧可以进一步减少计算量</h4><ul>
-<li>我们将方程 <script type="math/tex; mode=display">y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script>修改为 <script type="math/tex; mode=display">y_i= \frac{1}{C(\bar{x})} \sum_{\forall{j}} f(x_i,\bar{xj})g(\bar{xj})</script></li>
-<li>在空间域中执行此操作，这可以将成对计算量减少1/4</li>
-<li>这个技巧不会改变非局部行为，但会使计算更加稀疏。</li>
-<li>可以通过在图2中的 $\phi$ 和 $g$ 之后添加最大池化层来实现</li>
-</ul>
-<hr>
-<p>1 <strong>Self-attention:</strong></p>
-<p>在机器翻译中，自我注意模块通过关注所有位置并在嵌入空间中取其加权平均值来计算序列（例如，句子）中的位置处的响应，在CV中那就是通过关注图片中(可以是特征图)所有位置并在嵌入空间中取其加权平均值来表示图片中某位置处的响应。嵌入空间可以认为是一个更抽象的图片空间表达，目的是汇聚更多的信息，提高计算效率。</p>
-<p>2 <strong>首先我们来看一下文章说的local是什么意思。</strong></p>
-<p>Local这个词主要是针对感受野(receptive field)来说的。以卷积操作为例，它的感受野大小就是卷积核大小，而我们一般都选用3x3，5x5之类的卷积核，它们只考虑局部区域，因此都是local的运算。同理，池化(Pooling)也是。相反的，non-local指的就是感受野可以很大，而不是一个局部领域。</p>
-<p>那我们碰到过什么non-local的操作吗？有的，全连接就是non-local的，而且是global的。但是全连接带来了大量的参数，给优化带来困难。这也是深度学习(主要指卷积神经网络)近年来流行的原因，考虑局部区域，参数大大减少了，能够训得动了。</p>
-<p>那我们为什么还需要non-local？</p>
-<p>我们知道，卷积层的堆叠可以增大感受野，但是如果看特定层的卷积核在原图上的感受野，它毕竟是有限的。这是local运算不能避免的。然而有些任务，它们可能需要原图上更多的信息，比如attention。如果在某些层能够引入全局的信息，就能很好地解决local操作无法看清全局的情况，为后面的层带去更丰富的信息。</p>
+        <p>这是一篇对CornerNet和CornerNet-lite论文的解析</p>
+<a id="more"></a>
+<h3 id="CornerNet"><a href="#CornerNet" class="headerlink" title="CornerNet"></a>CornerNet</h3><p><a href="https://nicehuster.github.io/2019/04/23/CornerNet/" target="_blank" rel="noopener">CornerNet论文理解</a></p>
+<h3 id="CornerNet-lite"><a href="#CornerNet-lite" class="headerlink" title="CornerNet-lite"></a>CornerNet-lite</h3><p>pass</p>
+<h4 id="CornerNet-Saccade"><a href="#CornerNet-Saccade" class="headerlink" title="CornerNet-Saccade"></a>CornerNet-Saccade</h4><p>CornerNet-Saccade通过减少像素的处理来加速程序的执行。它用了attention机制。</p>
+<p>它缩小整个图像来预测attention map和coarse bbox，然后对高分辨率图像(即原始输入图像)以位置的中心的区域检测目标。这个算法通过控制处理每幅图像最大物体数量来平衡效率和精度之间的平衡。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4lkl00jr2j20yb0eigus.jpg" alt="pipeline"></p>
+<h4 id="Estimating-object-locations"><a href="#Estimating-object-locations" class="headerlink" title="Estimating object locations"></a>Estimating object locations</h4><p>CornerNet-Saccade的第一步就是要获得图像中可能的物体的位置。我们缩小图像得到attention map，它会有<strong>物体的位置</strong>和<strong>物体的粗略的尺度</strong>。给定一幅图像，我们将图像的长边<strong>缩小到2个尺度，255像素和192像素</strong>。192大小的图像填充0以扩充到255像素大小。</p>
+<p>缩小图像有2个理由。1，这不会影响程序执行的效率。2，网络很容易的利用图像的上下文信息来预测attention map。</p>
+<p>对于缩小的图像，CornerNet-Saccade预测3种attention map，一个针对小目标，一个针对中目标，一个针对大目标。小目标小于32像素，中目标介于32像素和96像素之间，大目标大于96像素。分别预测不同大小物体的位置让我们更好的控制每个位置CornerNet-Saccade应该将物体放大多少。相对于中物体，我们对小物体放大更多。</p>
+<p>用不同尺度的feature map来预测attention map。feature map是由backbone network(hourglass network)得到。每个hourglass module用卷积层和降采样层来缩小输入的feature map。然后通过多重卷积(multiple convolution)和上采样层恢复到原始分辨率。小尺度的特征映射用于较小的对象，粗尺度的特征映射用于较大的对象。我们用3x3的ConvReLU模块和1x1Conv-Sigmoid模块预测attention map。在测试时，我们只处理分数高于阈值t的位置，在实验中设置t=0.3。</p>
+<p>当CornerNet-Saccade处理缩小后的图像，它会检测到图像中的一些物体，并给他们生成bbox。得到的这个bbox可能不准确，因此我们还研究了高分辨率的区域(指原图像)，以获得更好的bbox。</p>
+<p>在训练时，我们将相应attention map上的每个bbox的中心设置为正，其余设置为负。然后我们用focal loss且$\alpha = 2$。卷积层的bias根据focal loss的论文设置。</p>
+<h4 id="Detecting-objects"><a href="#Detecting-objects" class="headerlink" title="Detecting objects"></a>Detecting objects</h4><p>CornerNet-Saccade用缩小的图像中获得的位置来确定处理的位置。如果我们直接对缩小的图像裁剪，一些物体由于太小而无法精确检测到。因此，我们要在高分辨率进行处理。</p>
+<p>对于从attention map上获得的位置，我们可以为不同大小的物体确定不同的缩放比例，$s_s$是小物体的比例，$s_m$是中物体的比例，$s_l$是大物体的比例。一般来说，$s_s&gt;s_m&gt;s_l$，因此我们设置$s_s=4,s_m=2,s_l=1$。在每个可能的位置$(x,y)$，我们根据缩放比例放大缩小的图像。然后我们将CornerNet-Saccade用到以改位置为中新的255x255的窗口。</p>
+<p>可以通过attention map得到的bbox来确定物体的大致大小，缩放比例是这样确定的，小物体，缩放后的bbox的较长边小于24，中物体小于64，大物体小于192。</p>
+<p>在可能的物体位置检测目标，我们合并bbox，并用NMS去除多余的bbox。当我们裁剪区域时，这个区域边界可能会有其他物体。我们将位于边界的物体的bbox移除。</p>
+<p>我们通过控制每幅图像中要出力的目标位置的最大数量来换取准确性和效率。为了达到良好的准确性和效率的平衡，我们优先考虑上述所说的bbox，在获得对象位置之后，我们根据他们的得分和优先位置进行排序，我们只检测位于topk的对象位置的物体。</p>
+<h4 id="Backbone-network"><a href="#Backbone-network" class="headerlink" title="Backbone network"></a>Backbone network</h4><p>我们设计了一个新的沙漏网络，包含3个沙漏组(hg_mods)，深度为54层，称其为Hourglass-54。在每个下采样层后跟一个残差。每个沙漏组将input feature缩小3次并增加通道数量(384,384,512)。就不细说了，看代码吧，比论文详细！</p>
+<h4 id="Training-details"><a href="#Training-details" class="headerlink" title="Training details"></a>Training details</h4><p>用Adam来优化网络，网络的输入大小为255x255，也是inference的输入的分辨率。在4块1080TI上用48的batch size大小进行训练。为了避免过拟合，我们用了data augmentation技术。当我们随机裁剪一个物体周围的区域时，这个物体要么是随机放置的，要么是在中心有一些随机偏移量。</p>
 
       
     </div>
@@ -548,6 +496,8 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
       
         <div class="post-tags">
           
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
@@ -561,8 +511,8 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/06/python之super理解/" rel="next" title="python之super理解">
-                <i class="fa fa-chevron-left"></i> python之super理解
+              <a href="/2019/06/30/yolo理解/" rel="next" title="yolo理解">
+                <i class="fa fa-chevron-left"></i> yolo理解
               </a>
             
           </div>
@@ -570,10 +520,6 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/25/attention记录/" rel="prev" title="attention记录">
-                attention记录 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -791,7 +737,7 @@ y_i= \frac{1}{C(x)} \sum_{\forall{j}} f(x_i,xj)g(xj)</script><script type="math/
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Introduction"><span class="nav-number">1.</span> <span class="nav-text">1.Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Related-works"><span class="nav-number">2.</span> <span class="nav-text">2.Related works</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Non-local-image-process"><span class="nav-number">2.1.</span> <span class="nav-text">Non-local image process</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#graphical-models"><span class="nav-number">2.2.</span> <span class="nav-text">graphical models</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#self-attention"><span class="nav-number">2.3.</span> <span class="nav-text">self-attention</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Non-local-Neural-Networks"><span class="nav-number">3.</span> <span class="nav-text">3.Non-local Neural Networks</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1-Formulation"><span class="nav-number">3.1.</span> <span class="nav-text">3.1 Formulation</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-Instantiations"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 Instantiations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-Non-local-Block"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 Non-local Block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#子采样技巧可以进一步减少计算量"><span class="nav-number">3.4.</span> <span class="nav-text">子采样技巧可以进一步减少计算量</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet"><span class="nav-number">1.</span> <span class="nav-text">CornerNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet-lite"><span class="nav-number">2.</span> <span class="nav-text">CornerNet-lite</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CornerNet-Saccade"><span class="nav-number">2.1.</span> <span class="nav-text">CornerNet-Saccade</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Estimating-object-locations"><span class="nav-number">2.2.</span> <span class="nav-text">Estimating object locations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Detecting-objects"><span class="nav-number">2.3.</span> <span class="nav-text">Detecting objects</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backbone-network"><span class="nav-number">2.4.</span> <span class="nav-text">Backbone network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-details"><span class="nav-number">2.5.</span> <span class="nav-text">Training details</span></a></li></ol></li></ol></div>
             
 
           </div>

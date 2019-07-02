@@ -97,7 +97,7 @@
 
 
   <meta name="description" content="YOLOV1理解 如上图所示，输入图片被划分为7x7个单元格，每个单元格独立作检测。在这里很容易被误导：每个网格单元的视野有限而且很可能只有局部特征，这样就很难理解yolo为何能检测比grid_cell大很多的物体。其实，yolo的做法并不是把每个单独的网格作为输入feed到模型，在inference的过程中，网格只是物体中心点位置的划分之用，并不是对图片进行切片，不会让网格脱离整体的关系。可以通">
-<meta name="keywords" content="深度学习,目标检测">
+<meta name="keywords" content="目标检测,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yolo理解">
 <meta property="og:url" content="http://yoursite.com/2019/06/30/yolo理解/index.html">
@@ -488,9 +488,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
             <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -512,6 +512,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/07/02/CornerNet-lite论文理解/" rel="prev" title="CornerNet-lite论文理解">
+                CornerNet-lite论文理解 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -581,7 +585,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">18</span>
+                    <span class="site-state-item-count">19</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
