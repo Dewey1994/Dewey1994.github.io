@@ -97,7 +97,7 @@
 
 
   <meta name="description" content="这是一篇对CornerNet和CornerNet-lite论文的解析">
-<meta name="keywords" content="深度学习,目标检测">
+<meta name="keywords" content="目标检测,深度学习">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CornerNet-lite论文理解">
 <meta property="og:url" content="http://yoursite.com/2019/07/02/CornerNet-lite论文理解/index.html">
@@ -105,7 +105,11 @@
 <meta property="og:description" content="这是一篇对CornerNet和CornerNet-lite论文的解析">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4lkl00jr2j20yb0eigus.jpg">
-<meta property="og:updated_time" content="2019-07-02T11:29:45.891Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4meuqlz4aj20mk0bpgow.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4mfxb39s9j20li05baay.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4mixmpx59j20m40760uz.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4mjd2ce6pj20kg05ut9v.jpg">
+<meta property="og:updated_time" content="2019-07-03T04:41:16.223Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="CornerNet-lite论文理解">
 <meta name="twitter:description" content="这是一篇对CornerNet和CornerNet-lite论文的解析">
@@ -389,12 +393,24 @@
                 
               
 
-              <time title="创建时间：2019-07-02 16:04:17 / 修改时间：19:29:45" itemprop="dateCreated datePublished" datetime="2019-07-02T16:04:17+08:00">2019-07-02</time>
+              <time title="创建时间：2019-07-02 16:04:17" itemprop="dateCreated datePublished" datetime="2019-07-02T16:04:17+08:00">2019-07-02</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2019-07-03 12:41:16" itemprop="dateModified" datetime="2019-07-03T12:41:16+08:00">2019-07-03</time>
               
             
           </span>
@@ -473,6 +489,26 @@
 <p>我们通过控制每幅图像中要出力的目标位置的最大数量来换取准确性和效率。为了达到良好的准确性和效率的平衡，我们优先考虑上述所说的bbox，在获得对象位置之后，我们根据他们的得分和优先位置进行排序，我们只检测位于topk的对象位置的物体。</p>
 <h4 id="Backbone-network"><a href="#Backbone-network" class="headerlink" title="Backbone network"></a>Backbone network</h4><p>我们设计了一个新的沙漏网络，包含3个沙漏组(hg_mods)，深度为54层，称其为Hourglass-54。在每个下采样层后跟一个残差。每个沙漏组将input feature缩小3次并增加通道数量(384,384,512)。就不细说了，看代码吧，比论文详细！</p>
 <h4 id="Training-details"><a href="#Training-details" class="headerlink" title="Training details"></a>Training details</h4><p>用Adam来优化网络，网络的输入大小为255x255，也是inference的输入的分辨率。在4块1080TI上用48的batch size大小进行训练。为了避免过拟合，我们用了data augmentation技术。当我们随机裁剪一个物体周围的区域时，这个物体要么是随机放置的，要么是在中心有一些随机偏移量。</p>
+<h3 id="CornerNet-Squeeze"><a href="#CornerNet-Squeeze" class="headerlink" title="CornerNet-Squeeze"></a>CornerNet-Squeeze</h3><h4 id="Overview"><a href="#Overview" class="headerlink" title="Overview"></a>Overview</h4><p>与CornerNet-Saccade相反，CornerNet-Squeeze用另一种方式来减少对每个像素的处理流程。在原来的CornerNet中，虽然Hourglass-104有足够强的性能，但它有太多的参数，太耗费时间了。为了减少Hourglass-104的复杂性，我们借鉴了SqueezeNet和MobileNet从而设计一个轻量级的Hourglass架构。</p>
+<h4 id="SqueezeNet和MobileNet给的启发"><a href="#SqueezeNet和MobileNet给的启发" class="headerlink" title="SqueezeNet和MobileNet给的启发"></a>SqueezeNet和MobileNet给的启发</h4><ol>
+<li>用1x1的卷积核代替3x3的卷积核</li>
+<li>decreasing inputs channels to 3x3 kernels</li>
+<li>迟点降采样</li>
+</ol>
+<p>我们用SqueezeNet中的fire module代替残差块。由MobileNet的启发，我们用3x3的深度可分离卷积代替3x3的标准卷积。</p>
+<p>我们没有采用第三种方法，因为Hourglass Network是对称结构，推迟下采样会在上采样得到更高的分辨率，会增加网络的计算代价</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4meuqlz4aj20mk0bpgow.jpg" alt="对比"></p>
+<p>除了代替残差块，我们还做了一些小修改。我们通过在Hourglass module前添加一个下采样层来降低Hourglass module的最大feature map的分辨率，并在每个Hourglass module中删除一个下采样层。 CornerNet-Squeeze会在Hourglass module前缩小3次图像，而CornerNet缩小2次图像。在CornerNet中的prediction module，我们把3x3的卷积核替换为1x1的卷积核。最后我们将Hourglass Network中的最近邻上采样替换为4x4的转置卷积核。</p>
+<h4 id="Training-details-1"><a href="#Training-details-1" class="headerlink" title="Training details"></a>Training details</h4><p>用和CornerNet相同的training loss和超参数来训练CornerNet-Squeeze。唯一的区别是batchsize。在相同的图像分辨率下，在Hourglass module前多下采样一次图片，在CornerNet-Squeeze中减少了4倍的内存使用。</p>
+<h3 id="CornerNet-Saccade-Results"><a href="#CornerNet-Saccade-Results" class="headerlink" title="CornerNet-Saccade Results"></a>CornerNet-Saccade Results</h3><h4 id="ERROR-analysis"><a href="#ERROR-analysis" class="headerlink" title="ERROR analysis"></a>ERROR analysis</h4><p>attention map对CornerNet-saccade很重要，如果attention map不精确，CornerNet-saccade就会丢失目标。我们用GT attention map来测试CornerNet-saccade，结果如下图，所以研究研究怎么预测准确的attention map？刷刷分？？？</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4mfxb39s9j20li05baay.jpg" alt=""></p>
+<h4 id="Performance-Analysis-of-Hourglass-54"><a href="#Performance-Analysis-of-Hourglass-54" class="headerlink" title="Performance Analysis of Hourglass-54"></a>Performance Analysis of Hourglass-54</h4><p>为了测试Hourglass-54的性能，我们做了2个实验。</p>
+<ol>
+<li>CornerNet-Saccade用Hourglass-104测试</li>
+<li>Cornet用Hourglass-54测试</li>
+</ol>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4mixmpx59j20m40760uz.jpg" alt=""></p>
+<h3 id="CornerNet-Squeeze-Results"><a href="#CornerNet-Squeeze-Results" class="headerlink" title="CornerNet-Squeeze Results"></a>CornerNet-Squeeze Results</h3><h4 id="和YOLOV3的比较"><a href="#和YOLOV3的比较" class="headerlink" title="和YOLOV3的比较"></a>和YOLOV3的比较</h4><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4mjd2ce6pj20kg05ut9v.jpg" alt=""></p>
 
       
     </div>
@@ -496,9 +532,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
             <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -737,7 +773,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet"><span class="nav-number">1.</span> <span class="nav-text">CornerNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet-lite"><span class="nav-number">2.</span> <span class="nav-text">CornerNet-lite</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CornerNet-Saccade"><span class="nav-number">2.1.</span> <span class="nav-text">CornerNet-Saccade</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Estimating-object-locations"><span class="nav-number">2.2.</span> <span class="nav-text">Estimating object locations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Detecting-objects"><span class="nav-number">2.3.</span> <span class="nav-text">Detecting objects</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backbone-network"><span class="nav-number">2.4.</span> <span class="nav-text">Backbone network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-details"><span class="nav-number">2.5.</span> <span class="nav-text">Training details</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet"><span class="nav-number">1.</span> <span class="nav-text">CornerNet</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet-lite"><span class="nav-number">2.</span> <span class="nav-text">CornerNet-lite</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CornerNet-Saccade"><span class="nav-number">2.1.</span> <span class="nav-text">CornerNet-Saccade</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Estimating-object-locations"><span class="nav-number">2.2.</span> <span class="nav-text">Estimating object locations</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Detecting-objects"><span class="nav-number">2.3.</span> <span class="nav-text">Detecting objects</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Backbone-network"><span class="nav-number">2.4.</span> <span class="nav-text">Backbone network</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-details"><span class="nav-number">2.5.</span> <span class="nav-text">Training details</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet-Squeeze"><span class="nav-number">3.</span> <span class="nav-text">CornerNet-Squeeze</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Overview"><span class="nav-number">3.1.</span> <span class="nav-text">Overview</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SqueezeNet和MobileNet给的启发"><span class="nav-number">3.2.</span> <span class="nav-text">SqueezeNet和MobileNet给的启发</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Training-details-1"><span class="nav-number">3.3.</span> <span class="nav-text">Training details</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet-Saccade-Results"><span class="nav-number">4.</span> <span class="nav-text">CornerNet-Saccade Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ERROR-analysis"><span class="nav-number">4.1.</span> <span class="nav-text">ERROR analysis</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Performance-Analysis-of-Hourglass-54"><span class="nav-number">4.2.</span> <span class="nav-text">Performance Analysis of Hourglass-54</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CornerNet-Squeeze-Results"><span class="nav-number">5.</span> <span class="nav-text">CornerNet-Squeeze Results</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#和YOLOV3的比较"><span class="nav-number">5.1.</span> <span class="nav-text">和YOLOV3的比较</span></a></li></ol></li></ol></div>
             
 
           </div>
