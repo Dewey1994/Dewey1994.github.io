@@ -96,23 +96,28 @@
 
 
 
-  <meta name="description" content="record my life">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Dewey&#39;s blog">
-<meta property="og:url" content="http://yoursite.com/categories/目标检测/深度学习/index.html">
+  <meta name="description" content="Accuracy准确率=预测正确的样本数/所有样本数，即预测正确的样本比例，在目标检测领域，不用这个度量标准。 Precision查准率是针对某一类样本预测有多准，即预测所得的结果，正确预测的样本占总样本的比例。(总样本是预测所得结果，里面包含了预测正确的结果和预测错误的结果) Precision=\frac{TP}{TP+FP}Recall召回率表示某一类样本预测正确的与所有groundtru">
+<meta name="keywords" content="目标检测,评价标准">
+<meta property="og:type" content="article">
+<meta property="og:title" content="目标检测评价标准">
+<meta property="og:url" content="http://yoursite.com/2019/07/10/目标检测评价标准/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="record my life">
+<meta property="og:description" content="Accuracy准确率=预测正确的样本数/所有样本数，即预测正确的样本比例，在目标检测领域，不用这个度量标准。 Precision查准率是针对某一类样本预测有多准，即预测所得的结果，正确预测的样本占总样本的比例。(总样本是预测所得结果，里面包含了预测正确的结果和预测错误的结果) Precision=\frac{TP}{TP+FP}Recall召回率表示某一类样本预测正确的与所有groundtru">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4ujzewvvyj20i204r0sk.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4uk0dd3qhj20f70bfdhe.jpg">
+<meta property="og:updated_time" content="2019-07-10T02:53:44.589Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Dewey&#39;s blog">
-<meta name="twitter:description" content="record my life">
+<meta name="twitter:title" content="目标检测评价标准">
+<meta name="twitter:description" content="Accuracy准确率=预测正确的样本数/所有样本数，即预测正确的样本比例，在目标检测领域，不用这个度量标准。 Precision查准率是针对某一类样本预测有多准，即预测所得的结果，正确预测的样本占总样本的比例。(总样本是预测所得结果，里面包含了预测正确的结果和预测错误的结果) Precision=\frac{TP}{TP+FP}Recall召回率表示某一类样本预测正确的与所有groundtru">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4ujzewvvyj20i204r0sk.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/categories/目标检测/深度学习/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/10/目标检测评价标准/">
 
 
 
@@ -122,7 +127,7 @@
   };
 </script>
 
-  <title>分类: 深度学习 | Dewey's blog</title>
+  <title>目标检测评价标准 | Dewey's blog</title>
   
 
 
@@ -170,7 +175,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left ">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
@@ -246,7 +251,7 @@
         
         
           
-          <li class="menu-item menu-item-categories menu-item-active">
+          <li class="menu-item menu-item-categories">
 
     
     
@@ -322,135 +327,211 @@
           
             
 
-    
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-      
-      
-    
-    
-
-  
-
-
           
           <div id="content" class="content">
             
 
+  <div id="posts" class="posts-expand">
+    
+
+  
+
   
   
   
-  <div class="post-block category">
 
-    <div id="posts" class="posts-collapse">
-      <div class="collection-title">
-        <h1>深度学习<small>分类</small>
-        </h1>
-      </div>
-
-      
-        
+  
 
   <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/10/目标检测评价标准/">
 
-      <h2 class="post-title">
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
-          <a class="post-title-link" href="/2019/07/03/分割做目标检测/" itemprop="url">
-            
-              <span itemprop="name">分割做目标检测</span>
-            
-          </a>
         
-      </h2>
+          <h1 class="post-title" itemprop="name headline">目标检测评价标准
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-03T16:47:50+08:00" content="2019-07-03">
-          07-03
-        </time>
-      </div>
+              
+            
+          </h1>
+        
 
-    </header>
-  </article>
+        <div class="post-meta">
+          <span class="post-time">
 
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-07-10 10:08:12 / 修改时间：10:53:44" itemprop="dateCreated datePublished" datetime="2019-07-10T10:08:12+08:00">2019-07-10</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/" itemprop="url" rel="index"><span itemprop="name">目标检测</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/评价标准/" itemprop="url" rel="index"><span itemprop="name">评价标准</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/07/02/CornerNet-lite论文理解/" itemprop="url">
-            
-              <span itemprop="name">CornerNet-lite论文理解</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-07-02T16:04:17+08:00" content="2019-07-02">
-          07-02
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+      
 
       
-        
-
-  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-          <a class="post-title-link" href="/2019/06/30/yolo理解/" itemprop="url">
-            
-              <span itemprop="name">yolo理解</span>
-            
-          </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated" datetime="2019-06-30T15:07:02+08:00" content="2019-06-30">
-          06-30
-        </time>
-      </div>
-
-    </header>
-  </article>
-
+        <p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4ujzewvvyj20i204r0sk.jpg" alt="样本举例"></p>
+<h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h3><p>准确率=预测正确的样本数/所有样本数，即预测正确的样本比例，在目标检测领域，不用这个度量标准。</p>
+<h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision"></a>Precision</h3><p>查准率是针对某一类样本预测有多准，即预测所得的结果，正确预测的样本占总样本的比例。(总样本是预测所得结果，里面包含了预测正确的结果和预测错误的结果)</p>
+<script type="math/tex; mode=display">Precision=\frac{TP}{TP+FP}</script><h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p>召回率表示某一类样本预测正确的与所有groundtruth的比例。总样本是某一类样本的groundtruth</p>
+<script type="math/tex; mode=display">Recall=\frac{TP}{TP+FN}</script><h3 id="AP"><a href="#AP" class="headerlink" title="AP"></a>AP</h3><p>以Recall为横轴，Precision为纵轴画出一条PR曲线，PR曲线下面的就定义为AP</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4uk0dd3qhj20f70bfdhe.jpg" alt="AP示例"></p>
+<h3 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h3><p>数据集总所有类别的AP求均值即为MAP</p>
 
       
     </div>
 
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/评价标准/" rel="tag"># 评价标准</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/03/分割做目标检测/" rel="next" title="分割做目标检测">
+                <i class="fa fa-chevron-left"></i> 分割做目标检测
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -471,8 +552,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -633,6 +723,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Accuracy"><span class="nav-number">1.</span> <span class="nav-text">Accuracy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Precision"><span class="nav-number">2.</span> <span class="nav-text">Precision</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Recall"><span class="nav-number">3.</span> <span class="nav-text">Recall</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#AP"><span class="nav-number">4.</span> <span class="nav-text">AP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MAP"><span class="nav-number">5.</span> <span class="nav-text">MAP</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -761,17 +868,23 @@
 
 
   
-
-  
-
-
-  <script src="/js/src/bootstrap.js?v=6.7.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
 
 
 
   
 
 
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
 
   
 
@@ -793,6 +906,43 @@
   
   
 
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
   
 
 
