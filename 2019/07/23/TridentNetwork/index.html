@@ -96,29 +96,28 @@
 
 
 
-  <meta name="description" content="这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。">
-<meta name="keywords" content="深度学习,GAN">
+  <meta name="description" content="这是一篇关于目标检测多尺度问题，从感受野入手解决的一篇文章">
+<meta name="keywords" content="深度学习,目标检测,感受野">
 <meta property="og:type" content="article">
-<meta property="og:title" content="DIST-GAN">
-<meta property="og:url" content="http://yoursite.com/2019/04/02/DIST-GAN/index.html">
+<meta property="og:title" content="Trident Network">
+<meta property="og:url" content="http://yoursite.com/2019/07/23/TridentNetwork/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。">
+<meta property="og:description" content="这是一篇关于目标检测多尺度问题，从感受野入手解决的一篇文章">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1ofjzs45zj20lr09742d.jpg">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1okykwd69j20v90eaacq.jpg">
-<meta property="og:updated_time" content="2019-04-02T13:00:01.525Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5a1hrhwxgj20ga07udha.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5a1xlmfmaj20oi08676f.jpg">
+<meta property="og:updated_time" content="2019-07-23T13:12:02.272Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="DIST-GAN">
-<meta name="twitter:description" content="这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg">
+<meta name="twitter:title" content="Trident Network">
+<meta name="twitter:description" content="这是一篇关于目标检测多尺度问题，从感受野入手解决的一篇文章">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5a1hrhwxgj20ga07udha.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/04/02/DIST-GAN/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/23/TridentNetwork/">
 
 
 
@@ -128,7 +127,7 @@
   };
 </script>
 
-  <title>DIST-GAN | Dewey's blog</title>
+  <title>Trident Network | Dewey's blog</title>
   
 
 
@@ -348,7 +347,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/04/02/DIST-GAN/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/23/TridentNetwork/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -365,7 +364,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">DIST-GAN
+          <h1 class="post-title" itemprop="name headline">Trident Network
 
               
             
@@ -391,7 +390,7 @@
                 
               
 
-              <time title="创建时间：2019-04-02 15:55:46 / 修改时间：21:00:01" itemprop="dateCreated datePublished" datetime="2019-04-02T15:55:46+08:00">2019-04-02</time>
+              <time title="创建时间：2019-07-23 16:23:32 / 修改时间：21:12:02" itemprop="dateCreated datePublished" datetime="2019-07-23T16:23:32+08:00">2019-07-23</time>
             
 
             
@@ -420,7 +419,14 @@
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/目标检测/" itemprop="url" rel="index"><span itemprop="name">目标检测</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/目标检测/感受野/" itemprop="url" rel="index"><span itemprop="name">感受野</span></a></span>
 
                 
                 
@@ -455,29 +461,33 @@
       
 
       
-        <p>这篇文章将Autoencoder和GAN相结合，提出了一种新颖的架构，以及两种距离度量：latent-data distance和discriminator-score distance，这两种距离能够有效减少生成器的模式坍塌。</p>
+        <p>这是一篇关于目标检测多尺度问题，从感受野入手解决的一篇文章</p>
 <a id="more"></a>
-<h3 id="Visual-mode-collapse-in-latent-space"><a href="#Visual-mode-collapse-in-latent-space" class="headerlink" title="Visual mode collapse in latent space"></a>Visual mode collapse in latent space</h3><p>以前的mode collapse是通过观察坍塌样本，然而，data space(就是指那些生成的图片或者数据集中的图片)是高维度的，很难在data space可视化一些<strong>点</strong>(这些点就表示数据的多样性，同样的点越多，说明数据的多样性越差，这篇论文中用同样颜色的点来表示同一数据)，但latent space是低维度的且容易控制，因此可以通过latent space来可视化其所代表的2D/3D空间。所以我们可以通过latent space来检验这些数据是否model collapse。但是有个问题就是，生成的图片数据，无法再映射回到latent space。因此我们采用一个现成的分类器，这个分类器预测生成样本的标签，我们最终可视化这个标签(我感觉这个可视化就是对生成的数据有个更直观的感受，其实就是把生成的数据聚类，然后显式的用图表示出来而已)</p>
-<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1oe5yi0tsj20ln07tn1c.jpg" alt="可视化"></p>
-<h3 id="Distance-constraint：Motivation"><a href="#Distance-constraint：Motivation" class="headerlink" title="Distance constraint：Motivation"></a>Distance constraint：Motivation</h3><p>Even some latent samples reside very far apart from each other, they map to the same digit.</p>
-<p>对上面这句话的理解：就是图中，两个点距离很远，他们本不应该属于同一类，但是最终结果却把他们分为同一类，我们可以认为这样的情况就已经是mode collapse了，因此我们要提出一种距离度量来保证类之间的最小距离</p>
-<h3 id="Improving-GAN-using-Distance-Constraints"><a href="#Improving-GAN-using-Distance-Constraints" class="headerlink" title="Improving GAN using Distance Constraints"></a>Improving GAN using Distance Constraints</h3><p>我们应用$eq.(1)$通过AE(autoencoder)来改善生成器。首先，我们先训练AE(encoder$E_\omega$和decoder$G_\gamma\theta$)，然后我们再训练判别器$D_\gamma$和生成器$G_\theta$。$\omega,\theta,\gamma$分别是encoder，生成器和判别器的参数。训练AE的reconstruction loss为：</p>
-<script type="math/tex; mode=display">\min\limits_{\omega,\theta}L_R(\omega,\theta)+\lambda_rL_W(\omega,\theta) \tag{1}</script><p>$L_R(\omega,\theta)=\parallel x-G_\theta(E_\omega(X))\parallel_2^2$是传统的AE目标函数，但是如果用这种逐像素形式，重构出来的图像会变得模糊，因此我们采用特征的形式来计算AEloss，因此新的AEloss为$L_R(\omega,\theta)=\parallel \Phi(x)-\Phi(G_\theta(E_\omega(x)))\parallel_2^2$。$L_W(\omega,\theta)$是latent-data距离约束，目的是正则化生成器，防止mode collapse。同时，重构样本$G_\theta(E_\omega(x))$能够用$G_\theta(E_\omega(x))=x+\epsilon$，$\epsilon$是一个重构误差，通常$E$和$G$的网络都很庞大，因此$\epsilon$就很小，可以认为是在原始数据上加了一些noise，因此我们可以将重构得到的样本也认作是“真实”的样本。$\Phi(x)$是判别器的最后的卷积层。训练过程为: </p>
-<ul>
-<li>(i) fix $D_\gamma$ and train $E_\omega$ and $G_\theta$ to minimize the reconstruction loss $Eq.1$ </li>
-<li>(ii) fix $E_\omega$, $G_\theta$, and train $D_\gamma$ to minimize $(Eq. 2)$ </li>
-<li>(iii) fix $E_\omega$, $D_\gamma$ and train $G_\theta$ to minimize $(Eq. 3)$</li>
-</ul>
-<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1ofjzs45zj20lr09742d.jpg" alt="network structure"></p>
-<p>当我们在训练生成器时，最大化原来生成器函数$E_z\sigma(D_\gamma(G_\theta(z)))$会很容易导致model collapse。在此处，我们用我们提出的L1 distance对齐重构样本分布和真实样本分布，对齐分布的loss为：</p>
-<script type="math/tex; mode=display">\min\limits_{\theta}L_G(\theta)=\mid \mathbb{E}_x\sigma(D_\gamma(x))-\mathbb{E}_z\sigma(D_\gamma(G_\theta(z)))\mid \tag{2}</script><p>$\sigma$代表sigmoid函数</p>
-<p>我对上面这段话的理解是一味的最大化判别器对生成样本的分数，即让分数趋近于1，会使得网络变得懒惰，造成mode collapse。而对齐分布其实就是让判别器对生成样本和真实样本的分数尽可能接近，也就是分布尽可能接近，也就是不管真是样本如何，都让生成的和真实的靠近。</p>
-<p>首先给出判别器的loss：</p>
-<script type="math/tex; mode=display">\min\limits_{\gamma}L_D(\omega,\theta,\gamma)=-(\mathbb{E}_xlog\sigma(D_\gamma(x)+\mathbb{E}_zlog(1-\sigma(D_\gamma(G_\theta(z))))+\mathbb{E}_xlog\sigma(D_\gamma(G_\theta(E_\omega(x))))-\lambda_p\mathbb{E}_{\hat{x}}(\parallel \nabla_{\hat{x}}D_\gamma(\hat{x})\parallel_2^2-1)^2) \tag{3}</script><p>我们的判别器和原始GAN的判别器有两方面的区别。一是，我们用重构样本作为“真实”样本可以减缓判别器的收敛，因此判别器的梯度可以一直传递。<strong>特别的，判别器的收敛与AE的收敛相耦合，这是一条重要的约束</strong>。相反，如果我们把重构样本作为假样本，这会加速判别器的收敛。第二，我们在判别器上用了梯度惩罚项$L_p=(\parallel \nabla_{\hat{x}}D_\gamma(\hat{x})\parallel_2^2-1)^2$，同时$\hat{x}=\epsilon x+(1-\epsilon)G(z)$,其中$\epsilon$是一个均匀随机数(uniform random number)，$\epsilon \in[0,1]$。这个就是WGANGP里面的那个玩意，文章还指出单独使用gradient penalty是无法解决收敛问题的。gradient penalty和discriminator-score distance联合起来能部分解决这种收敛问题，但也无法完全解决，因此作者加上先前的latent-data distance来一起解决收敛问题。</p>
-<p>这部分，我们讨论latent-data distance约束来正则化AE目的是减少生成器的mode collapse。特别的，我们用噪声输入来约束encoder的输出，同时用重构样本来约束生成器的输出，因此，为了减少mode collapse，我们要实现，如果latent space(潜在空间)中两个latent variables $g(z_i,z_j)$的距离小(大)，那么data space(数据空间)中的相关距离$f(x_i,x_j)$也应该小(大)。我们提出latent-data distance正则化表达式为：</p>
-<script type="math/tex; mode=display">L_W(\omega,\theta)=\parallel f(x,G_\theta(z))-\lambda_wg(E_\omega(x),z)\parallel^2_2 \tag{4}</script><p>其中$f,g$是计算data space和latent space距离函数。我们不能直接用L1-norm这种来直接计算两个数据分布的距离，因此我们提出用称为matching score的函数来计算距离</p>
-<script type="math/tex; mode=display">f(x,G_\theta(z))=M_d(\mathbb{E}_xG_\theta(E_\omega(x))-\mathbb{E}_zG_\theta(z)) \tag{5}</script><script type="math/tex; mode=display">g(E_\omega(x),z)=M_d(\mathbb{E}_xE_\omega(x)-\mathbb{E}_zz) \tag{6}</script><p>$M_d$计算的是输入的所有维度的平均值。根据经验$\lambda_w=\sqrt{\frac{d_z}{d_x}}$,其中$d_z,d_x$是latent和data样本的维度。其实$f$算的是生成的样本和重构样本的距离，$g$算的是初始随机噪声$z$和由原始样本encoder的latent space的距离。</p>
-<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g1okykwd69j20v90eaacq.jpg" alt="algorithm"></p>
+<h3 id="Motivation"><a href="#Motivation" class="headerlink" title="Motivation"></a>Motivation</h3><p><a href="https://zhuanlan.zhihu.com/p/54334986" target="_blank" rel="noopener">作者亲自的讲解</a>，这个还是主要讲作者的做这篇论文的流程。</p>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>尺度变化在目标检测中是一个核心问题。我们提出了一个控制感受野对不同尺度物体检测的控制实验。基于我们的实验，我们提出了TridentNet</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>唠家常（one-stage and two-stage）</p>
+<p>要解决尺度问题的话：</p>
+<ol>
+<li><p>图像金字塔的方法-&gt;SNIP-&gt;SNIPER，原始图像金字塔速度很慢，而SNIPER的方法，即，不同尺度上都用一个恒定的chip进行划分，对较小物体起到放大的作用，对较大物体起到缩小的作用，这是一个很不错的思路。</p>
+</li>
+<li><p>特征金子塔的方法，工作用SSD，FPN，但不同尺度对象的特征是在不同层提取的，所有他们的表征能力也不尽相同，相较于图像金字塔就差点意思。</p>
+</li>
+</ol>
+<p>作者从这两者中得出的idea是对不同尺度的对象都应有不同的感受野，因此作者提出了TridentNet，利用空洞卷积，Trident block具有相同的网络结构和参数权重，但感受野不同。其次，由SNIP启发，避免极端尺度的物体，在每个branch中给喂给与其感受野范围相匹配的对象。</p>
+<h3 id="Related-Work"><a href="#Related-Work" class="headerlink" title="Related Work"></a>Related Work</h3><h4 id="Methods-for-handling-scale-variation"><a href="#Methods-for-handling-scale-variation" class="headerlink" title="Methods for handling scale variation"></a>Methods for handling scale variation</h4><p>多尺度图像金字塔是一种常用的改进检测方法，<strong>基于图像金字塔的方法</strong>，SNIP提出了一种尺度归一化的方法，在训练过程中，对每个分辨率都在期望尺度范围内的目标进行训练。但是它的速度很慢，SNIPER只选择GT周围的上下文区域，并在训练期间为每个尺度采样背景。</p>
+<p><strong>使用多级特征来解决多尺度问题</strong>，HyperNet和ION把不同层的低级和高级特征concat起来进行预测，TDM和FPN引入自上而下的通路和横向连接，增强底层特称的语义表示。我们的TridentNet没有使用来自不同层次的特征，而是通过多个并行分支生成特定尺度的特征，从而是我们的网络对所有不同尺度的对象具有相同的表示能力。</p>
+<h3 id="Receptive-Field"><a href="#Receptive-Field" class="headerlink" title="Receptive Field"></a>Receptive Field</h3><p>我们用resnet-50和resnet-101为backbone network并改变conv4中第1-3个3x3conv的膨胀率$d_s$。我们可以发现，随着感受野大小的增加，检测器咋小目标上的性能都在持续下降。而对于大物体，性能在不断上升。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5a1hrhwxgj20ga07udha.jpg" alt="fig1"></p>
+<ol>
+<li>不同尺度对象的性能受到网络感受野大小的影响，最适合的感受野和对象大小有很强的相关性(这就和SNIP，SNIPER中的思想差不多)</li>
+<li>有效感受野小于理论感受野，我们假设网络的有效感受野需要在小尺度和大尺度间保持平衡，膨胀率的增加增加了有效感受野，但却影响了小物体的检测结果</li>
+</ol>
+<h3 id="Trident-Network"><a href="#Trident-Network" class="headerlink" title="Trident Network"></a>Trident Network</h3><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5a1xlmfmaj20oi08676f.jpg" alt="fig2"></p>
+<h4 id="Multi-branch-Block"><a href="#Multi-branch-Block" class="headerlink" title="Multi-branch Block"></a>Multi-branch Block</h4><p>trident block由多个平行分支组成，除了膨胀率外，每个分支与原始卷积块具有相同结构，以resnet的residual block为例，一般是1x1,3x3,1x3连续3个卷积核，其中3x3的用上述方法改良，改为3个由不同膨胀率的卷积构成并行分支（只改变kernel不为1的卷积）</p>
+<h4 id="Weight-sharing-among-branches"><a href="#Weight-sharing-among-branches" class="headerlink" title="Weight sharing among branches"></a>Weight sharing among branches</h4><p>我们共享所有分支的权重以及RPN和R-CNN的头部，只改变分支的膨胀率。权重共享的好处，减少了参数量以及潜在的过拟合风险，充分利用了每个样本，同样的参数在不同的膨胀率下训练了不同尺度的样本。</p>
+<h3 id="Scale-aware-Training-Scheme"><a href="#Scale-aware-Training-Scheme" class="headerlink" title="Scale-aware Training Scheme"></a>Scale-aware Training Scheme</h3><p>和SNIP相似，我们给每个分支定义有效范围[$l_i,u_i$]，在训练时，我们只选择proposal和GTbox的尺度在范围内的训练，有效的范围</p>
+<script type="math/tex; mode=display">l_i \le \sqrt{wh} \le u_i</script><h3 id="Inference-and-Approximation"><a href="#Inference-and-Approximation" class="headerlink" title="Inference and Approximation"></a>Inference and Approximation</h3><p>在推理过程中，我们生成所有分支的检测结果，然后过滤掉有效范围之外的框。然后用NMS或者soft-NMS得到最终结果。</p>
+<h4 id="Fast-Inference-Approximation"><a href="#Fast-Inference-Approximation" class="headerlink" title="Fast Inference Approximation"></a>Fast Inference Approximation</h4><p>在推理时，我们用一个主要分支来近似模拟TridentNet，我们把有效范围定义为[0,$ \infty$]来预测所有尺度的物体，我们把中间的分支作为我们的主要分支，因为它的有效范围包括了小物体和大物体。</p>
 
       
     </div>
@@ -503,7 +513,9 @@
           
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/感受野/" rel="tag"># 感受野</a>
           
         </div>
       
@@ -516,8 +528,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/28/SUB-GAN/" rel="next" title="SUB-GAN">
-                <i class="fa fa-chevron-left"></i> SUB-GAN
+              <a href="/2019/07/23/Network/" rel="next" title="Network">
+                <i class="fa fa-chevron-left"></i> Network
               </a>
             
           </div>
@@ -525,10 +537,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/04/08/attention-gan/" rel="prev" title="attention-gan">
-                attention-gan <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -762,7 +770,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Visual-mode-collapse-in-latent-space"><span class="nav-number">1.</span> <span class="nav-text">Visual mode collapse in latent space</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Distance-constraint：Motivation"><span class="nav-number">2.</span> <span class="nav-text">Distance constraint：Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Improving-GAN-using-Distance-Constraints"><span class="nav-number">3.</span> <span class="nav-text">Improving GAN using Distance Constraints</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Motivation"><span class="nav-number">1.</span> <span class="nav-text">Motivation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">2.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">3.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Related-Work"><span class="nav-number">4.</span> <span class="nav-text">Related Work</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Methods-for-handling-scale-variation"><span class="nav-number">4.1.</span> <span class="nav-text">Methods for handling scale variation</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Receptive-Field"><span class="nav-number">5.</span> <span class="nav-text">Receptive Field</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Trident-Network"><span class="nav-number">6.</span> <span class="nav-text">Trident Network</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Multi-branch-Block"><span class="nav-number">6.1.</span> <span class="nav-text">Multi-branch Block</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Weight-sharing-among-branches"><span class="nav-number">6.2.</span> <span class="nav-text">Weight sharing among branches</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Scale-aware-Training-Scheme"><span class="nav-number">7.</span> <span class="nav-text">Scale-aware Training Scheme</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Inference-and-Approximation"><span class="nav-number">8.</span> <span class="nav-text">Inference and Approximation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Fast-Inference-Approximation"><span class="nav-number">8.1.</span> <span class="nav-text">Fast Inference Approximation</span></a></li></ol></li></ol></div>
             
 
           </div>
