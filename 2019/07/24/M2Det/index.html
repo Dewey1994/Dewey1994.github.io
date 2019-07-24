@@ -96,25 +96,33 @@
 
 
 
-  <meta name="description" content="主要针对Wgan和Wgan-gp的区别来记录">
-<meta name="keywords" content="深度学习,GAN">
+  <meta name="description" content="这是AAAI-19年一篇one stage多尺度目标检测的论文">
+<meta name="keywords" content="目标检测,深度学习,尺度相关">
 <meta property="og:type" content="article">
-<meta property="og:title" content="WGAN-GP">
-<meta property="og:url" content="http://yoursite.com/2019/03/27/WGAN-GP/index.html">
+<meta property="og:title" content="M2Det">
+<meta property="og:url" content="http://yoursite.com/2019/07/24/M2Det/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="主要针对Wgan和Wgan-gp的区别来记录">
+<meta property="og:description" content="这是AAAI-19年一篇one stage多尺度目标检测的论文">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-03-29T04:24:54.116Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5av83nvkwj20ir0c1jtq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5avyjldokj21460gg0yt.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b0xmtugmj20bi058jrj.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b0y3ihcjj20as04naa3.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b114uju9j20m407u0tr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b11cmchhj20w008egms.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b12f43a3j20o80j3q9g.jpg">
+<meta property="og:updated_time" content="2019-07-24T08:52:56.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="WGAN-GP">
-<meta name="twitter:description" content="主要针对Wgan和Wgan-gp的区别来记录">
+<meta name="twitter:title" content="M2Det">
+<meta name="twitter:description" content="这是AAAI-19年一篇one stage多尺度目标检测的论文">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g5av83nvkwj20ir0c1jtq.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/03/27/WGAN-GP/">
+  <link rel="canonical" href="http://yoursite.com/2019/07/24/M2Det/">
 
 
 
@@ -124,7 +132,7 @@
   };
 </script>
 
-  <title>WGAN-GP | Dewey's blog</title>
+  <title>M2Det | Dewey's blog</title>
   
 
 
@@ -344,7 +352,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/03/27/WGAN-GP/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/07/24/M2Det/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -361,7 +369,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">WGAN-GP
+          <h1 class="post-title" itemprop="name headline">M2Det
 
               
             
@@ -387,24 +395,12 @@
                 
               
 
-              <time title="创建时间：2019-03-27 20:57:19" itemprop="dateCreated datePublished" datetime="2019-03-27T20:57:19+08:00">2019-03-27</time>
+              <time title="创建时间：2019-07-24 13:11:10 / 修改时间：16:52:56" itemprop="dateCreated datePublished" datetime="2019-07-24T13:11:10+08:00">2019-07-24</time>
             
 
             
               
 
-              
-                
-                <span class="post-meta-divider">|</span>
-                
-
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">更新于</span>
-                
-                <time title="修改时间：2019-03-29 12:24:54" itemprop="dateModified" datetime="2019-03-29T12:24:54+08:00">2019-03-29</time>
               
             
           </span>
@@ -421,14 +417,21 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/" itemprop="url" rel="index"><span itemprop="name">目标检测</span></a></span>
 
                 
                 
                   ，
                 
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/GAN/" itemprop="url" rel="index"><span itemprop="name">GAN</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/目标检测/深度学习/尺度相关/" itemprop="url" rel="index"><span itemprop="name">尺度相关</span></a></span>
 
                 
                 
@@ -463,14 +466,38 @@
       
 
       
-        <p>主要针对Wgan和Wgan-gp的区别来记录<br><a id="more"></a></p>
-<h3 id="WGAN"><a href="#WGAN" class="headerlink" title="WGAN"></a>WGAN</h3><p>Wgan采用的是weight cliping。weight cliping把权重裁剪到[-0.01,0.01]的区间上，这种强行裁剪，使得weight大部分都分布到了边缘，即-0.01和0.01，导致只能学习到一些很简单的函数，而浪费了神经网络的泛化能力。其次还有一个问题就是会导致梯度爆炸和梯度消失，具体来说就是，如果一个梯度原本是0.1，而你强行裁剪到0.01的范围，那么导致这个梯度急剧减小，经过反传，梯度可能就消失了，同理在负数那边，梯度可能会爆炸。</p>
-<h3 id="WGAN-GP"><a href="#WGAN-GP" class="headerlink" title="WGAN-GP"></a>WGAN-GP</h3><p>将weight cliping修改为gradient penalty</p>
-<ul>
-<li>首先WGAN-GP加强了Lipschitz约束条件，原先WGAN只是强调在K的范围内即可，而WGAN-GP则将K定义到1</li>
-<li>对梯度惩罚的样本选取在$P_g$和$P_r$之间，公式为$\hat{x}=\epsilon{x}+(1-\epsilon)\widetilde{x}$，$x$~$P_r$，$\widetilde{x}$~$P_g$</li>
-</ul>
-<h3 id="一些大佬的讲解，懒得记了"><a href="#一些大佬的讲解，懒得记了" class="headerlink" title="一些大佬的讲解，懒得记了"></a>一些大佬的讲解，懒得记了</h3><p>[1] <a href="https://blog.csdn.net/malefactor/article/details/82154224" target="_blank" rel="noopener">深度学习中的Normalization模型</a><br>[2] <a href="https://www.alexirpan.com/2017/02/22/wasserstein-gan.html" target="_blank" rel="noopener">对WGAN的总结</a></p>
+        <p>这是AAAI-19年一篇one stage多尺度目标检测的论文</p>
+<a id="more"></a>
+<h3 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h3><p>特征金字塔被广泛用于目标检测（DSSD,RetinaNet,RefineDet,Mask R-CNN, DeNet），但特征金字塔的初始定位是为分类任务而设计的。然后我们就提出了M2Det（multi-level and multi-scale features | integrated MLFPN into the SSD）</p>
+<h3 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h3><p>尺度问题在目标检测中是一个很重要的问题，通常有两种方法来解决：</p>
+<ol>
+<li><p><strong>图像金子塔</strong> SNIP中提到的方法。很明显，这种方法会增加存储和计算代价，效率极低</p>
+</li>
+<li><p><strong>特征金字塔</strong> FPN提出的低级特征和高级特征融合。相比上面的方法，只会消耗少量存储，计算代价也会更低，也很容易聚合到网络中，进行端到端的学习。</p>
+</li>
+</ol>
+<p>但特征金字塔也有一些局限，即，根据固有的多尺度来构造金字塔，而特征金字塔实际是为了目标分类任务而设计的。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5av83nvkwj20ir0c1jtq.jpg" alt="fig1"></p>
+<p>下来就说了说SSD，FPN,STDN的结构，提出他们的局限：</p>
+<ol>
+<li><p>对于目标检测任务来说，金字塔中的feature map的表征能力还差点意思，毕竟是为分类任务设计的。</p>
+</li>
+<li><p>金字塔中的每个feature map只包含单层信息</p>
+</li>
+</ol>
+<p>一般情况下，层次较深的高级特征对分类子任务的识别能力较强，层次较浅的低级特征对目标位置回归子任务的识别能力较强。此外，低层特征更适合描述具有简单外观的对象，而高层特征更适合描述具有复杂外观的对象。</p>
+<p>这篇paper的目标就是构造一个高效特征金字塔来进行不同尺度的目标检测。 首先，我们先融合了由backbone提取的多层特征作为基本特征，然后喂给TUM（thinned U-shape modules）和FFM（feature fusion modules）来提取更有表征能力，多层，多尺度的特征，最后，我们用尺度等价的feature map来构造最后的特征金子塔进行目标检测。此外，最终特征金字塔中的每个feature map由多个层次的decode layers组成。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5avyjldokj21460gg0yt.jpg" alt="network structure"></p>
+<h3 id="Proposed-Method"><a href="#Proposed-Method" class="headerlink" title="Proposed Method"></a>Proposed Method</h3><p>M2Det用backbone和MLFPN从输入图像中提取特征，然后和SSD一样，生成dense bbox和类型分数，然后跟着一个NMS得到最后的结果。MLFPN包含3个部分，FFM（feature fusion modules）,TUM（thinned U-shape modules）,SFAM（scale-wise feature aggregation）。FFMv1通过融合backbone的feature map，将语义信息和基本特征融合。每个TUM生成一组多尺度的feature，然后由TUMS和FFMv2s提取多层多尺度feature。此外，SFAM通过scale-wise feature concatenation操作和自适应注意机制将特征聚合到多层次的特征金字塔中。</p>
+<h3 id="MLFPN"><a href="#MLFPN" class="headerlink" title="MLFPN"></a>MLFPN</h3><p>MLFPN包含3个部分，首先FFMv1融合浅层深层特征作为基本特征，这为MLFPN提供了多层语义信息（<strong>level=各层，scale=图像的大小</strong>）。其次，TUMS和FFMv2交替堆叠。每个TUM生成一些不同尺度的feature map，FFMv2呼和基本特征和前一个TUM中最大的feature map输出（看网络图），混合后的feature map在喂给下一个TUM。第一个TUM就只用基本特征。剩下的TUM是基本特征+前一个TUM的输出。最后SFAM通过scale-wisefeature concatenation操作和channel-wise注意机制，将多级多尺度特征聚合起来。</p>
+<h4 id="FFMs"><a href="#FFMs" class="headerlink" title="FFMs"></a>FFMs</h4><p>它们使用1x1卷积层来压缩输入特征的通道，并使用连接操作来聚合这些特征映射。FFMv1通过上采样，使得两个输入的尺度一致，然后concat。FFMv2直接concat。 a = FFMv1 ， b = FFMv2</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b0xmtugmj20bi058jrj.jpg" alt="FFMs structure"></p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b0y3ihcjj20as04naa3.jpg" alt="TUMs structure"></p>
+<h4 id="TUMs"><a href="#TUMs" class="headerlink" title="TUMs"></a>TUMs</h4><p>encoder是一系列3x3卷积，步长为2。decoder将这些曾的输出作为其feature map的参考集合，而原始的FPN选择ResNet中每个阶段的最后一层的输出。此外，在decoder分支中，在上采样和element-wise后添加1x1的卷积层，以增强学习能力，并且保证特征的平滑。每个TUM的decoder中的所有输出会形成当前层的多尺度特征。堆叠之后的TUMs会形成多层多尺度的特征，前面的TUM会提供浅层的特征，中间的TUM会提供中层特征，后面的TUM会提供深层特征。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b114uju9j20m407u0tr.jpg" alt="TUMs structure"></p>
+<h4 id="SFAM"><a href="#SFAM" class="headerlink" title="SFAM"></a>SFAM</h4><p>把不同层不同尺度的特征聚合成不同层的特征（相同尺度聚合）。包含2步，首先，concat等价尺度的特征，$X_i = Concat(x_i^1,x_i^2,…,x_i^L) \in \mathbb{R}^{W_i \times H_i \times C}$，其中$i$代表第$i$个尺度（尺度一致，但包含的信息不同，浅层，中层，深层）。其次，用channel-wise attention机制来激励特征，用两个全连接层实现 SE block</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b11cmchhj20w008egms.jpg" alt=""></p>
+<h3 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h3><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g5b12f43a3j20o80j3q9g.jpg" alt="Experiments"></p>
 
       
     </div>
@@ -494,9 +521,11 @@
       
         <div class="post-tags">
           
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
-            <a href="/tags/GAN/" rel="tag"># GAN</a>
+            <a href="/tags/尺度相关/" rel="tag"># 尺度相关</a>
           
         </div>
       
@@ -509,8 +538,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/03/25/attention记录/" rel="next" title="attention记录">
-                <i class="fa fa-chevron-left"></i> attention记录
+              <a href="/2019/07/23/TridentNetwork/" rel="next" title="Trident Network">
+                <i class="fa fa-chevron-left"></i> Trident Network
               </a>
             
           </div>
@@ -518,10 +547,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/03/28/SUB-GAN/" rel="prev" title="SUB-GAN">
-                SUB-GAN <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -757,7 +782,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN"><span class="nav-number">1.</span> <span class="nav-text">WGAN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WGAN-GP"><span class="nav-number">2.</span> <span class="nav-text">WGAN-GP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些大佬的讲解，懒得记了"><span class="nav-number">3.</span> <span class="nav-text">一些大佬的讲解，懒得记了</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Proposed-Method"><span class="nav-number">3.</span> <span class="nav-text">Proposed Method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MLFPN"><span class="nav-number">4.</span> <span class="nav-text">MLFPN</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#FFMs"><span class="nav-number">4.1.</span> <span class="nav-text">FFMs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#TUMs"><span class="nav-number">4.2.</span> <span class="nav-text">TUMs</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SFAM"><span class="nav-number">4.3.</span> <span class="nav-text">SFAM</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Experiments"><span class="nav-number">5.</span> <span class="nav-text">Experiments</span></a></li></ol></div>
             
 
           </div>
