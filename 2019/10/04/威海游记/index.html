@@ -96,25 +96,43 @@
 
 
 
-  <meta name="description" content="ROIpooling和ROIalign的比较">
-<meta name="keywords" content="深度学习,3D detection">
+  <meta name="description" content="威海威海给我的印象是处于新旧结合，新老交替的阶段，城市里，有很多新兴建筑，比如很有设计感的威海市图书馆和威海市群众艺术馆，也有很多感觉是20年代初的小破房子；在搭乘公交时候发现，威海城市规划很规整，所以你打出租的时候根本不用担心司机会给你绕路，哈哈哈哈，是我太小心眼了…，还有就是给我的感觉，威海在不停的盖房子，和修路，可能之后再去，又会有新的不一样的感觉了吧。 说到这里也不得不说，威海的交通，之前">
+<meta name="keywords" content="旅游">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ROIalign和ROIpooling">
-<meta property="og:url" content="http://yoursite.com/2019/05/14/ROIalign和ROIpooling/index.html">
+<meta property="og:title" content="威海游记">
+<meta property="og:url" content="http://yoursite.com/2019/10/04/威海游记/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="ROIpooling和ROIalign的比较">
+<meta property="og:description" content="威海威海给我的印象是处于新旧结合，新老交替的阶段，城市里，有很多新兴建筑，比如很有设计感的威海市图书馆和威海市群众艺术馆，也有很多感觉是20年代初的小破房子；在搭乘公交时候发现，威海城市规划很规整，所以你打出租的时候根本不用担心司机会给你绕路，哈哈哈哈，是我太小心眼了…，还有就是给我的感觉，威海在不停的盖房子，和修路，可能之后再去，又会有新的不一样的感觉了吧。 说到这里也不得不说，威海的交通，之前">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-14T12:50:32.000Z">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7ml89k4txj23282aonpe.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mlk3rpqlj23282aox6q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjjn4u8kj23282aohdv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjko0s7fj23282aokjq.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjoffsapj23282ao4qw.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjr4hvfrj22ao328x6q.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjuu2c2gj23282aoqv6.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjzcj7itj22ao328e83.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk1dw200j23282aonph.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk02iioaj22ao328u0z.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk0g1rpxj22ao328b2b.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk27jj5wj22ao3284qr.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk2ld87fj23282aoqv8.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk3eorl1j23282aohdv.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk49d52cj23282ao7wi.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk5kmvbbj21z31z4b29.jpg">
+<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk84zqruj22ao328e83.jpg">
+<meta property="og:updated_time" content="2019-10-04T15:55:47.668Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ROIalign和ROIpooling">
-<meta name="twitter:description" content="ROIpooling和ROIalign的比较">
+<meta name="twitter:title" content="威海游记">
+<meta name="twitter:description" content="威海威海给我的印象是处于新旧结合，新老交替的阶段，城市里，有很多新兴建筑，比如很有设计感的威海市图书馆和威海市群众艺术馆，也有很多感觉是20年代初的小破房子；在搭乘公交时候发现，威海城市规划很规整，所以你打出租的时候根本不用担心司机会给你绕路，哈哈哈哈，是我太小心眼了…，还有就是给我的感觉，威海在不停的盖房子，和修路，可能之后再去，又会有新的不一样的感觉了吧。 说到这里也不得不说，威海的交通，之前">
+<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g7ml89k4txj23282aonpe.jpg">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2019/05/14/ROIalign和ROIpooling/">
+  <link rel="canonical" href="http://yoursite.com/2019/10/04/威海游记/">
 
 
 
@@ -124,7 +142,7 @@
   };
 </script>
 
-  <title>ROIalign和ROIpooling | Dewey's blog</title>
+  <title>威海游记 | Dewey's blog</title>
   
 
 
@@ -344,7 +362,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/05/14/ROIalign和ROIpooling/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/10/04/威海游记/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -361,7 +379,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">ROIalign和ROIpooling
+          <h1 class="post-title" itemprop="name headline">威海游记
 
               
             
@@ -387,7 +405,7 @@
                 
               
 
-              <time title="创建时间：2019-05-14 20:34:53 / 修改时间：20:50:32" itemprop="dateCreated datePublished" datetime="2019-05-14T20:34:53+08:00">2019-05-14</time>
+              <time title="创建时间：2019-10-04 07:38:21 / 修改时间：23:55:47" itemprop="dateCreated datePublished" datetime="2019-10-04T07:38:21+08:00">2019-10-04</time>
             
 
             
@@ -409,14 +427,7 @@
                 <span class="post-meta-item-text">分类于</span>
               
               
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
-
-                
-                
-                  ，
-                
-              
-                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/3D-detection/" itemprop="url" rel="index"><span itemprop="name">3D detection</span></a></span>
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/旅游/" itemprop="url" rel="index"><span itemprop="name">旅游</span></a></span>
 
                 
                 
@@ -451,9 +462,24 @@
       
 
       
-        <p>ROIpooling和ROIalign的比较<br><a id="more"></a><br>ROI池化层用max pooling把ROI对应的特征转换为一个固定大小的$H$ x $W$的小特征图，ROI由一个四元组定义($r,c,h,w$)，其中($r,c$)是左上角的坐标，($h,w$)是高度和宽度。$H$和$W$是超参数。</p>
-<p>ROI max pooling的工作原理是将$h$ x $w$大小的ROI窗口划分为$H$ x $W$个子窗口网格，大小为$h/H$ x $w/W$，然后将每个子窗口的值max pooling到相应的输出网格中。</p>
-<p>ROI Pool的输入是ROI的坐标和某一层的输出特征，不管是ROI Pool还是ROIAlign，目的都是提取输出特征图上该ROI坐标所对应的特征。RPN网络得到的ROI坐标是针对输入图像大小的，所以首先需要将ROI坐标缩小到输出特征对应的大小，假设输出特征尺寸是输入图像的1/16，那么先将ROI坐标除以16并取整（第一次量化），然后将取整后的ROI划分成H x W个bin（论文中是 7 x 7，有时候也用14 x 14），因为划分过程得到的bin的坐标是浮点值，所以这里还要将bin的坐标也做一个量化，具体而言对于左上角坐标采用向下取整，对于右下角坐标采用向上取整，最后采用最大池化操作处理每个bin，也就是用每个bin中的最大值作为该bin的值，每个bin都通过这样的方式得到值，最终输出的H x W大小的ROI特征。从这里的介绍可以看出ROI Pool有两次量化操作，这两步量化操作会引入误差。<br>相比之下ROIAlign不再引入量化操作，对于RPN网络得到的ROI坐标直接除以缩放倍数（比如16），这个过程不进行量化，因此得到的ROI坐标仍是浮点值，然后将ROI划分成H x W个bin，划分得到的bin坐标也是浮点值，不进行量化，接着通过在每个bin中均匀取4个点，这4个点的值通过该bin所包含的点插值计算得到，最后对这4个点求均值或最大值作为这个bin的值，通过这种方式计算每个bin的值后，最终输出H x W大小的ROI特征。可以看出ROIAlign整个过程没有采用量化操作，因此大大减少了量化带来的误差。</p>
+        <h3 id="威海"><a href="#威海" class="headerlink" title="威海"></a>威海</h3><p>威海给我的印象是处于新旧结合，新老交替的阶段，城市里，有很多新兴建筑，比如很有设计感的威海市图书馆和威海市群众艺术馆，也有很多感觉是20年代初的小破房子；在搭乘公交时候发现，威海城市规划很规整，所以你打出租的时候根本不用担心司机会给你绕路，哈哈哈哈，是我太小心眼了…，还有就是给我的感觉，威海在不停的盖房子，和修路，可能之后再去，又会有新的不一样的感觉了吧。</p>
+<p>说到这里也不得不说，威海的交通，之前在网上看到说，行人在过马路时，汽车会先减速停下等行人过去在开走，来了之后，发现确实是这样子的，点个赞！但我同样也发现了一个问题，就是在威海的城市规划中，威海的人行横道很多都没有红绿灯，所以，我发现了个规律，凡是在没有红绿灯的人行横道上一直等着没车的行人，99%都是外地的游客，且嘴上还嘟哝着：“这怎么没红绿灯啊？”。不过说实话，这样过马路还真的挺危险的，如果你去威海的话，建议还是老老实实等司机师傅主动停车让行，你再走，不然直接横穿，很容易当场去世！</p>
+<h3 id="流水账"><a href="#流水账" class="headerlink" title="流水账"></a>流水账</h3><p>第一天晚上吃完饭后去了海上公园，给我的第一印象就是很安静，尤其看到那个海滩，和海滩边上的灯光，有点梦回学校旁边的小沙滩的感觉，当晚特别兴奋的是我在沙滩上抓到了我的第一只小螃蟹，虽然就屁大点，哈哈哈哈，但是那个小螃蟹，动如脱兔，矫若惊龙，还会一门必杀技，装死！天呐，在大自然的训练下，一只小螃蟹都能活的如此惊世骇俗！还有就是有人打着手电筒在退潮的海边挖东西！</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7ml89k4txj23282aonpe.jpg" alt="螃蟹"></p>
+<p>第二天去了山大威海，那个我曾经本科差点去了地方和研究生也差点去了的地方，还去食堂恰了个饭，可惜，选错了面，吃了没几口，心痛！但吃完出来，到了沙滩的时候，嗯，这应该是我见过最漂亮的沙滩了，尤其当天浪还很大，有很多浪里白条，用肉身冲浪！真的，真的，在山大威海读书太幸福了！！！那海，酸了！！！</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mlk3rpqlj23282aox6q.jpg" alt="拍立得"></p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjjn4u8kj23282aohdv.jpg" alt="沙丘之王"></p>
+<script type="math/tex; mode=display">沙丘之王</script><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjko0s7fj23282aokjq.jpg" alt="小忍者神龟"></p>
+<script type="math/tex; mode=display">小忍者神龟</script><p>大概逗留了一个多小时，我们就启程去环海路hang out了。本想着环海路还挺长，没想到也就一个多小时就走完了，其实说着叫环海路，除了刚开始，在山大那一块能在路边看到海，其他地方都看不到好不好！还有就是在路上认识了一种树，麻栎树，果实长的像栗子一样，路上碰到了一对老夫妻在剥麻栎的壳，就特意询问了一下这玩意怎么吃，老人家告我们说这玩意不能直接吃，太苦太涩，需要处理好几遍，去掉苦涩，做成类似凉皮那样的吃食。走到环海路末尾，我们又进入山大，本想着从山大走出去，却突然发现了山大之王！</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjoffsapj23282ao4qw.jpg" alt="山大小猫咪"></p>
+<script type="math/tex; mode=display">山大之王</script><p>山大之王可太机灵了，我刚放下书包，它就迅速蹿到我腿边，喵喵的叫着，也太老练了吧？？？可惜，我只带了饼干，木有火腿肠，山大之王见我没有吃食，便不再理我，<strong>太真实了！</strong> 之后拍了几张照片，就坐车回到了住宿的地方，因为手机实在撑不下去了！！！休养生息后，我们出发去了威高广场，想见识一下，威海最大的商场到底怎样。哈哈哈，其实也还行，但晚饭给了我很深的印象，吃的是<strong>茅庐印象</strong>的川菜，它家的夫妻肺片也太好吃了！那个辣椒真的太香了，我自己都用勺子舀了几勺辣椒汤喝！天呐！真的太好喝了！</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjr4hvfrj22ao328x6q.jpg" alt="夫妻肺片"></p>
+<script type="math/tex; mode=display">夫妻肺片</script><p>最后一天，是被刘公岛劝退的一天，本来前两天在威海转悠，发现来旅游的人也没几个啊？天，去了刘公岛发现我想多了，队伍排成一万条龙，刚买的票直接退款开溜。</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjuu2c2gj23282aoqv6.jpg" alt="劝退"></p>
+<p>去了环翠楼，其实在昨天做选择的时候就在想到底去环翠楼还是刘公岛，环翠区，环翠楼，肯定是环翠楼在威海人民的心里很重要，不然怎么叫环翠区呢？但同伴想去刘公岛看看甲午海战的纪念馆，遂定去刘公岛。事实证明，环翠楼才是我们最好的选择。<br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mjzcj7itj22ao328e83.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk1dw200j23282aonph.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk02iioaj22ao328u0z.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk0g1rpxj22ao328b2b.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk27jj5wj22ao3284qr.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk2ld87fj23282aoqv8.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk3eorl1j23282aohdv.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk49d52cj23282ao7wi.jpg" alt=""><br><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk5kmvbbj21z31z4b29.jpg" alt=""></p>
+<p>其实环翠楼公园抛去环翠楼，和南山公园也没啥差别…哦对，在去环翠楼的路上，那街景，感觉回到了阳泉一样…印证了我对威海的印象。</p>
+<p>逛完环翠楼就去威高恰了个饭，去西西弗看了一下午书，发现了这本书，威海城市绘，嗯，青岛出版社，就是这么有缘…</p>
+<p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g7mk84zqruj22ao328e83.jpg" alt=""></p>
 
       
     </div>
@@ -477,9 +503,7 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
-            <a href="/tags/3D-detection/" rel="tag"># 3D detection</a>
+            <a href="/tags/旅游/" rel="tag"># 旅游</a>
           
         </div>
       
@@ -492,8 +516,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/05/08/votenet/" rel="next" title="votenet">
-                <i class="fa fa-chevron-left"></i> votenet
+              <a href="/2019/09/28/ikfast配置过程小结/" rel="next" title="ur5-ikfast配置过程小结">
+                <i class="fa fa-chevron-left"></i> ur5-ikfast配置过程小结
               </a>
             
           </div>
@@ -501,10 +525,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2019/05/23/pytorch学习/" rel="prev" title="pytorch学习">
-                pytorch学习 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -549,8 +569,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -732,6 +761,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#威海"><span class="nav-number">1.</span> <span class="nav-text">威海</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#流水账"><span class="nav-number">2.</span> <span class="nav-text">流水账</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
