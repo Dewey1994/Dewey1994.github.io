@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.ico?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="机器学习算法小结">
+<meta name="keywords" content="机器学习">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习小结">
+<meta property="og:url" content="http://yoursite.com/2020/04/30/机器学习小结/index.html">
+<meta property="og:site_name" content="Dewey&#39;s blog">
+<meta property="og:description" content="机器学习算法小结">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://s1.ax1x.com/2020/04/30/JqTSOK.jpg">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-a0a3cb02f629f3db360fc68b4c2153c0_720w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-3aab53d50ab65e11ad3c9e3decf895c2_720w.jpg">
+<meta property="og:image" content="https://pic3.zhimg.com/80/v2-f6787a16c23950d129a7927269d5352a_720w.jpg">
+<meta property="og:updated_time" content="2020-05-11T08:37:23.250Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="机器学习小结">
+<meta name="twitter:description" content="机器学习算法小结">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/04/30/JqTSOK.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/04/30/机器学习小结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>机器学习小结 | Dewey's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dewey's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Better to run than curse the road.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/04/30/机器学习小结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">机器学习小结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-04-30 09:53:02" itemprop="dateCreated datePublished" datetime="2020-04-30T09:53:02+08:00">2020-04-30</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-05-11 16:37:23" itemprop="dateModified" datetime="2020-05-11T16:37:23+08:00">2020-05-11</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/机器学习/" itemprop="url" rel="index"><span itemprop="name">机器学习</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>机器学习算法小结</p>
+<a id="more"></a>
+<h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>感知机是一个<strong>二类分类的线性分类模型</strong>，感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于判别模型</p>
+<h4 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h4><script type="math/tex; mode=display">f(x)=sign(\omega \cdot x + b)</script><h4 id="感知机学习策略（损失函数推导）（误分类点到超平面的距离）"><a href="#感知机学习策略（损失函数推导）（误分类点到超平面的距离）" class="headerlink" title="感知机学习策略（损失函数推导）（误分类点到超平面的距离）"></a>感知机学习策略（损失函数推导）（误分类点到超平面的距离）</h4><ul>
+<li>两个选择<ol>
+<li>误分类点的总数，但这样的损失函数不是参数$\omega,b$的连续可导函数，不易优化</li>
+<li>误分类点到超平面S的总距离，这是感知机所采用的</li>
+</ol>
+</li>
+<li><p>写出任意一点到$x_0$到超平面S的距离<script type="math/tex">\frac{\vert \omega\cdot x_0+b \vert}{\Vert \omega \Vert}</script></p>
+</li>
+<li><p>其次，对于误分类的数据$(x_i,y_i)$来说，$-y_i(\omega \cdot x_i + b)&gt;0 $ 成立，因此误分类点$x_i$到超平面S的距离为<script type="math/tex">-\frac{y_i( \omega\cdot x_i+b)}{\Vert \omega \Vert}</script></p>
+</li>
+<li><p>这样假设超平面S的误分类点集合为M，那么所有误分类点到超平面S的总距离为<script type="math/tex">-\frac{1}{\Vert \omega \Vert} \sum_{x_i \in M}y_i(\omega \cdot x_i + b)</script><br>不考虑$\frac{1}{\Vert \omega \Vert}$，就得到了感知机的损失函数。$\frac{1}{\Vert \omega \Vert}$，<strong>他就相当于于一个缩放因子，对正确分类不影响。</strong></p>
+</li>
+</ul>
+<p>给定训练数据集$T= \lbrace (x_1,y_1),(x_2,y_2),···,(x_N,y_N)\rbrace$,感知机$sign(\omega \cdot x + b)$学习的损失函数为<script type="math/tex">L(\omega, b)=-\sum_{x_i \in M} y_i(\omega \cdot x_i + b)</script></p>
+<h4 id="感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）"><a href="#感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）" class="headerlink" title="感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）"></a>感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）</h4><ul>
+<li>输入：训练数据集$T= \lbrace (x_1,y_1),(x_2,y_2),···,(x_N,y_N)\rbrace$，学习率$\eta(0 &lt;\eta \le 1)$</li>
+<li>输出：$\omega ,b$, 感知机模型$f(x)=sign(\omega \cdot x + b)$</li>
+</ul>
+<ol>
+<li>选取初值$\omega_0,b_0$;</li>
+<li>在训练集中选取数据$(x_i,y_i)$;</li>
+<li>如果$y_i(\omega \cdot x_i +b)\le 0$，则，$\omega \leftarrow \omega + \eta y_ix_i ，b \leftarrow b+\eta y_i$</li>
+<li>转置2，<strong>直至训练集中没有误分类点</strong></li>
+</ol>
+<p>首先选取任意个一个超平面$\omega_0,b_0$，然后用梯度下降法不断的极小化目标函数。极小化过程不是一次使M数据集中的所有误分类点的梯度下降，<strong>而是一次随机选取一个误分类点使其梯度下降。</strong></p>
+<p><strong>当训练数据集线性可分时，感知机算法原始形式迭代是收敛的，且存在无穷多个解，其解由于不同的初值或不同的迭代顺序而可能有所不同</strong></p>
+<hr>
+<h3 id="KNN-K近邻法"><a href="#KNN-K近邻法" class="headerlink" title="KNN K近邻法"></a>KNN K近邻法</h3><p>K近邻法是一种基本分类和回归的方法，判别类型</p>
+<p>k值的选择，距离度量和分类决策规则是K近邻法的三个基本要素</p>
+<p>通俗来讲就是，根据给定的距离度量，在训练集中找出与当前点x最邻近的k个点，涵盖这k个点的x的邻域记作$N_k(x)$，在$N_k(x)$中根据分类决策规则决定x的类别y</p>
+<p>k近邻法没有显示的学习过程</p>
+<h4 id="距离度量"><a href="#距离度量" class="headerlink" title="距离度量"></a>距离度量</h4><p>$L_P距离或Minkowski距离$</p>
+<h4 id="K值的选择"><a href="#K值的选择" class="headerlink" title="K值的选择"></a>K值的选择</h4><p>小k值，就相当于用较小的邻域中的训练实例进行预测，近似误差减小，估计误差增大，预测结果对近邻的实例点非常敏感，k值得减小就意味着模型变得复杂，容易发生过拟合。</p>
+<p>大k值，就相当于用较大的邻域中的训练实例进行预测，近似误差增大，估计误差减小，与输入实例较远的点也会对预测起作用，k值得增大就意味着模型变得简单。</p>
+<p>在应用中，k值一般选用一个较小的数值，通常采用交叉验证法来选取最优的k值</p>
+<h4 id="kd-tree"><a href="#kd-tree" class="headerlink" title="kd tree"></a>kd tree</h4><p>构造平衡kd树，搜索kd树</p>
+<h3 id="朴素贝叶斯法（生成模型）"><a href="#朴素贝叶斯法（生成模型）" class="headerlink" title="朴素贝叶斯法（生成模型）"></a>朴素贝叶斯法（生成模型）</h3><p>朴素贝叶斯法是基于贝叶斯订定理和特征条件独立假设的<strong>分类方法</strong></p>
+<p>朴素贝叶斯法通过训练数据集学习联合概率分布$P(X,Y)$</p>
+<p><strong>后验概率最大化等价于期望风险最小化</strong></p>
+<p>学习策略 极大似然估计 贝叶斯估计</p>
+<p><img src="https://s1.ax1x.com/2020/04/30/JqTSOK.jpg" alt="JqTSOK.jpg"></p>
+<hr>
+<h3 id="决策树"><a href="#决策树" class="headerlink" title="决策树"></a>决策树</h3><p>决策树是一种基本的分类和回归方法，通常包括3个步骤：特征选择，决策树的生成，决策树的修剪</p>
+<p>决策树可以看作一个if-then规则的集合，或者给定特征条件下的条件概率分布</p>
+<p>决策树的生成对应于模型的局部选择，决策树的剪枝对应于模型的全局选择，决策树的生成只考虑局部最优，决策树的剪枝则考虑全局最优</p>
+<h4 id="ID3"><a href="#ID3" class="headerlink" title="ID3"></a>ID3</h4><p>ID3 算法是建立在奥卡姆剃刀（用较少的东西，同样可以做好事情）的基础上：越是小型的决策树越优于大的决策树。</p>
+<p><strong>ID3使用的分类标准是信息增益</strong>，算法如下：</p>
+<ol>
+<li>初始化特征集合和数据集合；</li>
+<li>计算数据集合信息熵和所有特征的条件熵，选择信息增益最大的特征作为当前决策节点；</li>
+<li>更新数据集合和特征集合（删除上一步使用的特征，并按照特征值来划分不同分支的数据集合）；</li>
+<li>重复 2，3 两步，若子集值包含单一特征，则为分支叶子节点。</li>
+</ol>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>ID3没有剪枝策略</li>
+<li>信息增益准则对可取值数目较多的特征有所偏好，类似“编号”的特征其信息增益接近于 1</li>
+<li>只能用于处理离散分布的特征</li>
+<li>没有考虑缺失值</li>
+</ul>
+<h4 id="C4-5"><a href="#C4-5" class="headerlink" title="C4.5"></a>C4.5</h4><p>C4.5 算法最大的特点是克服了 ID3 对特征数目的偏重这一缺点，引入信息增益率来作为分类标准。</p>
+<p>C4.5 相对于 ID3 的缺点对应有以下改进方式：</p>
+<ul>
+<li><strong>引入悲观剪枝策略进行后剪枝；</strong></li>
+<li>引入信息增益率作为划分标准；</li>
+<li>将连续特征离散化，假设 n 个样本的连续特征 A 有 m 个取值，C4.5 将其排序并取相邻两样本值的平均数共 m-1 个划分点，分别计算以该划分点作为二元分类点时的信息增益，并选择信息增益最大的点作为该连续特征的二元离散分类点；</li>
+<li>对于缺失值的处理可以分为两个子问题：</li>
+<li>问题一：在特征值缺失的情况下进行划分特征的选择？（即如何计算特征的信息增益率）</li>
+<li>问题二：选定该划分特征，对于缺失该特征值的样本如何处理？（即到底把这个样本划分到哪个结点里）</li>
+<li>针对问题一，C4.5 的做法是：对于具有缺失值特征，用没有缺失的样本子集所占比重来折算；</li>
+<li>针对问题二，C4.5 的做法是：将样本同时划分到所有子节点，不过要调整样本的权重值，其实也就是以不同概率划分到不同节点中。</li>
+</ul>
+<p>利用信息增益率来进行划分</p>
+<p><strong>剪枝策略：</strong></p>
+<p>为什么要剪枝：过拟合的树在泛化能力的表现非常差。</p>
+<ul>
+<li>预剪枝<br>在节点划分前来确定是否继续增长，及早停止增长的主要方法有：<ul>
+<li>节点内数据样本低于某一阈值；</li>
+<li>所有节点特征都已分裂；</li>
+<li>节点划分前准确率比划分后准确率高。</li>
+</ul>
+</li>
+</ul>
+<p>预剪枝不仅可以降低过拟合的风险而且还可以减少训练时间，但另一方面它是基于“贪心”策略，会带来欠拟合风险。</p>
+<ul>
+<li>后剪枝</li>
+</ul>
+<p>在已经生成的决策树上进行剪枝，从而得到简化版的剪枝决策树。</p>
+<p><strong>C4.5 采用的悲观剪枝方法</strong>，<strong>用递归的方式从低往上针对每一个非叶子节点，评估用一个最佳叶子节点去代替这课子树是否有益。如果剪枝后与剪枝前相比其错误率是保持或者下降，则这棵子树就可以被替换掉</strong>。C4.5 通过训练数据集上的错误分类数量来估算未知样本上的错误率。</p>
+<p>后剪枝决策树的欠拟合风险很小，泛化性能往往优于预剪枝决策树。但同时其训练时间会大的多。</p>
+<p>缺点：</p>
+<p>剪枝策略可以再优化；</p>
+<ul>
+<li>C4.5 用的是<strong>多叉树</strong>，用二叉树效率更高；</li>
+<li>C4.5 <strong>只能用于分类</strong>；</li>
+<li>C4.5 使用的熵模型拥有大量耗时的对数运算，连续值还有排序运算；</li>
+<li>C4.5 在构造树的过程中，对数值属性值需要按照其大小进行排序，从中选择一个分割点，所以只适合于能够驻留于内存的数据集，当训练集大得无法在内存容纳时，程序无法运行。</li>
+<li><h4 id="CART"><a href="#CART" class="headerlink" title="CART"></a>CART</h4></li>
+</ul>
+<p><a href="https://www.zhihu.com/question/22697086" target="_blank" rel="noopener">cart如何剪枝</a></p>
+<p>对该该树根节点T，计算每一个子结点的$g(t)$，对该树，$\alpha$从0开始增大，总会有某颗子树要剪，随着$\alpha$不断增大，得到子树$T_1,T_2,…,T_n$</p>
+<p>CART 包含的基本过程有分裂，剪枝和树选择。</p>
+<ul>
+<li>分裂：分裂过程是一个二叉递归划分过程，其输入和预测特征既可以是连续型的也可以是离散型的，CART 没有停止准则，会一直生长下去；</li>
+<li>剪枝：采用代价复杂度剪枝，从最大树开始，每次选择训练数据熵对整体性能贡献最小的那个分裂节点作为下一个剪枝对象，直到只剩下根节点。CART 会产生一系列嵌套的剪枝树，需要从中选出一颗最优的决策树；</li>
+<li>树选择：用单独的测试集评估每棵剪枝树的预测性能（也可以用交叉验证）。</li>
+</ul>
+<hr>
+<p>3类算法的差异</p>
+<ul>
+<li>划分标准的差异：ID3 使用信息增益偏向特征值多的特征，C4.5 使用信息增益率克服信息增益的缺点，偏向于特征值小的特征，CART 使用基尼指数克服 C4.5 需要求 log 的巨大计算量，偏向于特征值较多的特征。</li>
+<li>使用场景的差异：ID3 和 C4.5 都只能用于分类问题，CART 可以用于分类和回归问题；ID3 和 C4.5 是多叉树，速度较慢，CART 是二叉树，计算速度很快；</li>
+<li>样本数据的差异：ID3 只能处理离散数据且缺失值敏感，C4.5 和 CART 可以处理连续性数据且有多种方式处理缺失值；从样本量考虑的话，小样本建议 C4.5、大样本建议 CART。C4.5 处理过程中需对数据集进行多次扫描排序，处理成本耗时较高，而 CART 本身是一种大样本的统计方法，小样本处理下泛化误差较大 ；</li>
+<li>样本特征的差异：ID3 和 C4.5 层级之间只使用一次特征，CART 可多次重复使用特征；</li>
+<li>剪枝策略的差异：ID3 没有剪枝策略，C4.5 是通过悲观剪枝策略来修正树的准确性，而 CART 是通过代价复杂度剪枝。</li>
+</ul>
+<hr>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>算法</th>
+<th>支持模型</th>
+<th>树结构</th>
+<th>特征选择</th>
+<th>连续值处理</th>
+<th>缺失值处理</th>
+<th>剪枝</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ID3</td>
+<td>分类</td>
+<td>多叉树</td>
+<td>信息增益</td>
+<td>不支持</td>
+<td>不支持</td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>C4.5</td>
+<td>分类</td>
+<td>多叉树</td>
+<td>信息增益比</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持（悲观剪枝方法）</td>
+</tr>
+<tr>
+<td>CART</td>
+<td>回归分类</td>
+<td>二叉树</td>
+<td>基尼系数 均方差</td>
+<td>支持</td>
+<td>支持</td>
+<td>支持（基于代价复杂度的剪枝）</td>
+</tr>
+</tbody>
+</table>
+</div>
+<hr>
+<h4 id="决策树算法小结"><a href="#决策树算法小结" class="headerlink" title="决策树算法小结"></a>决策树算法小结</h4><p><strong>优点：</strong></p>
+<ul>
+<li>简单直观，生成的决策树很直观。</li>
+<li>基本不需要预处理，不需要提前归一化和处理缺失值。</li>
+<li>使用决策树预测的代价是O(log2m)。m为样本数。</li>
+<li>既可以处理离散值也可以处理连续值。很多算法只是专注于离散值或者连续值。</li>
+<li>可以处理多维度输出的分类问题。</li>
+<li>相比于神经网络之类的黑盒分类模型，决策树在逻辑上可以很好解释。</li>
+<li>可以交叉验证的剪枝来选择模型，从而提高泛化能力。</li>
+<li>对于异常点的容错能力好，健壮性高。</li>
+</ul>
+<p><strong>缺点：</strong></p>
+<ul>
+<li>决策树算法非常容易过拟合，导致泛化能力不强。可以通过设置节点最少样本数量和限制决策树深度来改进。</li>
+<li>决策树会因为样本发生一点的改动，导致树结构的剧烈改变。这个可以通过集成学习之类的方法解决。 </li>
+<li>寻找最优的决策树是一个NP难题，我们一般是通过启发式方法，容易陷入局部最优。可以通过集成学习的方法来改善。</li>
+<li>有些比较复杂的关系，决策树很难学习，比如异或。这个就没有办法了，一般这种关系可以换神经网络分类方法来解决。</li>
+<li>如果某些特征的样本比例过大，生成决策树容易偏向于这些特征。这个可以通过调节样本权重来改善。</li>
+</ul>
+<p><a href="https://www.cnblogs.com/keye/p/10564914.html" target="_blank" rel="noopener">https://www.cnblogs.com/keye/p/10564914.html</a></p>
+<p><a href="https://www.cnblogs.com/keye/p/10267473.html" target="_blank" rel="noopener">https://www.cnblogs.com/keye/p/10267473.html</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/85731206" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/85731206</a></p>
+<hr>
+<h4 id="集成学习"><a href="#集成学习" class="headerlink" title="集成学习"></a>集成学习</h4><p>常见的集成学习框架有三种：Bagging，Boosting 和 Stacking</p>
+<h5 id="Bagging"><a href="#Bagging" class="headerlink" title="Bagging"></a>Bagging</h5><p>Bagging 全称叫 Bootstrap aggregating。每个基学习器都会对训练集进行有放回抽样得到子训练集，比较著名的采样法为 0.632 自助法。每个基学习器基于不同子训练集进行训练，并综合所有基学习器的预测值得到最终的预测结果。Bagging 常用的综合方法是投票法，票数最多的类别为预测类别。</p>
+<p><img src="https://pic1.zhimg.com/80/v2-a0a3cb02f629f3db360fc68b4c2153c0_720w.jpg" alt="bagging"></p>
+<h5 id="boosting"><a href="#boosting" class="headerlink" title="boosting"></a>boosting</h5><p>Boosting 训练过程为阶梯状，基模型的训练是有顺序的，每个基模型都会在前一个基模型学习的基础上进行学习，最终综合所有基模型的预测值产生最终的预测结果，用的比较多的综合方式为加权法。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-3aab53d50ab65e11ad3c9e3decf895c2_720w.jpg" alt="boosting"></p>
+<h5 id="stacking"><a href="#stacking" class="headerlink" title="stacking"></a>stacking</h5><p>Stacking 是先用全部数据训练好基模型，然后每个基模型都对每个训练样本进行的预测，其预测值将作为训练样本的特征值，最终会得到新的训练样本，然后基于新的训练样本进行训练得到模型，然后得到最终预测结果。</p>
+<p><img src="https://pic3.zhimg.com/80/v2-f6787a16c23950d129a7927269d5352a_720w.jpg" alt="stacking"></p>
+<p>那么，为什么集成学习会好于单个学习器呢？原因可能有三：</p>
+<ol>
+<li>训练样本可能无法选择出最好的单个学习器，由于没法选择出最好的学习器，所以干脆结合起来一起用；</li>
+<li>假设能找到最好的学习器，但由于算法运算的限制无法找到最优解，只能找到次优解，采用集成学习可以弥补算法的不足；</li>
+<li>可能算法无法得到最优解，而集成学习能够得到近似解。比如说最优解是一条对角线，而单个决策树得到的结果只能是平行于坐标轴的，但是集成学习可以去拟合这条对角线。</li>
+</ol>
+<p>我们常说集成学习中的基模型是弱模型，通常来说弱模型是偏差高（在训练集上准确度低）方差小（防止过拟合能力强）的模型，但并不是所有集成学习框架中的基模型都是弱模型。<strong>Bagging 和 Stacking 中的基模型为强模型（偏差低，方差高），而Boosting 中的基模型为弱模型（偏差高，方差低）。</strong></p>
+<h5 id="随机森林"><a href="#随机森林" class="headerlink" title="随机森林"></a>随机森林</h5><p>Random Forest（随机森林），用随机的方式建立一个森林。RF 算法由很多决策树组成，每一棵决策树之间没有关联。建立完森林后，当有新样本进入时，每棵决策树都会分别进行判断，然后基于投票法给出分类结果。</p>
+<p>Random Forest（随机森林）是 Bagging 的扩展变体，它在以决策树为基学习器构建 Bagging 集成的基础上，进一步在决策树的训练过程中引入了随机特征选择，因此可以概括 RF 包括四个部分：</p>
+<p>随机选择样本（放回抽样）；</p>
+<ol>
+<li>随机选择特征；</li>
+<li>构建决策树；</li>
+<li>随机森林投票（平均）。</li>
+<li>随机选择样本和 Bagging 相同，采用的是 Bootstrap 自助采样法；<strong>随机选择特征是指在每个节点在分裂过程中都是随机选择特征的（区别与每棵树随机选择一批特征）。</strong></li>
+</ol>
+<p>这种随机性导致随机森林的偏差会有稍微的增加（相比于单棵不随机树），但是由于随机森林的“平均”特性，会使得它的方差减小，而且方差的减小补偿了偏差的增大，因此总体而言是更好的模型。</p>
+<p>随机采样由于引入了两种采样方法保证了随机性，所以每棵树都是最大可能的进行生长就算不剪枝也不会出现过拟合。</p>
+<p>优点：</p>
+<ol>
+<li>在数据集上表现良好，相对于其他算法有较大的优势</li>
+<li>易于并行化，在大数据集上有很大的优势；</li>
+<li>能够处理高维度数据，不用做特征选择。</li>
+</ol>
+<h5 id="Adaboost"><a href="#Adaboost" class="headerlink" title="Adaboost"></a>Adaboost</h5><p>看书</p>
+<h5 id="GBDT"><a href="#GBDT" class="headerlink" title="GBDT"></a>GBDT</h5><p>GBDT（Gradient Boosting Decision Tree）是一种迭代的决策树算法，该算法由多棵决策树组成，从名字中我们可以看出来它是属于 Boosting 策略。GBDT 是被公认的泛化能力较强的算法。</p>
+<p>GBDT 由三个概念组成：Regression Decision Tree（即 DT）、Gradient Boosting（即 GB），和 Shringkage（一个重要演变）</p>
+<p><strong>回归树（Regression Decision Tree）</strong></p>
+<p>如果认为 GBDT 由很多分类树那就大错特错了（虽然调整后也可以分类）。对于分类树而言，其值加减无意义（如性别），而对于回归树而言，其值加减才是有意义的（如说年龄）。GBDT 的核心在于累加所有树的结果作为最终结果，所以 GBDT 中的树都是回归树，不是分类树，这一点相当重要。</p>
+<p>回归树在分枝时会穷举每一个特征的每个阈值以找到最好的分割点，衡量标准是最小化均方误差。</p>
+<p><strong>梯度迭代（Gradient Boosting）</strong></p>
+<p>上面说到 GBDT 的核心在于累加所有树的结果作为最终结果，GBDT 的每一棵树都是以之前树得到的残差来更新目标值，这样每一棵树的值加起来即为 GBDT 的预测值。</p>
+<p>优点：</p>
+<ul>
+<li>可以自动进行特征组合，拟合非线性数据；</li>
+<li>可以灵活处理各种类型的数据。</li>
+</ul>
+<p>缺点：对异常点敏感</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/23/MLE和MAP/" rel="next" title="MLE和MAP">
+                <i class="fa fa-chevron-left"></i> MLE和MAP
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dewey</p>
+              <p class="site-description motion-element" itemprop="description">record my life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">31</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">25</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Dewey1994" title="GitHub &rarr; https://github.com/Dewey1994" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:401692632@qq.com" title="Email &rarr; mailto:401692632@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机"><span class="nav-number">1.</span> <span class="nav-text">感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机模型"><span class="nav-number">1.1.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略（损失函数推导）（误分类点到超平面的距离）"><span class="nav-number">1.2.</span> <span class="nav-text">感知机学习策略（损失函数推导）（误分类点到超平面的距离）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）"><span class="nav-number">1.3.</span> <span class="nav-text">感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN-K近邻法"><span class="nav-number">2.</span> <span class="nav-text">KNN K近邻法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#距离度量"><span class="nav-number">2.1.</span> <span class="nav-text">距离度量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K值的选择"><span class="nav-number">2.2.</span> <span class="nav-text">K值的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kd-tree"><span class="nav-number">2.3.</span> <span class="nav-text">kd tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯法（生成模型）"><span class="nav-number">3.</span> <span class="nav-text">朴素贝叶斯法（生成模型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树"><span class="nav-number">4.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID3"><span class="nav-number">4.1.</span> <span class="nav-text">ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C4-5"><span class="nav-number">4.2.</span> <span class="nav-text">C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CART"><span class="nav-number">4.3.</span> <span class="nav-text">CART</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树算法小结"><span class="nav-number">4.4.</span> <span class="nav-text">决策树算法小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集成学习"><span class="nav-number">4.5.</span> <span class="nav-text">集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Bagging"><span class="nav-number">4.5.1.</span> <span class="nav-text">Bagging</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boosting"><span class="nav-number">4.5.2.</span> <span class="nav-text">boosting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stacking"><span class="nav-number">4.5.3.</span> <span class="nav-text">stacking</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机森林"><span class="nav-number">4.5.4.</span> <span class="nav-text">随机森林</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Adaboost"><span class="nav-number">4.5.5.</span> <span class="nav-text">Adaboost</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GBDT"><span class="nav-number">4.5.6.</span> <span class="nav-text">GBDT</span></a></li></ol></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$','$'], ["\\(","\\)"] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: "AMS"
+      }
+    }
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+      for (i = 0; i < all.length; i += 1) {
+        all[i].SourceElement().parentNode.className += ' has-jax';
+      }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2.7.1/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+
+<style>
+.MathJax_Display {
+  overflow: auto hidden;
+}
+</style><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+    
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>
