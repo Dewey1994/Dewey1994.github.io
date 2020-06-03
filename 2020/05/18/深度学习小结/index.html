@@ -1,0 +1,1139 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.ico?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="深度学习面试小结">
+<meta name="keywords" content="深度学习,面试">
+<meta property="og:type" content="article">
+<meta property="og:title" content="深度学习小结">
+<meta property="og:url" content="http://yoursite.com/2020/05/18/深度学习小结/index.html">
+<meta property="og:site_name" content="Dewey&#39;s blog">
+<meta property="og:description" content="深度学习面试小结">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:image" content="https://pic2.zhimg.com/v2-17d64df1108abd9794a9305828160825_r.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-ef5cac4e1ef50a396f2fccad2d90a623_720w.jpg">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-810a1e2babdc6e434072b15e21667861_720w.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/23/Yjcc01.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/23/Yxitc6.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/23/YxiBAH.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/23/YxkJOK.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/23/Yxk5pn.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/23/YxkIlq.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/24/tSPaYd.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/24/tSVUk8.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/24/tSbtSg.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/24/tSbcpF.md.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/05/30/tQAZL9.png">
+<meta property="og:updated_time" content="2020-06-02T15:29:16.242Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="深度学习小结">
+<meta name="twitter:description" content="深度学习面试小结">
+<meta name="twitter:image" content="https://pic2.zhimg.com/v2-17d64df1108abd9794a9305828160825_r.jpg">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/05/18/深度学习小结/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>深度学习小结 | Dewey's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dewey's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Better to run than curse the road.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/05/18/深度学习小结/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">深度学习小结
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-05-18 22:49:22" itemprop="dateCreated datePublished" datetime="2020-05-18T22:49:22+08:00">2020-05-18</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-06-02 23:29:16" itemprop="dateModified" datetime="2020-06-02T23:29:16+08:00">2020-06-02</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/" itemprop="url" rel="index"><span itemprop="name">深度学习</span></a></span>
+
+                
+                
+                  ，
+                
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/深度学习/面试/" itemprop="url" rel="index"><span itemprop="name">面试</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>深度学习面试小结</p>
+<a id="more"></a>
+<h2 id="nms总结"><a href="#nms总结" class="headerlink" title="nms总结"></a>nms总结</h2><h3 id="nms-amp-soft-nms"><a href="#nms-amp-soft-nms" class="headerlink" title="nms&amp;soft-nms"></a>nms&amp;soft-nms</h3><p><img src="https://pic2.zhimg.com/v2-17d64df1108abd9794a9305828160825_r.jpg" alt=""></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">nms</span><span class="params">(self, bboxes, scores, threshold=<span class="number">0.5</span>)</span>:</span></span><br><span class="line">    x1 = bboxes[:,<span class="number">0</span>]</span><br><span class="line">    y1 = bboxes[:,<span class="number">1</span>]</span><br><span class="line">    x2 = bboxes[:,<span class="number">2</span>]</span><br><span class="line">    y2 = bboxes[:,<span class="number">3</span>]</span><br><span class="line">    areas = (x2-x1)*(y2-y1)   <span class="comment"># [N,] 每个bbox的面积</span></span><br><span class="line">    _, order = scores.sort(<span class="number">0</span>, descending=<span class="keyword">True</span>)    <span class="comment"># 降序排列</span></span><br><span class="line"></span><br><span class="line">    keep = []</span><br><span class="line">    <span class="keyword">while</span> order.numel() &gt; <span class="number">0</span>:       <span class="comment"># torch.numel()返回张量元素个数</span></span><br><span class="line">        <span class="keyword">if</span> order.numel() == <span class="number">1</span>:     <span class="comment"># 保留框只剩一个</span></span><br><span class="line">            i = order.item()</span><br><span class="line">            keep.append(i)</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            i = order[<span class="number">0</span>].item()    <span class="comment"># 保留scores最大的那个框box[i]</span></span><br><span class="line">            keep.append(i)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># 计算box[i]与其余各框的IOU(思路很好)</span></span><br><span class="line">        xx1 = x1[order[<span class="number">1</span>:]].clamp(min=x1[i])   <span class="comment"># [N-1,]</span></span><br><span class="line">        yy1 = y1[order[<span class="number">1</span>:]].clamp(min=y1[i])</span><br><span class="line">        xx2 = x2[order[<span class="number">1</span>:]].clamp(max=x2[i])</span><br><span class="line">        yy2 = y2[order[<span class="number">1</span>:]].clamp(max=y2[i])</span><br><span class="line">        inter = (xx2-xx1).clamp(min=<span class="number">0</span>) * (yy2-yy1).clamp(min=<span class="number">0</span>)   <span class="comment"># [N-1,]</span></span><br><span class="line"></span><br><span class="line">        iou = inter / (areas[i]+areas[order[<span class="number">1</span>:]]-inter)  <span class="comment"># [N-1,]</span></span><br><span class="line">        idx = (iou &lt;= threshold).nonzero().squeeze() <span class="comment"># 注意此时idx为[N-1,] 而order为[N,]</span></span><br><span class="line">        <span class="keyword">if</span> idx.numel() == <span class="number">0</span>:</span><br><span class="line">            <span class="keyword">break</span></span><br><span class="line">        order = order[idx+<span class="number">1</span>]  <span class="comment"># 修补索引之间的差值</span></span><br><span class="line">    <span class="keyword">return</span> torch.LongTensor(keep)   <span class="comment"># Pytorch的索引值为LongTensor</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> time</span><br><span class="line"><span class="keyword">import</span> numpy <span class="keyword">as</span> np</span><br><span class="line"><span class="keyword">import</span> torch</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">soft_nms_pytorch</span><span class="params">(dets, box_scores, sigma=<span class="number">0.5</span>, thresh=<span class="number">0.001</span>, cuda=<span class="number">0</span>)</span>:</span></span><br><span class="line">    <span class="string">"""</span></span><br><span class="line"><span class="string">    Build a pytorch implement of Soft NMS algorithm.</span></span><br><span class="line"><span class="string">    # Augments</span></span><br><span class="line"><span class="string">        dets:        boxes coordinate tensor (format:[y1, x1, y2, x2])</span></span><br><span class="line"><span class="string">        box_scores:  box score tensors</span></span><br><span class="line"><span class="string">        sigma:       variance of Gaussian function</span></span><br><span class="line"><span class="string">        thresh:      score thresh</span></span><br><span class="line"><span class="string">        cuda:        CUDA flag</span></span><br><span class="line"><span class="string">    # Return</span></span><br><span class="line"><span class="string">        the index of the selected boxes</span></span><br><span class="line"><span class="string">    """</span></span><br><span class="line"></span><br><span class="line">    <span class="comment"># Indexes concatenate boxes with the last column</span></span><br><span class="line">    N = dets.shape[<span class="number">0</span>]</span><br><span class="line">    <span class="keyword">if</span> cuda:</span><br><span class="line">        indexes = torch.arange(<span class="number">0</span>, N, dtype=torch.float).cuda().view(N, <span class="number">1</span>)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        indexes = torch.arange(<span class="number">0</span>, N, dtype=torch.float).view(N, <span class="number">1</span>)</span><br><span class="line">    dets = torch.cat((dets, indexes), dim=<span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># The order of boxes coordinate is [y1,x1,y2,x2]</span></span><br><span class="line">    y1 = dets[:, <span class="number">0</span>]</span><br><span class="line">    x1 = dets[:, <span class="number">1</span>]</span><br><span class="line">    y2 = dets[:, <span class="number">2</span>]</span><br><span class="line">    x2 = dets[:, <span class="number">3</span>]</span><br><span class="line">    scores = box_scores</span><br><span class="line">    areas = (x2 - x1 + <span class="number">1</span>) * (y2 - y1 + <span class="number">1</span>)</span><br><span class="line"></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(N):</span><br><span class="line">        <span class="comment"># intermediate parameters for later parameters exchange</span></span><br><span class="line">        tscore = scores[i].clone()</span><br><span class="line">        pos = i + <span class="number">1</span></span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> i != N - <span class="number">1</span>:</span><br><span class="line">            maxscore, maxpos = torch.max(scores[pos:], dim=<span class="number">0</span>)</span><br><span class="line">            <span class="keyword">if</span> tscore &lt; maxscore:</span><br><span class="line">                dets[i], dets[maxpos.item() + i + <span class="number">1</span>] = dets[maxpos.item() + i + <span class="number">1</span>].clone(), dets[i].clone()</span><br><span class="line">                scores[i], scores[maxpos.item() + i + <span class="number">1</span>] = scores[maxpos.item() + i + <span class="number">1</span>].clone(), scores[i].clone()</span><br><span class="line">                areas[i], areas[maxpos + i + <span class="number">1</span>] = areas[maxpos + i + <span class="number">1</span>].clone(), areas[i].clone()</span><br><span class="line"></span><br><span class="line">        <span class="comment"># IoU calculate</span></span><br><span class="line">        yy1 = np.maximum(dets[i, <span class="number">0</span>].to(<span class="string">"cpu"</span>).numpy(), dets[pos:, <span class="number">0</span>].to(<span class="string">"cpu"</span>).numpy())</span><br><span class="line">        xx1 = np.maximum(dets[i, <span class="number">1</span>].to(<span class="string">"cpu"</span>).numpy(), dets[pos:, <span class="number">1</span>].to(<span class="string">"cpu"</span>).numpy())</span><br><span class="line">        yy2 = np.minimum(dets[i, <span class="number">2</span>].to(<span class="string">"cpu"</span>).numpy(), dets[pos:, <span class="number">2</span>].to(<span class="string">"cpu"</span>).numpy())</span><br><span class="line">        xx2 = np.minimum(dets[i, <span class="number">3</span>].to(<span class="string">"cpu"</span>).numpy(), dets[pos:, <span class="number">3</span>].to(<span class="string">"cpu"</span>).numpy())</span><br><span class="line">        </span><br><span class="line">        w = np.maximum(<span class="number">0.0</span>, xx2 - xx1 + <span class="number">1</span>)</span><br><span class="line">        h = np.maximum(<span class="number">0.0</span>, yy2 - yy1 + <span class="number">1</span>)</span><br><span class="line">        inter = torch.tensor(w * h).cuda() <span class="keyword">if</span> cuda <span class="keyword">else</span> torch.tensor(w * h)</span><br><span class="line">        ovr = torch.div(inter, (areas[i] + areas[pos:] - inter))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Gaussian decay</span></span><br><span class="line">        weight = torch.exp(-(ovr * ovr) / sigma)</span><br><span class="line">        scores[pos:] = weight * scores[pos:]</span><br><span class="line"></span><br><span class="line">    <span class="comment"># select the boxes and keep the corresponding indexes</span></span><br><span class="line">    keep = dets[:, <span class="number">4</span>][scores &gt; thresh].int()</span><br><span class="line"></span><br><span class="line">    <span class="keyword">return</span> keep</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">speed</span><span class="params">()</span>:</span></span><br><span class="line">    boxes = <span class="number">1000</span>*torch.rand((<span class="number">1000</span>, <span class="number">100</span>, <span class="number">4</span>), dtype=torch.float)</span><br><span class="line">    boxscores = torch.rand((<span class="number">1000</span>, <span class="number">100</span>), dtype=torch.float)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># cuda flag</span></span><br><span class="line">    cuda = <span class="number">1</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> cuda:</span><br><span class="line">        boxes = boxes.cuda()</span><br><span class="line">        boxscores = boxscores.cuda()</span><br><span class="line"></span><br><span class="line">    start = time.time()</span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">1000</span>):</span><br><span class="line">        soft_nms_pytorch(boxes[i], boxscores[i], cuda=cuda)</span><br><span class="line">    end = time.time()</span><br><span class="line">    print(<span class="string">"Average run time: %f ms"</span> % (end-start))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">test</span><span class="params">()</span>:</span></span><br><span class="line">    <span class="comment"># boxes and boxscores</span></span><br><span class="line">    boxes = torch.tensor([[<span class="number">200</span>, <span class="number">200</span>, <span class="number">400</span>, <span class="number">400</span>],</span><br><span class="line">                          [<span class="number">220</span>, <span class="number">220</span>, <span class="number">420</span>, <span class="number">420</span>],</span><br><span class="line">                          [<span class="number">200</span>, <span class="number">240</span>, <span class="number">400</span>, <span class="number">440</span>],</span><br><span class="line">                          [<span class="number">240</span>, <span class="number">200</span>, <span class="number">440</span>, <span class="number">400</span>],</span><br><span class="line">                          [<span class="number">1</span>, <span class="number">1</span>, <span class="number">2</span>, <span class="number">2</span>]], dtype=torch.float)</span><br><span class="line">    boxscores = torch.tensor([<span class="number">0.8</span>, <span class="number">0.7</span>, <span class="number">0.6</span>, <span class="number">0.5</span>, <span class="number">0.9</span>], dtype=torch.float)</span><br><span class="line"></span><br><span class="line">    <span class="comment"># cuda flag</span></span><br><span class="line">    cuda = <span class="number">1</span> <span class="keyword">if</span> torch.cuda.is_available() <span class="keyword">else</span> <span class="number">0</span></span><br><span class="line">    <span class="keyword">if</span> cuda:</span><br><span class="line">        boxes = boxes.cuda()</span><br><span class="line">        boxscores = boxscores.cuda()</span><br><span class="line"></span><br><span class="line">    print(soft_nms_pytorch(boxes, boxscores, cuda=cuda))</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="keyword">if</span> __name__ == <span class="string">'__main__'</span>:</span><br><span class="line">    test()</span><br><span class="line">    <span class="comment"># speed()</span></span><br></pre></td></tr></table></figure>
+<h3 id="retinanet代码通读"><a href="#retinanet代码通读" class="headerlink" title="retinanet代码通读"></a>retinanet代码通读</h3><p>先捋一下anchor部分的东西，当初在这里就一直很迷，认为是回归anchor和GTbox，其实不是，回归的是合适的anchor（与GTbox有大的iou）的$y_{min},x_{min},y_{max},x_{max}$的offset，其中根据GTbox来筛选合适anchor的部分就在encode函数那一部分，这样看来，网络拟合的数据其实是offset，要即$f(y_{min},x_{min},y_{max},x_{max})=\hat{y}_{min}^, \hat{x}_{min},\hat{y}_{max},\hat{x}_{max}\approx$ offset</p>
+<h3 id="权重衰减和dropout"><a href="#权重衰减和dropout" class="headerlink" title="权重衰减和dropout"></a>权重衰减和dropout</h3><p>这是神经网络中避免过拟合采用的方法</p>
+<p>权重衰减等价于L2正则化，L2正则化趋向于选择更多的特征，这些特征会趋近于0，L1正则化趋向于产生少量的特征，而其他特征都是0</p>
+<p>dropout是随机丢弃神经元，在训练过程忽略之，是一种集成学习的思想，每一次训练过程中随机丢弃，相当于训练了n个欠拟合的神经网络，通过集成的思想得到一个较好的结果，实际操作是在每一次训练中，随机选取神经元，保留参数，不参与反向传播</p>
+<h3 id="卷积神经网络感受野计算"><a href="#卷积神经网络感受野计算" class="headerlink" title="卷积神经网络感受野计算"></a>卷积神经网络感受野计算</h3><p>之前只是感性的了解了感受野是什么（其实就是一知半解），这次恰好看到知乎有位大佬写了一篇文章，遂吸收过来。</p>
+<p><img src="https://pic4.zhimg.com/80/v2-ef5cac4e1ef50a396f2fccad2d90a623_720w.jpg" alt=""></p>
+<p>图中是个微型CNN，来自Inception-v3论文，原图是为了说明一个conv5x5可以用两个conv3x3代替，从下到上称为第1, 2, 3层：</p>
+<ol>
+<li>第2层左下角的值，是第1层左下红框中3x3区域的值经过卷积，也就是乘加运算计算出来的，即第2层左下角位置的感受野是第1层左下红框区域</li>
+<li>第3层唯一值，是第2层所有3x3区域卷积得到的，即第3层唯一位置的感受野是第2层所有3x3区域</li>
+<li>第3层唯一值，是第1层所有5x5区域经过两层卷积得到的，即第3层唯一位置的感受野是第1层所有5x5区域</li>
+</ol>
+<p>就是这么简单，<strong>某一层feature map(特性图)中某个位置的特征向量，是由前面某一层固定区域的输入计算出来的，那这个区域就是这个位置的感受野</strong>。任意两个层之间都有位置—感受野对应关系，但我们更常用的是feature map层到输入图像的感受野，如目标检测中我们需要知道feature map层每个位置的特征向量对应输入图像哪个区域，以便我们在这个区域中设置anchor，检测该区域内的目标。</p>
+<p><strong>感受野区域之外图像区域的像素不会影响feature map层的特征向量</strong>，所以我们不太可能让CNN仅依赖某个特征向量去找到其对应输入感受野之外的目标。这里说“不太可能”而不是“绝无可能”，是因为CNN很强大，且图像像素之间有相关性，有时候感受野之外的目标是可以猜出来的，什么一叶知秋，管中窥豹，见微知著之类，对CNN目标检测都是有可能的，但猜出来的结果并不总是那么靠谱。</p>
+<p>感受野有什么用呢？</p>
+<ul>
+<li>一般task要求感受野越大越好，如图像分类中最后卷积层的感受野要大于输入图像，网络深度越深感受野越大性能越好</li>
+<li>密集预测task要求输出像素的感受野足够的大，确保做出决策时没有忽略重要信息，一般也是越深越好</li>
+<li>目标检测task中设置anchor要严格对应感受野，anchor太大或偏离感受野都会严重影响检测性能</li>
+</ul>
+<h4 id="感受野计算"><a href="#感受野计算" class="headerlink" title="感受野计算"></a>感受野计算</h4><p>以下是一些显(bu)而(hui)易(zheng)见(ming)的结论：</p>
+<ul>
+<li>初始feature map层的感受野是1</li>
+<li>每经过一个convkxk s1的卷积层，感受野 r = r + (k - 1)，常用k=3感受野 r = r + 2, k=5感受野r = r + 4</li>
+<li>每经过一个convkxk s2的卷积层或max/avg pooling层，感受野 r = (r x 2) + (k -2)，常用卷积核k=3, s=2，感受野 r = r x 2 + 1，卷积核k=7, s=2, 感受野r = r x 2 + 5</li>
+<li>每经过一个maxpool2x2 s2的max/avg pooling下采样层，感受野 r = r x 2<br>特殊情况，经过conv1x1 s1不会改变感受野，经过FC层和GAP层，感受野就是整个输入图像</li>
+<li>经过多分枝的路径，按照感受野最大支路计算，shotcut也一样所以不会改变感受野<br>ReLU, BN，dropout等元素级操作不会影响感受野</li>
+<li>全局步进等于经过所有层的步进累乘，$S=s_1<em>s_2</em>s_3<em>…</em>s_n$</li>
+<li>经过的所有层所加padding都可以等效加在输入图像，等效值P，直接用卷积的输入输出公式 $f_{out}=(f_{in}-r+2P)/S+1$ 反推出P即可，即$P=\frac{(f_{out}-1)*S+K-f_{in}}{2}$</li>
+</ul>
+<p>最初版本SSD和Faster R-CNN的backbone都是VGG-16，结构特点卷积层都是conv3x3s1，下采样层都是maxpool2x2 s2。先来计算SSD中第一个feature map输出层的感受野，结构是conv4-3 backbone + conv3x3 classifier (为了写起来简单省掉了左边括号)：</p>
+<p>r = 1 +2 +2+2+2 )x2 +2+2+2 )x2 +2+2 )x2 +2+2 = 108<br>S = 2x2x2 = 8<br>经过3次pooling，fout变为fin的八分之一，且s=8，则代入上式<br>p=(k-s)/2<br>这个是从后往前算的方法</p>
+<hr>
+<p>这个是从前往后算的方法</p>
+<script type="math/tex; mode=display">r_k=r_{k-1}+(k-1)*\prod_{i=1}^{k-1}s_i</script><p>其中$r$为感受野，$s_i$为每一层的stride，$k$为该层kernel size</p>
+<p>感受野要大于anchor才行</p>
+<h4 id="带空洞卷积的算法"><a href="#带空洞卷积的算法" class="headerlink" title="带空洞卷积的算法"></a>带空洞卷积的算法</h4><p>空洞卷积实际卷积核大小：</p>
+<p>K=k+(k-1)(r-1)，k为原始卷积核大小，r为空洞卷积参数空洞率；</p>
+<p>以三个r=2的3*3/s1空洞卷积为例计算感受野：</p>
+<p>K=k+(k-1)(r-1)=3+2*1=5<br>R=1+4+4+4=13</p>
+<h3 id="深度学习优化算法"><a href="#深度学习优化算法" class="headerlink" title="深度学习优化算法"></a>深度学习优化算法</h3><h4 id="梯度"><a href="#梯度" class="headerlink" title="梯度"></a>梯度</h4><p>方向导数：$\frac{\partial f}{\partial l}= \frac{\partial f}{\partial x} cos \varphi+\frac{\partial f}{\partial y}sin \varphi$  </p>
+<p>给定$\varphi$方向导数即确定，也就意味着任意方向都可以，该位置处，任意方向的方向导数为偏导数的线性组合，系数为该方向的单位向量。</p>
+<p>梯度：$grad(x,y)=\nabla f(x,y)=\frac{\partial f}{\partial x} i+\frac{\partial f}{\partial y}j$</p>
+<p>偏导数构成的向量即为梯度</p>
+<p>其中$i,j$就是表示某一函数在该点处的方向导数沿着该方向取得最大值，即函数在该点处沿着该方向（此梯度的方向）变化最快，变化率最大（为该梯度的模），当方向导数的方向与梯度方向一致，方向导数有最大值，<strong>因而取梯度的负数，也就是函数下降最快的方向</strong></p>
+<h4 id="梯度下降法"><a href="#梯度下降法" class="headerlink" title="梯度下降法"></a>梯度下降法</h4><p>BGD批量梯度下降法（Batch Gradient Descent）：批量梯度下降法，是梯度下降法最常用的形式，具体做法也就是在更新参数时使用所有的样本来进行更新。</p>
+<p>$\theta_i=\theta_i-\alpha\sum_{j=1}^m(h_\theta(x_0^j,x_1^j,…,x_n^j)-y_j)x_i^j$</p>
+<p>SGD随机梯度下降法（Stochastic Gradient Descent）:</p>
+<p>随机梯度下降法，其实和批量梯度下降法原理类似，区别在与求梯度时没有用所有的m个样本的数据，而是仅仅选取一个样本j来求梯度。对应的更新公式是:</p>
+<p>$\theta_i=\theta_i-\alpha(h_\theta(x_0^j,x_1^j,…,x_n^j)-y_j)x_i^j$</p>
+<p>随机梯度下降法，和4.1的批量梯度下降法是两个极端，一个采用所有数据来梯度下降，一个用一个样本来梯度下降。自然各自的优缺点都非常突出。对于训练速度来说，随机梯度下降法由于每次仅仅采用一个样本来迭代，训练速度很快，而批量梯度下降法在样本量很大的时候，训练速度不能让人满意。对于准确度来说，随机梯度下降法用于仅仅用一个样本决定梯度方向，导致解很有可能不是最优。对于收敛速度来说，由于随机梯度下降法一次迭代一个样本，导致迭代方向变化很大，不能很快的收敛到局部最优解。</p>
+<p>小批量梯度下降法（Mini-batch Gradient Descent）:</p>
+<p>小批量梯度下降法是批量梯度下降法和随机梯度下降法的折衷，也就是对于m个样本，我们采用x个样子来迭代，1&lt;x&lt;m。一般可以取x=10，当然根据样本的数据，可以调整这个x的值。对应的更新公式是：</p>
+<p>$\theta_i=\theta_i-\alpha\sum_{j=t}^{t+x-1}(h_\theta(x_0^j,x_1^j,…,x_n^j)-y_j)x_i^j$</p>
+<h4 id="momentum"><a href="#momentum" class="headerlink" title="momentum"></a>momentum</h4><p>Momentum改进自SGD算法，让每一次的参数更新方向不仅仅取决于当前位置的梯度，还受到上一次参数更新方向的影响</p>
+<p>sgd的更新公式：$\theta_i=\theta_{i-1}-\eta\nabla f(\theta_{i-1})$</p>
+<p>加入momentum的sgd的更新公式：$\theta_i=\theta_{i-1}-\eta(\beta v_{i-1}+\nabla f(\theta_{i-1}))$，其中$v_{i}=\beta v_{i-1}+\nabla f(\theta_{i-1})$</p>
+<p>$\theta$为网络参数，$\eta$为学习率，$\beta$为动量因子，$v$为动量（更新方向），$\nabla f(\theta_{i-1})$为梯度在$\theta_{i-1}$处的梯度</p>
+<h4 id="NAG"><a href="#NAG" class="headerlink" title="NAG"></a>NAG</h4><p>然后NAG就对Momentum说：“既然<strong>我都知道我这一次一定会走$\eta\beta v_{i-1}$的量，那么我何必还用现在这个位置的梯度</strong>呢？我直接先走到$\eta\beta v_{i-1}$之后的地方，然后再根据那里的梯度再前进一下，岂不美哉？”所以就有了下面的公式：</p>
+<script type="math/tex; mode=display">\theta_i=\theta_{i-1}-\eta(\beta v_{i-1}+\nabla f(\theta_{i-1}-\eta\beta v_{i-1}))</script><p>展开为</p>
+<script type="math/tex; mode=display">\theta_i=\theta_{i-1}-\eta\beta v_{i-1}-\eta \nabla f(\theta_{i-1}-\eta\beta v_{i-1})</script><p>momentum展开为</p>
+<script type="math/tex; mode=display">\theta_i=\theta_{i-1}-\eta \beta v_{i-1}- \eta\nabla f(\theta_{i-1})</script><p>$\theta_{i-1}$与$\theta_{i-1}-\eta \beta v_{i-1}$，也即多加入了$-\eta \beta v_{i-1}$这一<strong>已知项</strong></p>
+<p>跟上面Momentum公式的唯一区别在于，梯度不是根据当前参数位置$\theta_{i-1}$，而是根据先走了本来计划要走的一步后，达到的参数位置$\theta_{i-1}-\eta\beta v_{i-1}$计算出来的。</p>
+<p><img src="https://pic2.zhimg.com/80/v2-810a1e2babdc6e434072b15e21667861_720w.png" alt=""></p>
+<p>在原始形式中，Nesterov Accelerated Gradient（NAG）算法相对于Momentum的改进在于，以“向前看”看到的梯度而不是当前位置梯度去更新。<strong>经过变换之后的等效形式中，NAG算法相对于Momentum多了一个本次梯度相对上次梯度的变化量，这个变化量本质上是对目标函数二阶导的近似</strong>。由于利用了二阶导的信息，NAG算法才会比Momentum具有更快的收敛速度。</p>
+<p><img src="https://s1.ax1x.com/2020/05/23/Yjcc01.png" alt="Yjcc01.png"></p>
+<p>其中SGD里还有一个权重衰减参数，权重衰减是一种正则化手段，在每次更新时，引入权重衰减系数</p>
+<script type="math/tex; mode=display">\theta_t \leftarrow(1-\beta)\theta_{t-1}-\alpha g_t</script><p>$\beta$为权重衰减系数，一般取值比较小，在标准的随机梯度下降中，权重衰减正则化和 ℓ2 正则化的效果相同。因此，权重衰减在一些深度学习框架中通过ℓ2正则化来实现。但是，较为复杂的优化方法（比如 Adam）中，权重衰减正则化和ℓ2正则化并不等价。</p>
+<p>reference：</p>
+<ul>
+<li><a href="https://www.cnblogs.com/shine-lee/p/11715033.html" target="_blank" rel="noopener">梯度，方向导数介绍</a> </li>
+<li><a href="https://zhuanlan.zhihu.com/p/22810533" target="_blank" rel="noopener">momentum和NAG</a></li>
+</ul>
+<h3 id="L1-L2正则化"><a href="#L1-L2正则化" class="headerlink" title="L1 L2正则化"></a>L1 L2正则化</h3><p>带有正则化的目标函数</p>
+<script type="math/tex; mode=display">\tilde{J}(\theta;X,y)=J(\theta;X,y)+\alpha\Omega(\theta)</script><p>$\alpha$越大，对应的正则惩罚越大。当我们的训练算法最小化正则化后的目标函数$\tilde{J}$时，它会降低原始目标$\tilde{J}$关于训练数据的误差并同时减小在某些衡量标准下参数$\theta$（或参数子集）的规模。选择不同的参数范数 Ω 会偏好不同的解。我们一般只对权重做惩罚，不对偏置做惩罚。</p>
+<h4 id="L2正则化"><a href="#L2正则化" class="headerlink" title="L2正则化"></a>L2正则化</h4><script type="math/tex; mode=display">\tilde{J}(\omega;X,y)=J(\omega;X,y)+\frac{\alpha}{2}\omega^T\omega</script><p>对应的梯度为</p>
+<script type="math/tex; mode=display">\nabla_{\omega}\tilde{J}(\omega;X,y)=\nabla_{\omega}J(\omega;X,y)+\alpha\omega</script><p>使用单步梯度下降更新权重，公式如下</p>
+<script type="math/tex; mode=display">\omega\leftarrow\omega-\eta(\nabla_{\omega}J(\omega;X,y)+\alpha\omega)</script><p>换种写法</p>
+<script type="math/tex; mode=display">\omega\leftarrow(1-\eta\alpha)\omega-\eta\nabla_{\omega}J(\omega;X,y)</script><p><strong>也就是权重衰减的形式，仅在梯度下降算法中L2正则化与权重衰减等价</strong></p>
+<script type="math/tex; mode=display">\tilde{J}(\omega)=J(\omega^{*})+\frac{1}{2}(\omega-\omega^{*})^TH(\omega^{*})(\omega-\omega^{*})</script><p>其中$a^TH(f)a=(a^T\nabla)^2f$</p>
+<p><a href="https://imgchr.com/i/Yxitc6" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/23/Yxitc6.png" alt="Yxitc6.png"></a></p>
+<p><a href="https://imgchr.com/i/YxiBAH" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/23/YxiBAH.png" alt="YxiBAH.png"></a></p>
+<p><strong>重点是根据$\frac{\lambda_i}{\lambda_i+\alpha}$因子缩放特征向量的分量</strong></p>
+<h4 id="L1正则化"><a href="#L1正则化" class="headerlink" title="L1正则化"></a>L1正则化</h4><script type="math/tex; mode=display">\tilde{J}(\omega;X,y)=J(\omega;X,y)+\alpha\|\omega\|_1</script><p>对应梯度为</p>
+<script type="math/tex; mode=display">\nabla_{\omega}\tilde{J}(\omega;X,y)=\nabla_{\omega}J(\omega;X,y)+\alpha sign(\omega)</script><p>具体来说，我们可以看到正则化对梯度的影响不再是线性地缩放每个$\omega_i$；而是添加了一项与$sign(\omega_i)$同号的常数。</p>
+<p>我们可以将 L1正则化目标函数的二次近似分解成关于参数的求和：</p>
+<script type="math/tex; mode=display">\tilde{J}(\omega;X,y)=J(\omega^*;X,y)+\sum_i[\frac{1}{2}H_{i,i}(\omega_i-\omega_i^*)^2+\alpha |\omega_i|]</script><p><a href="https://imgchr.com/i/YxkJOK" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/23/YxkJOK.png" alt="YxkJOK.png"></a></p>
+<script type="math/tex; mode=display">\omega_i=sign(\omega_i^*)max\lbrace |\omega_i^*|-\frac{\alpha}{H_{i,i}},0 \rbrace</script><p><a href="https://imgchr.com/i/Yxk5pn" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/23/Yxk5pn.png" alt="Yxk5pn.png"></a></p>
+<p><a href="https://imgchr.com/i/YxkIlq" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/23/YxkIlq.png" alt="YxkIlq.png"></a></p>
+<h4 id="讲讲正则化为什么能降低过拟合程度，并且说明下下L1正则化和L2正则化。"><a href="#讲讲正则化为什么能降低过拟合程度，并且说明下下L1正则化和L2正则化。" class="headerlink" title="讲讲正则化为什么能降低过拟合程度，并且说明下下L1正则化和L2正则化。"></a>讲讲正则化为什么能降低过拟合程度，并且说明下下L1正则化和L2正则化。</h4><p>降低过拟合程度：</p>
+<p>正则化之所以能够降低过拟合的原因在于，正则化是结构风险最小化的一种策略实现。</p>
+<p>给loss function加上正则化项，能使得新得到的优化目标函数h = f+normal，需要在f和normal中做一个权衡（trade-off），如果还像原来只优化f的情况下，那可能得到一组解比较复杂，使得正则项normal比较大，那么h就不是最优的，因此可以看出加正则项能让解更加简单，符合奥卡姆剃刀理论，同时也比较符合在偏差和方差（方差表示模型的复杂度）分析中，通过降低模型复杂度，得到更小的泛化误差，降低过拟合程度。</p>
+<p>L1正则化和L2正则化：</p>
+<p>L1正则化就是在loss function后边所加正则项为L1范数，加上L1范数容易得到稀疏解（0比较多）。L2正则化就是loss function后边所加正则项为L2范数的平方，加上L2正则相比于L1正则来说，得到的解比较平滑（不是稀疏），但是同样能够保证解中接近于0（但不是等于0，所以相对平滑）的维度比较多，降低模型的复杂度。</p>
+<p>reference：</p>
+<ul>
+<li><a href="https://github.com/dalmia/Deep-Learning-Book-Chapter-Summaries" target="_blank" rel="noopener">Deep-Learning-Book-Chapter-Summaries</a></li>
+<li><a href="https://medium.com/inveterate-learner/deep-learning-book-chapter-7-regularization-for-deep-learning-937ff261875c" target="_blank" rel="noopener">medium.com-Deep Learning Book: Chapter 7 — Regularization for Deep Learning</a></li>
+<li><a href="https://baike.baidu.com/item/%E9%BB%91%E5%A1%9E%E7%9F%A9%E9%98%B5/2248782" target="_blank" rel="noopener">hessian matrix 百度百科</a></li>
+<li><a href="https://ccjou.wordpress.com/2013/09/09/%e7%ad%94%e5%bc%b5%e7%9b%9b%e6%9d%b1%e2%94%80%e2%94%80%e9%97%9c%e6%96%bc-hessian-%e7%9f%a9%e9%99%a3%e8%88%87%e5%a4%9a%e8%ae%8a%e9%87%8f%e5%87%bd%e6%95%b8%e7%9a%84%e6%b3%b0%e5%8b%92%e5%b1%95%e9%96%8b/" target="_blank" rel="noopener">關於 Hessian 矩陣與多變量函數的泰勒展開式</a></li>
+<li><a href="https://www.zhihu.com/question/37096933/answer/70426653" target="_blank" rel="noopener">l1 相比于 l2 为什么容易获得稀疏解？</a></li>
+</ul>
+<h3 id="adaGrad-RMSprop-Adadelta-Adam"><a href="#adaGrad-RMSprop-Adadelta-Adam" class="headerlink" title="adaGrad RMSprop Adadelta Adam"></a>adaGrad RMSprop Adadelta Adam</h3><h4 id="adaGrad-用累积梯度去更新参数"><a href="#adaGrad-用累积梯度去更新参数" class="headerlink" title="adaGrad 用累积梯度去更新参数"></a>adaGrad 用累积梯度去更新参数</h4><p>AdaGrad 算法，独立地适应所有模型参数的学习率，缩放每个参数反比于其所有梯度历史平方值总和的平方根。具有损失最大偏导的参数相应地有一个快速下降的学习率，而具有小偏导的参数在学习率上有相对较小的下降。净效果是在参数空间中更为平缓的倾斜方向会取得更大的进步。</p>
+<p>在凸优化背景中，AdaGrad算法具有一些令人满意的理论性质。然而，经验上已经发现，对于训练深度神经网络模型而言，<strong>从训练开始时积累梯度平方会导致有效学习率过早和过量的减小</strong>。AdaGrad在某些深度学习模型上效果不错，但不是全部。</p>
+<p>这一方法在稀疏数据的场景下表现很好。</p>
+<p><img src="https://s1.ax1x.com/2020/05/24/tSPaYd.png" alt="tSPaYd.png"></p>
+<h4 id="RMSprop"><a href="#RMSprop" class="headerlink" title="RMSprop"></a>RMSprop</h4><p>RMSProp 使用指数衰减平均以丢弃遥远过去的历史，使其能够在找到凸碗状结构后快速收敛，它就像一个初始化于该碗状结构的 AdaGrad 算法实例。</p>
+<p>相比于 AdaGrad，使用移动平均引入了一个新的超参数ρ，用来控制移动平均的长度范围。</p>
+<p>在迭代过程中， 每个参数的学习率并不是呈衰减趋势， 既可以变小也可以变大．</p>
+<script type="math/tex; mode=display">r\leftarrow r+ g \odot g</script><script type="math/tex; mode=display">\Delta \theta \leftarrow\frac{\epsilon}{\delta+\sqrt{r}} \odot g</script><script type="math/tex; mode=display">r \leftarrow \rho r+(1-\rho)g \odot g</script><script type="math/tex; mode=display">\Delta \theta \leftarrow - \frac{\epsilon}{\sqrt{\delta+r}}\odot g</script><p><img src="https://s1.ax1x.com/2020/05/24/tSVUk8.png" alt="tSVUk8.png"></p>
+<h4 id="Adadelta"><a href="#Adadelta" class="headerlink" title="Adadelta"></a>Adadelta</h4><p>同RMSProp算法一样计算</p>
+<script type="math/tex; mode=display">r \leftarrow \rho r+(1-\rho)g \odot g</script><script type="math/tex; mode=display">\Delta \theta \leftarrow  \sqrt{\frac{\Delta x_{t-1}+\delta}{r+\delta}}\odot g</script><p>与RMSProp算法不同的是，AdaDelta算法还维护一个额外的状态变量$\Delta x_t$，其元素同样在时间步0时被初始化为0。我们使用$\Delta x_{t-1}$来计算自变量的变化量</p>
+<script type="math/tex; mode=display">\Delta x_t \leftarrow \rho \Delta x_{t-1}+(1-\rho)\Delta\theta \odot \Delta\theta</script><p>AdaDelta算法与RMSProp算法的不同之处在于使用$\sqrt{\Delta x_{t-1}}$来替代超参数$\eta$，也就是上面的$\epsilon$</p>
+<h4 id="Adam"><a href="#Adam" class="headerlink" title="Adam"></a>Adam</h4><p>Adam算法（Adaptive Moment Estimation Algorithm）可以看作动量法和RMSprop算法的结合，不但使用动量作为参数更新方向，而且可以自适应调整学习率．</p>
+<p>Adam 算法一方面计算梯度平方$g_t^2$的指数加权平均（和RMSprop算法类似）,另一方面计算梯度$g_t$的指数加权平均（和动量法类似）。</p>
+<script type="math/tex; mode=display">M_t=\beta_1 M_{t-1}+(1-\beta_1)g_t</script><script type="math/tex; mode=display">G_t=\beta_2 G_{t-1}+(1-\beta_2)g_t \odot g_t</script><p>其中$\beta_1$和$\beta_2$分别为两个移动平均的衰减率， 通常取值为$\beta_1$=0.9, $\beta_2$=0.99。我们可以把$M_t$和$G_t$分别看作梯度的均值（一阶矩）和未减去均值的方差（二阶矩）。</p>
+<p>假设$M_0=0,G_0=0$， 那么在迭代初期$M_t$和$G_t$的值会比真实的均值和方差要小。特别是当$\beta_1$和$\beta_2$都接近于1时，偏差会很大。因此，需要对偏差进行修正。</p>
+<script type="math/tex; mode=display">\hat{M_t}=\frac{M_t}{1-\beta_1^t}</script><script type="math/tex; mode=display">\hat{G_t}=\frac{G_t}{1-\beta_2^t}</script><p>Adam算法的参数更新差值为</p>
+<script type="math/tex; mode=display">\Delta \theta_t=-\frac{\alpha}{\sqrt{\hat{G_t}+\epsilon}}\hat{M_t}</script><p>其中学习率𝛼通常设为0.001，并且也可以进行衰减，比如$\alpha_t=\alpha_0/\sqrt{t}$</p>
+<p>稀疏数据选择自适应学习率的算法；而且，只需设定初始学习率而不用再调整即很可能实现最好效果。</p>
+<h3 id="牛顿法"><a href="#牛顿法" class="headerlink" title="牛顿法"></a>牛顿法</h3><p><img src="https://s1.ax1x.com/2020/05/24/tSbtSg.png" alt="tSbtSg.png"></p>
+<p><a href="https://imgchr.com/i/tSbcpF" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/24/tSbcpF.md.png" alt="tSbcpF.md.png"></a></p>
+<p>在高维情况下， Hessian ~E 阵求逆的计算复杂度很大 3 而且当目标函数非口时，二阶法有可能会收敛到鞍点( Saddle Point ) 。</p>
+<p>Hessian 矩阵中元素数目是参数数量的平方，因此，如果参数数目为 k（甚至是在非常小的神经网络中 k 也可能是百万级别），牛顿法需要计算 k × k 矩阵的逆，计算复杂度为$O(k^3)$。另外，由于参数将每次更新都会改变，每次训练迭代都需要计算 Hessian 矩阵的逆。其结果是，只有参数很少的网络才能在实际中用牛顿法训练。</p>
+<h4 id="平方根倒数速算法"><a href="#平方根倒数速算法" class="headerlink" title="平方根倒数速算法"></a>平方根倒数速算法</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">float</span> <span class="title">Q_rsqrt</span><span class="params">( <span class="keyword">float</span> number )</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">	<span class="keyword">long</span> i;</span><br><span class="line">	<span class="keyword">float</span> x2, y;</span><br><span class="line">	<span class="keyword">const</span> <span class="keyword">float</span> threehalfs = <span class="number">1.5F</span>;</span><br><span class="line"></span><br><span class="line">	x2 = number * <span class="number">0.5F</span>;</span><br><span class="line">	y  = number;</span><br><span class="line">	i  = * ( <span class="keyword">long</span> * ) &amp;y;                       <span class="comment">// evil floating point bit level hacking（对浮点数的邪恶位元hack）</span></span><br><span class="line">	i  = <span class="number">0x5f3759df</span> - ( i &gt;&gt; <span class="number">1</span> );               <span class="comment">// what the fuck?（这他妈的是怎么回事？）</span></span><br><span class="line">	y  = * ( <span class="keyword">float</span> * ) &amp;i;</span><br><span class="line">	y  = y * ( threehalfs - ( x2 * y * y ) );   <span class="comment">// 1st iteration （第一次迭代）</span></span><br><span class="line"><span class="comment">//      y  = y * ( threehalfs - ( x2 * y * y ) );   // 2nd iteration, this can be removed（第二次迭代，可以删除）</span></span><br><span class="line"></span><br><span class="line">	<span class="keyword">return</span> y;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>为计算平方根倒数的值，软件首先要先确定一个近似值，而后则使用某些数值方法不断计算修改近似值，直至达到可接受的精度。</p>
+<p><a href="https://imgchr.com/i/tQAZL9" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/05/30/tQAZL9.png" alt="tQAZL9.png"></a></p>
+<p>其中导数$f(y)=\frac{1}{y^2}-x=0$是对y求导，把x看作常数，按这样的方式求导</p>
+<h3 id="BN"><a href="#BN" class="headerlink" title="BN"></a>BN</h3><p><a href="https://zhuanlan.zhihu.com/p/33173246" target="_blank" rel="noopener">15 BN原论文解释</a><br><a href="https://zhuanlan.zhihu.com/p/52749286" target="_blank" rel="noopener">1805 为什么BN有用</a></p>
+<p>我有个思路去解释那个transform，先强行拉到正态分布，使得各个网络不用去强行记忆参数，避免过拟合，而后续的transform，别的论文解释的不是很清晰，我自己有个想法是网络学习$\gamma \beta$使得具有相似分布的数据能拉到更加相似的分布上去，比如两张图片都有狗，狗的那一块的特征向量就会更相似，而其他特征也会拉到他们相应的分布上去</p>
+<h3 id="FLOPs与模型推理速度"><a href="#FLOPs与模型推理速度" class="headerlink" title="FLOPs与模型推理速度"></a>FLOPs与模型推理速度</h3><p><a href="https://zhuanlan.zhihu.com/p/122943688" target="_blank" rel="noopener">FLOPs与模型推理速度</a></p>
+<p>FLOPS：注意全大写，是floating point operations per second的缩写，意指每秒浮点运算次数，理解为计算速度。是一个衡量硬件性能的指标。</p>
+<p>FLOPs：注意s小写，是floating point operations的缩写（s表复数），意指浮点运算数，理解为计算量。可以用来衡量算法/模型的复杂度。</p>
+<p>大部分时候，对于GPU，算力瓶颈在于访存带宽。而同种计算量，访存数据量差异巨大。</p>
+<p>工业界考虑的不是FLOPs，甚至也不是单纯的inference time，考虑的是把一块儿GPU打满情况下的QPS（queries per second）。用图片分类为例，就是</p>
+<p>一块儿GPU打满，这块儿GPU每秒钟能处理多少张图片。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/面试/" rel="tag"># 面试</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/04/30/机器学习小结/" rel="next" title="机器学习小结">
+                <i class="fa fa-chevron-left"></i> 机器学习小结
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/05/27/前缀和小结/" rel="prev" title="前缀和小结">
+                前缀和小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dewey</p>
+              <p class="site-description motion-element" itemprop="description">record my life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">32</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">26</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Dewey1994" title="GitHub &rarr; https://github.com/Dewey1994" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:401692632@qq.com" title="Email &rarr; mailto:401692632@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#nms总结"><span class="nav-number">1.</span> <span class="nav-text">nms总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#nms-amp-soft-nms"><span class="nav-number">1.1.</span> <span class="nav-text">nms&amp;soft-nms</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#retinanet代码通读"><span class="nav-number">1.2.</span> <span class="nav-text">retinanet代码通读</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#权重衰减和dropout"><span class="nav-number">1.3.</span> <span class="nav-text">权重衰减和dropout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络感受野计算"><span class="nav-number">1.4.</span> <span class="nav-text">卷积神经网络感受野计算</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感受野计算"><span class="nav-number">1.4.1.</span> <span class="nav-text">感受野计算</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#带空洞卷积的算法"><span class="nav-number">1.4.2.</span> <span class="nav-text">带空洞卷积的算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度学习优化算法"><span class="nav-number">1.5.</span> <span class="nav-text">深度学习优化算法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度"><span class="nav-number">1.5.1.</span> <span class="nav-text">梯度</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#梯度下降法"><span class="nav-number">1.5.2.</span> <span class="nav-text">梯度下降法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#momentum"><span class="nav-number">1.5.3.</span> <span class="nav-text">momentum</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#NAG"><span class="nav-number">1.5.4.</span> <span class="nav-text">NAG</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L1-L2正则化"><span class="nav-number">1.6.</span> <span class="nav-text">L1 L2正则化</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#L2正则化"><span class="nav-number">1.6.1.</span> <span class="nav-text">L2正则化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#L1正则化"><span class="nav-number">1.6.2.</span> <span class="nav-text">L1正则化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#讲讲正则化为什么能降低过拟合程度，并且说明下下L1正则化和L2正则化。"><span class="nav-number">1.6.3.</span> <span class="nav-text">讲讲正则化为什么能降低过拟合程度，并且说明下下L1正则化和L2正则化。</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#adaGrad-RMSprop-Adadelta-Adam"><span class="nav-number">1.7.</span> <span class="nav-text">adaGrad RMSprop Adadelta Adam</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#adaGrad-用累积梯度去更新参数"><span class="nav-number">1.7.1.</span> <span class="nav-text">adaGrad 用累积梯度去更新参数</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#RMSprop"><span class="nav-number">1.7.2.</span> <span class="nav-text">RMSprop</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adadelta"><span class="nav-number">1.7.3.</span> <span class="nav-text">Adadelta</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Adam"><span class="nav-number">1.7.4.</span> <span class="nav-text">Adam</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#牛顿法"><span class="nav-number">1.8.</span> <span class="nav-text">牛顿法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#平方根倒数速算法"><span class="nav-number">1.8.1.</span> <span class="nav-text">平方根倒数速算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#BN"><span class="nav-number">1.9.</span> <span class="nav-text">BN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FLOPs与模型推理速度"><span class="nav-number">1.10.</span> <span class="nav-text">FLOPs与模型推理速度</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

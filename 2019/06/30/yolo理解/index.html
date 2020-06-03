@@ -97,19 +97,19 @@
 
 
   <meta name="description" content="YOLO">
-<meta name="keywords" content="目标检测,深度学习">
+<meta name="keywords" content="深度学习,目标检测">
 <meta property="og:type" content="article">
 <meta property="og:title" content="yolo理解">
 <meta property="og:url" content="http://yoursite.com/2019/06/30/yolo理解/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="YOLO">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4j794jcdgj20mp0e7gn5.jpg">
-<meta property="og:updated_time" content="2019-07-23T08:11:45.318Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/03/taIQvd.png">
+<meta property="og:updated_time" content="2020-06-03T13:17:57.320Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="yolo理解">
 <meta name="twitter:description" content="YOLO">
-<meta name="twitter:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4j794jcdgj20mp0e7gn5.jpg">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/03/taIQvd.png">
 
 
 
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-07-23 16:11:45" itemprop="dateModified" datetime="2019-07-23T16:11:45+08:00">2019-07-23</time>
+                <time title="修改时间：2020-06-03 21:17:57" itemprop="dateModified" datetime="2020-06-03T21:17:57+08:00">2020-06-03</time>
               
             
           </span>
@@ -467,18 +467,52 @@
       
         <p>YOLO</p>
 <a id="more"></a>
-<h3 id="YOLOV1理解"><a href="#YOLOV1理解" class="headerlink" title="YOLOV1理解"></a>YOLOV1理解</h3><p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4j794jcdgj20mp0e7gn5.jpg" alt=""></p>
-<p>如上图所示，输入图片被划分为7x7个单元格，每个单元格独立作检测。<br>在这里很容易被误导：每个网格单元的视野有限而且很可能只有局部特征，这样就很难理解yolo为何能检测比grid_cell大很多的物体。其实，yolo的做法并不是把每个单独的网格作为输入feed到模型，<strong>在inference的过程中，网格只是物体中心点位置的划分之用，并不是对图片进行切片，不会让网格脱离整体的关系。</strong><br>可以通过yolo_v1的structure来进一步理解，相比faster r-cnn那种two-stage复杂的网络结构而言，yolo_v1的网络结构显得亲民得多。<strong>基本思想是这样：预测框的位置、大小和物体分类都通过CNN暴力predict出来。</strong></p>
-<p>网络的输出是7x7x30，7x7表示把输入图片划分位7x7的网格，每一个小单元的另一个维度等于30。30=(2*5+20)。代表能预测2个框的5个参数(x,y,w,h,score)和20个种类。</p>
-<p>训练的loss采用SSE分别对预测框的位置，大小，种类，置信度(score)</p>
-<p>YOLOV1在后面保留的特性</p>
-<ol>
-<li>Leaky ReLU</li>
-<li>分而治之，用网格来划分图片区域，每块区域独立检测目标</li>
-<li>端到端的训练</li>
-</ol>
-<h3 id="YOLOV2"><a href="#YOLOV2" class="headerlink" title="YOLOV2"></a>YOLOV2</h3><p><a href="https://blog.csdn.net/leviopku/article/details/82588959" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/82588959</a></p>
+<h3 id="YOLOV1理解"><a href="#YOLOV1理解" class="headerlink" title="YOLOV1理解"></a>YOLOV1理解</h3><p><img src="https://s1.ax1x.com/2020/06/03/taIQvd.png" alt="taIQvd.png"></p>
+<p>yolo将输入图像划分为 S×S 的网格，物体的中心落在哪一个网格内，这个网格就负责预测该物体的置信度，类别以及位置。</p>
+<p>对于VOC，每个网格有两个bbox，对于需要预测的网格中的俩bbox，我们比对其IOU来决定最好的那个bbox，另一个bbox confidence置为0和网格中没有物体的网格一样</p>
+<p>(x,y,w,h,conf):</p>
+<ul>
+<li>x,y是bbox中心与该网格左上角的offset，且归一化到0-1，除以网格大小</li>
+<li>w,h是bbox大小，归一化到01，除以图片大小</li>
+<li>confidence=$P(pbject)*IOU_{truth}^{pred}$</li>
+</ul>
+<p>损失函数全为均方误差<br>使用dropout避免过拟合</p>
+<p>之后保留的特性：</p>
+<ul>
+<li>leaky relu</li>
+<li>分而治之，用网格来划分区域，每个grid独立检测</li>
+<li>end to end</li>
+</ul>
+<h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><p><a href="https://www.cnblogs.com/xiongzihua/p/9315183.html" target="_blank" rel="noopener">YOLO v1的详解与复现</a><br><a href="https://zhuanlan.zhihu.com/p/25236464" target="_blank" rel="noopener">yolo详解</a><br><a href="https://blog.csdn.net/leviopku/article/details/82588059" target="_blank" rel="noopener">YOLO系列之V1</a></p>
+<h3 id="YOLOV2"><a href="#YOLOV2" class="headerlink" title="YOLOV2"></a>YOLOV2</h3><p>直接预测(x, y)，就像yolo_v1的做法，不过v2是预测一个相对位置，它也试了faster RCNN中的anchor策略但效果不咋地</p>
+<p>细粒度特征提取</p>
+<p>BN</p>
+<p>加了一些技巧 本质没什么变化</p>
+<p><a href="https://blog.csdn.net/leviopku/article/details/82588959" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/82588959</a></p>
 <h3 id="YOLOV3"><a href="#YOLOV3" class="headerlink" title="YOLOV3"></a>YOLOV3</h3><p><a href="https://blog.csdn.net/leviopku/article/details/82588959" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/82588959</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/76802514" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/76802514</a></p>
+<p><a href="https://www.jianshu.com/p/d13ae1055302" target="_blank" rel="noopener">https://www.jianshu.com/p/d13ae1055302</a></p>
+<p><a href="https://blog.csdn.net/qq_20657717/article/details/81669006" target="_blank" rel="noopener">https://blog.csdn.net/qq_20657717/article/details/81669006</a></p>
+<p>深刻理解Yolov3之后，训练策略总结如下：</p>
+<p>预测框一共分为三种情况：正例（positive）、负例（negative）、忽略样例（ignore）。</p>
+<ul>
+<li>正例：任取一个ground truth，与4032个框全部计算IOU，IOU最大的预测框，即为正例。并且一个预测框，只能分配给一个ground truth。例如第一个ground truth已经匹配了一个正例检测框，那么下一个ground truth，就在余下的4031个检测框中，寻找IOU最大的检测框作为正例。ground truth的先后顺序可忽略。正例产生置信度loss、检测框loss、类别loss。预测框为对应的ground truth box标签（需要反向编码，使用真实的x、y、w、h计算出$t_x,t_y,t_w,t_h$ ）；类别标签对应类别为1，其余为0；置信度标签为1。</li>
+<li>忽略样例：正例除外，与任意一个ground truth的IOU大于阈值（论文中使用0.5），则为忽略样例。忽略样例不产生任何loss。</li>
+<li>负例：正例除外（与ground truth计算后IOU最大的检测框，但是IOU小于阈值，仍为正例），与全部ground truth的IOU都小于阈值（0.5），则为负例。负例只有置信度产生loss，置信度标签为0。</li>
+</ul>
+<p>改进之处：</p>
+<ul>
+<li>多尺度预测 （类FPN）</li>
+<li>更好的基础分类网络（类ResNet）和分类器</li>
+</ul>
+<p>分类器-类别预测：<br>YOLOv3不使用Softmax对每个框进行分类，主要考虑因素有两个：</p>
+<p>Softmax使得每个框分配一个类别（score最大的一个），而对于Open Images这种数据集，目标可能有重叠的类别标签，因此Softmax不适用于多标签分类。<br>Softmax可被独立的多个logistic分类器替代，且准确率不会下降。<br>分类损失采用binary cross-entropy loss.<br>多尺度预测<br>每种尺度预测3个box, anchor的设计方式仍然使用聚类,得到9个聚类中心,将其按照大小均分给3中尺度.</p>
+<ul>
+<li>尺度1: 在基础网络之后添加一些卷积层再输出box信息.</li>
+<li>尺度2: 从尺度1中的倒数第二层的卷积层上采样(x2)再与最后一个16x16大小的特征图相加,再次通过多个卷积后输出box信息.相比尺度1变大两倍.</li>
+<li>尺度3: 与尺度2类似,使用了32x32大小的特征图.</li>
+</ul>
+<p>为了实现多标签分类，模型不再使用softmax函数作为最终的分类器，分类损失采用binary cross-entropy损失函数替换Softmax损失函数（Softmax会选择分数最高的类别判定为当前框所属的类别，而现实中一个目标可能属于多个类别标签），由于每个点所对应的 bounding box 少并且差异大，每个 bounding 与 ground truth 的 matching 策略变成了 1 对 1。原来分类网络中的softmax层都是假设一张图像或一个object只属于一个类别，但是在一些复杂场景下，一个object可能属于多个类，比如你的类别中有woman和person这两个类，那么如果一张图像中有一个woman，那么你检测的结果中类别标签就要同时有woman和person两个类，这就是多标签分类，需要用逻辑回归层来对每个类别做二分类。逻辑回归层主要用到sigmoid函数，该函数可以将输入约束在0到1的范围内，因此当一张图像经过特征提取后的某一类输出经过sigmoid函数约束后如果大于0.5，就表示属于该类，当预测的目标类别很复杂的时候，采用 logistic regression 进行分类是更有效的，比如在 Open Images Dataset 数据集进行分类.</p>
 
       
     </div>
@@ -502,9 +536,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
-          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
           
         </div>
       
@@ -599,7 +633,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">39</span>
+                    <span class="site-state-item-count">41</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -674,7 +708,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">31</span>
+                      
+                    
+                    <span class="site-state-item-count">32</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -737,7 +773,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">25</span>
+                      
+                    
+                    <span class="site-state-item-count">26</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
@@ -799,7 +837,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV1理解"><span class="nav-number">1.</span> <span class="nav-text">YOLOV1理解</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV2"><span class="nav-number">2.</span> <span class="nav-text">YOLOV2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV3"><span class="nav-number">3.</span> <span class="nav-text">YOLOV3</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV1理解"><span class="nav-number">1.</span> <span class="nav-text">YOLOV1理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV2"><span class="nav-number">2.</span> <span class="nav-text">YOLOV2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV3"><span class="nav-number">3.</span> <span class="nav-text">YOLOV3</span></a></li></ol></div>
             
 
           </div>
