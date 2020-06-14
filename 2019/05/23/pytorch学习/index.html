@@ -104,10 +104,13 @@
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="一份长期更新的学习笔记">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-05-23T12:14:52.117Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/06/tygMLj.png">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/06/ty64jH.png">
+<meta property="og:updated_time" content="2020-06-06T11:57:34.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="pytorch学习">
 <meta name="twitter:description" content="一份长期更新的学习笔记">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/06/tygMLj.png">
 
 
 
@@ -387,12 +390,24 @@
                 
               
 
-              <time title="创建时间：2019-05-23 19:49:57 / 修改时间：20:14:52" itemprop="dateCreated datePublished" datetime="2019-05-23T19:49:57+08:00">2019-05-23</time>
+              <time title="创建时间：2019-05-23 19:49:57" itemprop="dateCreated datePublished" datetime="2019-05-23T19:49:57+08:00">2019-05-23</time>
             
 
             
               
 
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-06-06 19:57:34" itemprop="dateModified" datetime="2020-06-06T19:57:34+08:00">2020-06-06</time>
               
             
           </span>
@@ -455,6 +470,23 @@
 <h3 id="pytorch权重初始化"><a href="#pytorch权重初始化" class="headerlink" title="pytorch权重初始化"></a>pytorch权重初始化</h3><p>在torch.nn.init里，文档里有很多初始化的函数，下面给个初始化的代码</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">weights_normal_init</span><span class="params">(model, dev=<span class="number">0.01</span>)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> isinstance(model, list):</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> model:</span><br><span class="line">            weights_normal_init(m, dev)</span><br><span class="line">    <span class="keyword">else</span>:</span><br><span class="line">        <span class="keyword">for</span> m <span class="keyword">in</span> model.modules():</span><br><span class="line">            <span class="keyword">if</span> isinstance(m, nn.Conv2d):                </span><br><span class="line">                <span class="comment">#print torch.sum(m.weight)</span></span><br><span class="line">                m.weight.data.normal_(<span class="number">0.0</span>, dev)</span><br><span class="line">                <span class="keyword">if</span> m.bias <span class="keyword">is</span> <span class="keyword">not</span> <span class="keyword">None</span>:</span><br><span class="line">                    m.bias.data.fill_(<span class="number">0.0</span>)</span><br><span class="line">            <span class="keyword">elif</span> isinstance(m, nn.Linear):</span><br><span class="line">                m.weight.data.normal_(<span class="number">0.0</span>, dev)</span><br></pre></td></tr></table></figure>
 <h3 id="numpy中ravel-amp-flatten-的区别"><a href="#numpy中ravel-amp-flatten-的区别" class="headerlink" title="numpy中ravel() &amp; flatten()的区别"></a>numpy中ravel() &amp; flatten()的区别</h3><p>ravel()和flatten()都是把一个矩阵张成一个向量，其中ravel()返回的向量是一个类似引用的东西，修改这个会影响原矩阵；而flatten()则是相当于copy了一份，修改这个不会影响原矩阵。</p>
+<h3 id="permute-transpose-view-reshape"><a href="#permute-transpose-view-reshape" class="headerlink" title="permute transpose view reshape"></a>permute transpose view reshape</h3><p>首先说一下pytorch底层是如何存储这些tensor的，pytorch底层是C实现的，而C在在存储多维数组采用的是行优先展开数组的形式，通过flatten()展开的一维数组形式与实际存储形式一致。</p>
+<p>reshape的操作方法是将读取tensor的一维形式（实际定义可能是多维的，即flatten展开）按照顺序，reshape成规定的样子（虽然未修改原tensor形状，但新建了一份tensor元信息，在其内重新指定stride）相当于tensor.contiguous().view()</p>
+<p>torch.view等方法操作需要连续的Tensor。<br>transpose、permute 操作虽然没有修改底层一维数组，但是新建了一份Tensor元信息，并在新的元信息中的 重新指定 stride。torch.view 方法约定了不修改数组本身，只是使用新的形状查看数据。如果我们在 transpose、permute 操作后执行 view，Pytorch 会抛出以下错误</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">invalid argument <span class="number">2</span>: view size <span class="keyword">is</span> <span class="keyword">not</span> compatible <span class="keyword">with</span> input tenso<span class="string">r's size and stride (at least one dimension </span></span><br><span class="line"><span class="string">spans across two contiguous subspaces). Call .contiguous() before .view(). </span></span><br><span class="line"><span class="string">at /Users/soumith/b101_2/2019_02_08/wheel_build_dirs/wheel_3.6/pytorch/aten/src/TH/generic/THTensor.cpp:213</span></span><br></pre></td></tr></table></figure>
+<p>如果我们是按照tensor内部的stride跳着访问得到的一个tensor，则该tensor在内存上连续，在语义上不连续，view的工作环境是在底层数组上按指定的形状reshape，即使view不报错，得到的结果还是原先tensor的结果</p>
+<p>transpose对二维矩阵转置</p>
+<p>permute对多维矩阵进行转置</p>
+<p>实质上对各元素位置的变换<br><a href="https://zhuanlan.zhihu.com/p/88311093" target="_blank" rel="noopener">permute()和view()</a></p>
+<p>reference</p>
+<p><a href="https://zhuanlan.zhihu.com/p/64551412" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/64551412</a><br><a href="https://www.zhihu.com/question/269160464/answer/400342428" target="_blank" rel="noopener">SSD permute</a></p>
+<h3 id="stack"><a href="#stack" class="headerlink" title="stack"></a>stack</h3><p>axis等于几就说明在哪个维度上进行堆叠。当axis=2的时候，意味着第二个维度，也就是数组的每一行中的更深一层的维度。对于本例的2维数组来说就到了单个的数据。注意：千万不要理解成2维堆叠是对每一列拿出来进行堆叠！我觉得维度的概念就是逐层深入的</p>
+<p><a href="https://blog.csdn.net/weixin_44330492/article/details/100126774?utm_medium=distribute.pc_relevant_right.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase&amp;depth_1-utm_source=distribute.pc_relevant_right.none-task-blog-BlogCommendFromMachineLearnPai2-3.nonecase" target="_blank" rel="noopener">stack</a></p>
+<p><a href="https://blog.csdn.net/Riverhope/article/details/78922006?utm_medium=distribute.pc_relevant.none-task-blog-baidujs-2" target="_blank" rel="noopener">stack1</a></p>
+<p><a href="https://blog.csdn.net/qq_17550379/article/details/78934529" target="_blank" rel="noopener">stack2</a></p>
+<h3 id="维度分析"><a href="#维度分析" class="headerlink" title="维度分析"></a>维度分析</h3><p>一张图片的格式H<em>W</em>C，怎么存储的？最外层的shape是H，里面的二维矩阵是W*C</p>
+<p><img src="https://s1.ax1x.com/2020/06/06/tygMLj.png" alt="tygMLj.png"></p>
+<p><img src="https://s1.ax1x.com/2020/06/06/ty64jH.png" alt="ty64jH.png"></p>
 
       
     </div>
@@ -575,7 +607,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -779,7 +811,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一份长期更新的学习笔记"><span class="nav-number">1.</span> <span class="nav-text">一份长期更新的学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch权重初始化"><span class="nav-number">1.1.</span> <span class="nav-text">pytorch权重初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy中ravel-amp-flatten-的区别"><span class="nav-number">1.2.</span> <span class="nav-text">numpy中ravel() &amp; flatten()的区别</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#一份长期更新的学习笔记"><span class="nav-number">1.</span> <span class="nav-text">一份长期更新的学习笔记</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pytorch权重初始化"><span class="nav-number">1.1.</span> <span class="nav-text">pytorch权重初始化</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#numpy中ravel-amp-flatten-的区别"><span class="nav-number">1.2.</span> <span class="nav-text">numpy中ravel() &amp; flatten()的区别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#permute-transpose-view-reshape"><span class="nav-number">1.3.</span> <span class="nav-text">permute transpose view reshape</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#stack"><span class="nav-number">1.4.</span> <span class="nav-text">stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#维度分析"><span class="nav-number">1.5.</span> <span class="nav-text">维度分析</span></a></li></ol></li></ol></div>
             
 
           </div>

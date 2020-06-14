@@ -96,19 +96,22 @@
 
 
 
-  <meta name="description" content="YOLO">
-<meta name="keywords" content="深度学习,目标检测">
+  <meta name="description" content="YOLO RCNN">
+<meta name="keywords" content="目标检测,深度学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="yolo理解">
+<meta property="og:title" content="检测">
 <meta property="og:url" content="http://yoursite.com/2019/06/30/yolo理解/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="YOLO">
+<meta property="og:description" content="YOLO RCNN">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/03/taIQvd.png">
-<meta property="og:updated_time" content="2020-06-03T13:17:57.320Z">
+<meta property="og:image" content="https://pic4.zhimg.com/v2-d28ded21949483b0fbb64b3612b0d543_r.jpg">
+<meta property="og:image" content="https://pic4.zhimg.com/80/v2-e64a99b38f411c337f538eb5f093bdf3_720w.jpg">
+<meta property="og:image" content="http://p98.pstatp.com/large/pgc-image/1537960311955d415820c98">
+<meta property="og:updated_time" content="2020-06-13T08:46:22.760Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="yolo理解">
-<meta name="twitter:description" content="YOLO">
+<meta name="twitter:title" content="检测">
+<meta name="twitter:description" content="YOLO RCNN">
 <meta name="twitter:image" content="https://s1.ax1x.com/2020/06/03/taIQvd.png">
 
 
@@ -126,7 +129,7 @@
   };
 </script>
 
-  <title>yolo理解 | Dewey's blog</title>
+  <title>检测 | Dewey's blog</title>
   
 
 
@@ -363,7 +366,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">yolo理解
+          <h1 class="post-title" itemprop="name headline">检测
 
               
             
@@ -406,7 +409,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-03 21:17:57" itemprop="dateModified" datetime="2020-06-03T21:17:57+08:00">2020-06-03</time>
+                <time title="修改时间：2020-06-13 16:46:22" itemprop="dateModified" datetime="2020-06-13T16:46:22+08:00">2020-06-13</time>
               
             
           </span>
@@ -465,14 +468,14 @@
       
 
       
-        <p>YOLO</p>
+        <p>YOLO RCNN</p>
 <a id="more"></a>
 <h3 id="YOLOV1理解"><a href="#YOLOV1理解" class="headerlink" title="YOLOV1理解"></a>YOLOV1理解</h3><p><img src="https://s1.ax1x.com/2020/06/03/taIQvd.png" alt="taIQvd.png"></p>
 <p>yolo将输入图像划分为 S×S 的网格，物体的中心落在哪一个网格内，这个网格就负责预测该物体的置信度，类别以及位置。</p>
 <p>对于VOC，每个网格有两个bbox，对于需要预测的网格中的俩bbox，我们比对其IOU来决定最好的那个bbox，另一个bbox confidence置为0和网格中没有物体的网格一样</p>
 <p>(x,y,w,h,conf):</p>
 <ul>
-<li>x,y是bbox中心与该网格左上角的offset，且归一化到0-1，除以网格大小</li>
+<li>x,y是bbox中心，与该网格左上角的offset，且归一化到0-1，除以网格大小</li>
 <li>w,h是bbox大小，归一化到01，除以图片大小</li>
 <li>confidence=$P(pbject)*IOU_{truth}^{pred}$</li>
 </ul>
@@ -483,13 +486,15 @@
 <li>分而治之，用网格来划分区域，每个grid独立检测</li>
 <li>end to end</li>
 </ul>
+<p>密集检测效果很差，一个网格只预测一个物体</p>
 <h4 id="reference"><a href="#reference" class="headerlink" title="reference"></a>reference</h4><p><a href="https://www.cnblogs.com/xiongzihua/p/9315183.html" target="_blank" rel="noopener">YOLO v1的详解与复现</a><br><a href="https://zhuanlan.zhihu.com/p/25236464" target="_blank" rel="noopener">yolo详解</a><br><a href="https://blog.csdn.net/leviopku/article/details/82588059" target="_blank" rel="noopener">YOLO系列之V1</a></p>
 <h3 id="YOLOV2"><a href="#YOLOV2" class="headerlink" title="YOLOV2"></a>YOLOV2</h3><p>直接预测(x, y)，就像yolo_v1的做法，不过v2是预测一个相对位置，它也试了faster RCNN中的anchor策略但效果不咋地</p>
 <p>细粒度特征提取</p>
 <p>BN</p>
+<p>设置先验框，采用全卷积做预测，采用残差网络，采用多尺度特征图做预测。</p>
 <p>加了一些技巧 本质没什么变化</p>
 <p><a href="https://blog.csdn.net/leviopku/article/details/82588959" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/82588959</a></p>
-<h3 id="YOLOV3"><a href="#YOLOV3" class="headerlink" title="YOLOV3"></a>YOLOV3</h3><p><a href="https://blog.csdn.net/leviopku/article/details/82588959" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/82588959</a></p>
+<h3 id="YOLOV3"><a href="#YOLOV3" class="headerlink" title="YOLOV3"></a>YOLOV3</h3><p><a href="https://blog.csdn.net/leviopku/article/details/82660381" target="_blank" rel="noopener">https://blog.csdn.net/leviopku/article/details/82660381</a></p>
 <p><a href="https://zhuanlan.zhihu.com/p/76802514" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/76802514</a></p>
 <p><a href="https://www.jianshu.com/p/d13ae1055302" target="_blank" rel="noopener">https://www.jianshu.com/p/d13ae1055302</a></p>
 <p><a href="https://blog.csdn.net/qq_20657717/article/details/81669006" target="_blank" rel="noopener">https://blog.csdn.net/qq_20657717/article/details/81669006</a></p>
@@ -513,6 +518,83 @@
 <li>尺度3: 与尺度2类似,使用了32x32大小的特征图.</li>
 </ul>
 <p>为了实现多标签分类，模型不再使用softmax函数作为最终的分类器，分类损失采用binary cross-entropy损失函数替换Softmax损失函数（Softmax会选择分数最高的类别判定为当前框所属的类别，而现实中一个目标可能属于多个类别标签），由于每个点所对应的 bounding box 少并且差异大，每个 bounding 与 ground truth 的 matching 策略变成了 1 对 1。原来分类网络中的softmax层都是假设一张图像或一个object只属于一个类别，但是在一些复杂场景下，一个object可能属于多个类，比如你的类别中有woman和person这两个类，那么如果一张图像中有一个woman，那么你检测的结果中类别标签就要同时有woman和person两个类，这就是多标签分类，需要用逻辑回归层来对每个类别做二分类。逻辑回归层主要用到sigmoid函数，该函数可以将输入约束在0到1的范围内，因此当一张图像经过特征提取后的某一类输出经过sigmoid函数约束后如果大于0.5，就表示属于该类，当预测的目标类别很复杂的时候，采用 logistic regression 进行分类是更有效的，比如在 Open Images Dataset 数据集进行分类.</p>
+<h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><ul>
+<li>多尺度非feature map预测</li>
+<li>卷积预测</li>
+<li>HEM采样负样本，使得负样本大约为正样本的3倍</li>
+<li>augmentation</li>
+<li>loss  loc:smoothL1 loss  cls:softmax loss</li>
+</ul>
+<p><img src="https://pic4.zhimg.com/v2-d28ded21949483b0fbb64b3612b0d543_r.jpg" alt=""></p>
+<ul>
+<li>anchor采用与faster R-cnn策略，计算offset<br>anchor:$d=(d^{cx},d^{cy},d^{w},d^{h})$,pred=$(b^{cx},b^{cy},b^{w},b^{h})$<br>encode:</li>
+</ul>
+<script type="math/tex; mode=display">l^{cx}=(b^{cx}-d^{cx})/d^w</script><script type="math/tex; mode=display">l^{cy}=(b^{cy}-d^{cy})/d^h</script><script type="math/tex; mode=display">l^{w}=log(b^w/d^w)</script><script type="math/tex; mode=display">l^{h}=log(b^h/d^h)</script><p>anchor与GT的iou大于0.5作为正样本，小于0.5取为负样本，保证负样本是正样本的3倍，anchor {1,2,3,1/2,1/3}</p>
+<h3 id="R-CNN"><a href="#R-CNN" class="headerlink" title="R-CNN"></a>R-CNN</h3><p><a href="https://imlogm.github.io/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/rcnn/" target="_blank" rel="noopener">https://imlogm.github.io/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/rcnn/</a></p>
+<p><a href="https://zhuanlan.zhihu.com/p/23006190" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/23006190</a></p>
+<p>RCNN的过程分4个阶段：</p>
+<ul>
+<li>候选区域提出阶段（Proposal）：采用selective-search方法，从一幅图像生成1K~2K个候选区域；</li>
+<li>特征提取：对每个候选区域，使用CNN进行特征提取；</li>
+<li>分类：每个候选区域的特征放入分类器SVM，得到该候选区域的分类结果；</li>
+<li>回归：候选区域的特征放入回归器，得到bbox的修正量。</li>
+</ul>
+<p>4个独立的阶段，候选区域是从原图片抠出来的子图片(selective search)</p>
+<p>特征提取阶段：然后我们在加padding和各向同性的扩展（因为fc要求图片输入和输出大小一样）通过IOU确定了正负样本，对候选区域（样本）随机采样，抽取正负样本比例为1：3</p>
+<p>分类采用多个SVM分类器</p>
+<p>回归器：对每一类目标，使用一个线性脊回归器（L2）进行精修。‘</p>
+<h3 id="SPPNET"><a href="#SPPNET" class="headerlink" title="SPPNET"></a>SPPNET</h3><p>SPP-net提出：能否在feature map上提取ROI特征，这样就只需要在整幅图像上做一次卷积。</p>
+<p>首先理解ROI，在RCNN中，我们选取候选区域，每个候选区域都独立提取特征的话，那相当于每幅图片都要进行1k~2k次CNN。（当然由于有正负样本采样，实际并没有有这么多）</p>
+<p>既然候选区域都是图片的一部分，那么先对整张图片进行特征提取，然后根据每个候选区域在原图上的位置选择相应的特征不就行了。这种方式正是RCNN系列的后续改进之一</p>
+<p>ROI就是直接在特征图上找到对应的区域特征然后进行后续操作</p>
+<p>俩问题：</p>
+<ol>
+<li>原始图片的ROI如何映射到feature map？</li>
+</ol>
+<p>一个映射</p>
+<ol>
+<li>ROI在feature map上对应的特征区域的维度不满足全连接层怎么办？</li>
+</ol>
+<p>假设原图输入是224x224，对于conv5出来后的输出是13x13x256的，可以理解成有256个这样的filter，每个filter对应一张13x13的reponse map。如果像上图那样将reponse map分成1x1(金字塔底座)，2x2(金字塔中间)，4x4（金字塔顶座）三张子图，分别做max pooling后，出来的特征就是(16+4+1)x256 维度。如果原图的输入不是224x224，出来的特征依然是(16+4+1)x256维度。这样就实现了不管图像尺寸如何 池化n 的输出永远是 （16+4+1）x256 维度。</p>
+<p><a href="https://zhuanlan.zhihu.com/p/24780433" target="_blank" rel="noopener">图像和feature map如何映射</a></p>
+<h3 id="FAST-RCNN"><a href="#FAST-RCNN" class="headerlink" title="FAST RCNN"></a>FAST RCNN</h3><p><a href="https://zhuanlan.zhihu.com/p/24780395" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24780395</a></p>
+<p>bbox回归直接拟合GT与预测的位置</p>
+<h3 id="FASTER-R-CNN"><a href="#FASTER-R-CNN" class="headerlink" title="FASTER R-CNN"></a>FASTER R-CNN</h3><p>我透，看了三天搞明白到底什么鬼</p>
+<p><img src="https://pic4.zhimg.com/80/v2-e64a99b38f411c337f538eb5f093bdf3_720w.jpg" alt="faster rcnn"></p>
+<p>backbone特征提取就不说了</p>
+<p>RPN中我们先用feature map的softmax（上分支，分类）以及loc（下分支，位置）来拟合anchor和GTbox的offset和类别以及相应类别</p>
+<p>RPN中预测loc和softmax结果进一步去生成proposal，我们根据anchor和网络输出的loc生成proposal，再将相应的类别按idx赋对，也就生成了proposal（这里选取2000个）</p>
+<p>后续再用proposal_target_creator再去与GT进行比较（因为由anchor通过loc生成，这是新的，需要在于GT进行iou比较选取最优样本），选取出128个进行之后的训练，得到最后的128个样本loc和类别</p>
+<p>然后我们通过ROIpooling生成7x7的feature map</p>
+<p>最后进行classfication和loc回归</p>
+<p>最后采样后的128个样本的loc和类别和最后的预测的loc和classification进行拟合</p>
+<p>也就是4个loss，总结一下哈</p>
+<p>anchor与GT的offset和RPN网络前面输出的pred_loc的结果去做loss smoothL1<br>anchor和pred_loc的类别拟合 cross entropy loss</p>
+<p>采样后的ROI和GT的offset和网络最后的HEAD的pred_loc去做loss<br>ROI和pred的类别拟合</p>
+<p>ROIPOOLING：2次量化</p>
+<ol>
+<li>由于proposal是对应MXN尺度的，所以首先使用spatial_scale参数将其映射回(M/16)X(N/16)大小的feature map尺度；</li>
+<li>再将每个proposal对应的feature map区域水平分为pool_h*pool_w的网格；</li>
+<li>对网格的每一份都进行max pooling处理。</li>
+</ol>
+<p>1)Conv layers使用的是VGG16，feat_stride=32(即表示，经过网络层后图片缩小为原图的1/32),原图800<em>800,最后一层特征图feature map大小:25</em>25</p>
+<p>2)假定原图中有一region proposal，大小为665<em>665，这样，映射到特征图中的大小：665/32=20.78,即20.78</em>20.78，如果你看过Caffe的Roi Pooling的C++源码，在计算的时候会进行取整操作，于是，进行所谓的第一次量化，即映射的特征图大小为20*20（这里我觉得也有padding的影响）</p>
+<p>3)假定pooled_w=7,pooled_h=7,即pooling后固定成7<em>7大小的特征图，所以，将上面在 feature map上映射的20</em>20的 region  proposal划分成49个同等大小的小区域，每个小区域的大小20/7=2.86,即2.86<em>2.86，此时，进行第二次量化，故小区域大小变成2</em>2</p>
+<p>4)每个2<em>2的小区域里，取出其中最大的像素值，作为这一个区域的‘代表’，这样，49个小区域就输出49个像素值，组成7</em>7大小的feature map</p>
+<p>总结，所以，通过上面可以看出，经过两次量化，即将浮点数取整，原本在特征图上映射的20<em>20大小的region proposal，偏差成大小为7</em>7的，这样的像素偏差势必会对后层的回归定位产生影响</p>
+<p>ROIALIGN：</p>
+<p> 同样，针对上图，有着类似的映射</p>
+<pre><code> 1)Conv layers使用的是VGG16，feat_stride=32(即表示，经过网络层后图片缩小为原图的1/32),原图800*800,最后一层特征图feature map大小:25*25
+
+  2)假定原图中有一region proposal，大小为665*665，这样，映射到特征图中的大小：665/32=20.78,即20.78*20.78，此时，没有像RoiPooling那样就行取整操作，保留浮点数
+
+  3)假定pooled_w=7,pooled_h=7,即pooling后固定成7*7大小的特征图，所以，将在 feature map上映射的20.78*20.78的region proposal 划分成49个同等大小的小区域，每个小区域的大小20.78/7=2.97,即2.97*2.97
+
+  4)假定采样点数为4，即表示，对于每个2.97*2.97的小区域，平分四份，每一份取其中心点位置，而中心点位置的像素，采用双线性插值法进行计算，这样，就会得到四个点的像素值，如下图
+</code></pre><p><img src="http://p98.pstatp.com/large/pgc-image/1537960311955d415820c98" alt=""></p>
+<p><a href="https://www.cnblogs.com/kerwins-AC/p/9752679.html" target="_blank" rel="noopener">模型准备篇</a><br><a href="https://www.cnblogs.com/kerwins-AC/p/9728731.html" target="_blank" rel="noopener">模型训练篇</a><br><a href="https://zhuanlan.zhihu.com/p/31426458" target="_blank" rel="noopener">一文看懂faster R-CNN</a><br><a href="https://blog.csdn.net/qq_43477550/article/details/105584364" target="_blank" rel="noopener">faster rcnn面试问题</a></p>
+<h3 id="rcnn系列发展路线"><a href="#rcnn系列发展路线" class="headerlink" title="rcnn系列发展路线"></a>rcnn系列发展路线</h3><p>RCNN-&gt;SPP将RCNN的selective search分别将图片作为输入修改为输入一张图片，在后续的feature map定位selective search的位置，这里SPP引入了SPP层 回归分类还是采用RCNN的东西，回归L2loss ，分类SVM</p>
+<p>SPP-&gt;fast RCNN SPP修改为ROI POOLING，且合并特征提取，bbox回归和分类，，分类器由SVM替换为softmax，回归换成L1还是去直接拟合坐标和宽高</p>
 
       
     </div>
@@ -536,9 +618,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
-          
             <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
+          
+            <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
           
         </div>
       
@@ -633,7 +715,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">41</span>
+                    <span class="site-state-item-count">45</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -837,7 +919,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV1理解"><span class="nav-number">1.</span> <span class="nav-text">YOLOV1理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV2"><span class="nav-number">2.</span> <span class="nav-text">YOLOV2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV3"><span class="nav-number">3.</span> <span class="nav-text">YOLOV3</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV1理解"><span class="nav-number">1.</span> <span class="nav-text">YOLOV1理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV2"><span class="nav-number">2.</span> <span class="nav-text">YOLOV2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV3"><span class="nav-number">3.</span> <span class="nav-text">YOLOV3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">4.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-CNN"><span class="nav-number">5.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPPNET"><span class="nav-number">6.</span> <span class="nav-text">SPPNET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAST-RCNN"><span class="nav-number">7.</span> <span class="nav-text">FAST RCNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FASTER-R-CNN"><span class="nav-number">8.</span> <span class="nav-text">FASTER R-CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rcnn系列发展路线"><span class="nav-number">9.</span> <span class="nav-text">rcnn系列发展路线</span></a></li></ol></div>
             
 
           </div>
