@@ -110,7 +110,7 @@
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ih9e1cgcj30d80ergm0.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ihenozyvj30og0nfmyj.jpg">
 <meta property="og:image" content="https://wx2.sinaimg.cn/mw690/007Epu9Pgy1g0ihenlv4sj30og0k1ta3.jpg">
-<meta property="og:updated_time" content="2019-04-27T07:02:39.756Z">
+<meta property="og:updated_time" content="2020-06-14T14:52:07.301Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积相关知识">
 <meta name="twitter:description" content="卷积与互相关在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。">
@@ -411,7 +411,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-04-27 15:02:39" itemprop="dateModified" datetime="2019-04-27T15:02:39+08:00">2019-04-27</time>
+                <time title="修改时间：2020-06-14 22:52:07" itemprop="dateModified" datetime="2020-06-14T22:52:07+08:00">2020-06-14</time>
               
             
           </span>
@@ -463,7 +463,8 @@
       
 
       
-        <h3 id="卷积与互相关"><a href="#卷积与互相关" class="headerlink" title="卷积与互相关"></a>卷积与互相关</h3><p>在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。<br><a id="more"></a><br><img src="https://wx4.sinaimg.cn/mw690/007Epu9Pgy1g0igur5fr8j30og0h2ab9.jpg" width="50%" height="50%"><br>在深度学习中，卷积中的过滤器不经过反转。严格来说，这是互相关。我们本质上是执行逐元素乘法和加法。但在深度学习中，直接将其称之为卷积更加方便。这没什么问题，因为过滤器的权重是在训练阶段学习到的。如果上面例子中的反转函数 g 是正确的函数，那么经过训练后，学习得到的过滤器看起来就会像是反转后的函数 g。因此，在训练之前，没必要像在真正的卷积中那样首先反转过滤器。</p>
+        <h3 id="卷积与互相关"><a href="#卷积与互相关" class="headerlink" title="卷积与互相关"></a>卷积与互相关</h3><p>在深度学习领域中卷积的本质上是互相关(cross-corelation),区别就是核是否进行了旋转。<br><a id="more"></a><br><img src="https://wx4.sinaimg.cn/mw690/007Epu9Pgy1g0igur5fr8j30og0h2ab9.jpg" width="50%" height="50%"></p>
+<p>在深度学习中，卷积中的过滤器不经过反转。严格来说，这是互相关。我们本质上是执行逐元素乘法和加法。但在深度学习中，直接将其称之为卷积更加方便。这没什么问题，因为过滤器的权重是在训练阶段学习到的。如果上面例子中的反转函数 g 是正确的函数，那么经过训练后，学习得到的过滤器看起来就会像是反转后的函数 g。因此，在训练之前，没必要像在真正的卷积中那样首先反转过滤器。</p>
 <h3 id="3D卷积"><a href="#3D卷积" class="headerlink" title="3D卷积"></a>3D卷积</h3><p>3D卷积的过滤器在三个方向（图像的高度，宽度，通道）上移动。在每个位置，逐元素的乘法和加法都会提供一个数值。因为过滤器是滑过一个 3D 空间，所以输出数值也按 3D 空间排布。也就是说输出是一个 3D 数据。</p>
 <p><img src="https://wx2.sinaimg.cn/mw690/007Epu9Ply1g0ih1z0bigj30og0hvq4b.jpg" width="50%" height="50%"></p>
 <h3 id="转置卷积（去卷积）"><a href="#转置卷积（去卷积）" class="headerlink" title="转置卷积（去卷积）"></a>转置卷积（去卷积）</h3><p>对于很多网络架构的很多应用而言，我们往往需要进行与普通卷积方向相反的转换，即我们希望执行上采样。例子包括生成高分辨率图像以及将低维特征图映射到高维空间，比如在自动编码器或形义分割中。（在后者的例子中，形义分割首先会提取编码器中的特征图，然后在解码器中恢复原来的图像大小，使其可以分类原始图像中的每个像素。）</p>

@@ -96,17 +96,20 @@
 
 
 
-  <meta name="description" content="record my life">
+  <meta name="description" content="const 与 指针12345678910111213141516171819const int *p = c;const修饰的是int *p，因此int *p（指针）是常量我们不可以通过*p去修改，我们可以通过 p = &amp;amp;b，修改p的地址，来修改指针指向的内容int a = 1;int b = 2;*p = a //错误p = &amp;amp;b //正确int* const pconst修饰">
 <meta property="og:type" content="article">
 <meta property="og:title" content="c++面试小结">
 <meta property="og:url" content="http://yoursite.com/2020/06/14/c-面试小结/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="record my life">
+<meta property="og:description" content="const 与 指针12345678910111213141516171819const int *p = c;const修饰的是int *p，因此int *p（指针）是常量我们不可以通过*p去修改，我们可以通过 p = &amp;amp;b，修改p的地址，来修改指针指向的内容int a = 1;int b = 2;*p = a //错误p = &amp;amp;b //正确int* const pconst修饰">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-06-14T10:22:41.655Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/14/NStN7j.jpg">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/14/NSttBQ.jpg">
+<meta property="og:updated_time" content="2020-06-14T14:52:06.433Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="c++面试小结">
-<meta name="twitter:description" content="record my life">
+<meta name="twitter:description" content="const 与 指针12345678910111213141516171819const int *p = c;const修饰的是int *p，因此int *p（指针）是常量我们不可以通过*p去修改，我们可以通过 p = &amp;amp;b，修改p的地址，来修改指针指向的内容int a = 1;int b = 2;*p = a //错误p = &amp;amp;b //正确int* const pconst修饰">
+<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/14/NStN7j.jpg">
 
 
 
@@ -386,9 +389,13 @@
                 
               
 
-              <time title="创建时间：2020-06-14 18:22:41" itemprop="dateCreated datePublished" datetime="2020-06-14T18:22:41+08:00">2020-06-14</time>
+              <time title="创建时间：2020-06-14 18:22:41 / 修改时间：22:52:06" itemprop="dateCreated datePublished" datetime="2020-06-14T18:22:41+08:00">2020-06-14</time>
             
 
+            
+              
+
+              
             
           </span>
 
@@ -421,7 +428,21 @@
       
 
       
-        
+        <h3 id="const-与-指针"><a href="#const-与-指针" class="headerlink" title="const 与 指针"></a>const 与 指针</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> *p = c;</span><br><span class="line"><span class="keyword">const</span>修饰的是<span class="keyword">int</span> *p，因此<span class="keyword">int</span> *p（指针）是常量</span><br><span class="line">我们不可以通过*p去修改，我们可以通过 p = &amp;b，修改p的地址，来修改指针指向的内容</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">*p = a <span class="comment">//错误</span></span><br><span class="line">p = &amp;b <span class="comment">//正确</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span>* <span class="keyword">const</span> p</span><br><span class="line"><span class="keyword">const</span>修饰的是p，因此p是常量</span><br><span class="line">我们不可以通过p去修改，我们可以通过*p=a，来修改指针</span><br><span class="line"></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"></span><br><span class="line">p = &amp;a;<span class="comment">//错误</span></span><br><span class="line">*p = b; <span class="comment">//正确</span></span><br></pre></td></tr></table></figure>
+<h3 id="指针数组-数组指针"><a href="#指针数组-数组指针" class="headerlink" title="指针数组 数组指针"></a>指针数组 数组指针</h3><p><a href="https://blog.csdn.net/u013719339/article/details/80563247" target="_blank" rel="noopener">https://blog.csdn.net/u013719339/article/details/80563247</a></p>
+<p>数组指针(*p)[n]，是指针，指向数组的指针,数组指针是一个指针变量，占有内存中一个指针的存储空间，直接将数组地址赋给这个指针，我们就能通过这个指针去访问数组元素，偏数组整体操作（数组首地址和数组首元素地址数值上一样，但意义不一样）,我们对数组整个空间操作，对于读取矩阵行，就特别方便，很典型的例子就是矩阵运算，对单行进行操作的时候，会利用数组指针来访问行数据。</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> a[<span class="number">4</span>];</span><br><span class="line"><span class="keyword">char</span> (*pa)[<span class="number">4</span>] = &amp;a;</span><br><span class="line">在这里，pa指向的不是a的首元素，而是a的整个内存空间</span><br><span class="line">如果你对pa做自加移动操作，移动步长是<span class="number">4</span>个<span class="keyword">char</span>字符长度，而不是<span class="number">1</span>个。</span><br></pre></td></tr></table></figure>
+<p>指针数组*p[n]，是数组，数组里是指针, 指针数组是多个指针变量，以数组的形式存储在内存中，占有多个指针的存储空间，我们需要将数据内元素的内个地址赋予这个指针数组，才可以去访问数组，偏数组内元素的操作<br><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">int</span> a = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">int</span> b = <span class="number">2</span>;</span><br><span class="line"><span class="keyword">int</span> *p[<span class="number">2</span>];</span><br><span class="line">p[<span class="number">0</span>] = &amp;a;</span><br><span class="line">p[<span class="number">1</span>] = &amp;b;</span><br><span class="line">p[<span class="number">0</span>]存储的是a的地址，p存储的是存储a地址的地址，一个[x]也就相当于*(基址+x*单位大小)</span><br></pre></td></tr></table></figure></p>
+<p><img src="https://s1.ax1x.com/2020/06/14/NStN7j.jpg" alt="NStN7j.jpg"><br><img src="https://s1.ax1x.com/2020/06/14/NSttBQ.jpg" alt="NSttBQ.jpg"></p>
+<h3 id="深拷贝-浅拷贝"><a href="#深拷贝-浅拷贝" class="headerlink" title="深拷贝 浅拷贝"></a>深拷贝 浅拷贝</h3><p>浅拷贝是增加了一个指针，指向原来已经存在的内存。而深拷贝是增加了一个指针，并新开辟了一块空间</p>
+<h3 id="野指针"><a href="#野指针" class="headerlink" title="野指针"></a>野指针</h3><p>是指向“垃圾”内存的指针。<br>原因：</p>
+<ol>
+<li>指针变量没有被初始化</li>
+<li>指针指向的内存被释放了，而指针本身没有置NULL</li>
+<li>指针超过了变量的作用范围</li>
+</ol>
+<h3 id="static"><a href="#static" class="headerlink" title="static"></a>static</h3><p><a href="https://zhuanlan.zhihu.com/p/37439983" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/37439983</a></p>
+
       
     </div>
 
@@ -508,8 +529,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
             
@@ -717,6 +747,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#const-与-指针"><span class="nav-number">1.</span> <span class="nav-text">const 与 指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#指针数组-数组指针"><span class="nav-number">2.</span> <span class="nav-text">指针数组 数组指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深拷贝-浅拷贝"><span class="nav-number">3.</span> <span class="nav-text">深拷贝 浅拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#野指针"><span class="nav-number">4.</span> <span class="nav-text">野指针</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#static"><span class="nav-number">5.</span> <span class="nav-text">static</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

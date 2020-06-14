@@ -108,7 +108,8 @@
 <meta property="og:image" content="https://pic4.zhimg.com/v2-d28ded21949483b0fbb64b3612b0d543_r.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-e64a99b38f411c337f538eb5f093bdf3_720w.jpg">
 <meta property="og:image" content="http://p98.pstatp.com/large/pgc-image/1537960311955d415820c98">
-<meta property="og:updated_time" content="2020-06-13T08:46:22.760Z">
+<meta property="og:image" content="https://s1.ax1x.com/2020/06/14/NStaAs.jpg">
+<meta property="og:updated_time" content="2020-06-14T14:51:33.499Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="检测">
 <meta name="twitter:description" content="YOLO RCNN">
@@ -409,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-13 16:46:22" itemprop="dateModified" datetime="2020-06-13T16:46:22+08:00">2020-06-13</time>
+                <time title="修改时间：2020-06-14 22:51:33" itemprop="dateModified" datetime="2020-06-14T22:51:33+08:00">2020-06-14</time>
               
             
           </span>
@@ -518,6 +519,11 @@
 <li>尺度3: 与尺度2类似,使用了32x32大小的特征图.</li>
 </ul>
 <p>为了实现多标签分类，模型不再使用softmax函数作为最终的分类器，分类损失采用binary cross-entropy损失函数替换Softmax损失函数（Softmax会选择分数最高的类别判定为当前框所属的类别，而现实中一个目标可能属于多个类别标签），由于每个点所对应的 bounding box 少并且差异大，每个 bounding 与 ground truth 的 matching 策略变成了 1 对 1。原来分类网络中的softmax层都是假设一张图像或一个object只属于一个类别，但是在一些复杂场景下，一个object可能属于多个类，比如你的类别中有woman和person这两个类，那么如果一张图像中有一个woman，那么你检测的结果中类别标签就要同时有woman和person两个类，这就是多标签分类，需要用逻辑回归层来对每个类别做二分类。逻辑回归层主要用到sigmoid函数，该函数可以将输入约束在0到1的范围内，因此当一张图像经过特征提取后的某一类输出经过sigmoid函数约束后如果大于0.5，就表示属于该类，当预测的目标类别很复杂的时候，采用 logistic regression 进行分类是更有效的，比如在 Open Images Dataset 数据集进行分类.</p>
+<p>anchor回归</p>
+<p><a href="https://blog.csdn.net/weixin_43384257/article/details/100974776" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43384257/article/details/100974776</a></p>
+<p><a href="https://blog.csdn.net/qq_34199326/article/details/84109828" target="_blank" rel="noopener">https://blog.csdn.net/qq_34199326/article/details/84109828</a></p>
+<p>总结一下，YOLO系列就是根据通过grid cell（抽象将每一个1<em>1像素看作一个1</em>1的格子）操作的。首先，判断物体中心落入哪一个grid cell，哪个grid cell就负责检测这个目标，YOLOV1,YOLOV2有个缺点是每个cell确定了预测一个物体，那么他就不能预测其他物体，导致密集检测容易丢框，YOLOV3改进了这个地方，通过判断anchor与GT的最大IOU来根据anchor所在的grid cell，分配这个grid cell去判断</p>
+<p>YOLOV3 anchor回归策略与faster rcnn不太一样，首先,YOLOV3算的是pred box中心相对于相应grid cell左上角的offset（这个offset要进行sigmoid将其约束在（0，1）内），宽高与faster rcnn一样</p>
 <h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><ul>
 <li>多尺度非feature map预测</li>
 <li>卷积预测</li>
@@ -542,7 +548,7 @@
 <p>4个独立的阶段，候选区域是从原图片抠出来的子图片(selective search)</p>
 <p>特征提取阶段：然后我们在加padding和各向同性的扩展（因为fc要求图片输入和输出大小一样）通过IOU确定了正负样本，对候选区域（样本）随机采样，抽取正负样本比例为1：3</p>
 <p>分类采用多个SVM分类器</p>
-<p>回归器：对每一类目标，使用一个线性脊回归器（L2）进行精修。‘</p>
+<p>回归器：对每一类目标，使用一个线性脊回归器（L2）进行精修。</p>
 <h3 id="SPPNET"><a href="#SPPNET" class="headerlink" title="SPPNET"></a>SPPNET</h3><p>SPP-net提出：能否在feature map上提取ROI特征，这样就只需要在整幅图像上做一次卷积。</p>
 <p>首先理解ROI，在RCNN中，我们选取候选区域，每个候选区域都独立提取特征的话，那相当于每幅图片都要进行1k~2k次CNN。（当然由于有正负样本采样，实际并没有有这么多）</p>
 <p>既然候选区域都是图片的一部分，那么先对整张图片进行特征提取，然后根据每个候选区域在原图上的位置选择相应的特征不就行了。这种方式正是RCNN系列的后续改进之一</p>
@@ -560,11 +566,12 @@
 <h3 id="FAST-RCNN"><a href="#FAST-RCNN" class="headerlink" title="FAST RCNN"></a>FAST RCNN</h3><p><a href="https://zhuanlan.zhihu.com/p/24780395" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/24780395</a></p>
 <p>bbox回归直接拟合GT与预测的位置</p>
 <h3 id="FASTER-R-CNN"><a href="#FASTER-R-CNN" class="headerlink" title="FASTER R-CNN"></a>FASTER R-CNN</h3><p>我透，看了三天搞明白到底什么鬼</p>
+<p><a href="https://blog.csdn.net/weixin_43384257/article/details/100974776" target="_blank" rel="noopener">https://blog.csdn.net/weixin_43384257/article/details/100974776</a><br><a href="https://blog.csdn.net/qq_34199326/article/details/84109828" target="_blank" rel="noopener">https://blog.csdn.net/qq_34199326/article/details/84109828</a></p>
 <p><img src="https://pic4.zhimg.com/80/v2-e64a99b38f411c337f538eb5f093bdf3_720w.jpg" alt="faster rcnn"></p>
 <p>backbone特征提取就不说了</p>
 <p>RPN中我们先用feature map的softmax（上分支，分类）以及loc（下分支，位置）来拟合anchor和GTbox的offset和类别以及相应类别</p>
 <p>RPN中预测loc和softmax结果进一步去生成proposal，我们根据anchor和网络输出的loc生成proposal，再将相应的类别按idx赋对，也就生成了proposal（这里选取2000个）</p>
-<p>后续再用proposal_target_creator再去与GT进行比较（因为由anchor通过loc生成，这是新的，需要在于GT进行iou比较选取最优样本），选取出128个进行之后的训练，得到最后的128个样本loc和类别</p>
+<p>后续再用proposal_target_creator再去与GT进行比较（因为由anchor通过loc生成，这是新的，需要在于GT进行iou比较选取最优样本），选取出128个进行之后的训练（pos和neg各选128），得到最后的128个样本loc和类别</p>
 <p>然后我们通过ROIpooling生成7x7的feature map</p>
 <p>最后进行classfication和loc回归</p>
 <p>最后采样后的128个样本的loc和类别和最后的预测的loc和classification进行拟合</p>
@@ -595,6 +602,7 @@
 <p><a href="https://www.cnblogs.com/kerwins-AC/p/9752679.html" target="_blank" rel="noopener">模型准备篇</a><br><a href="https://www.cnblogs.com/kerwins-AC/p/9728731.html" target="_blank" rel="noopener">模型训练篇</a><br><a href="https://zhuanlan.zhihu.com/p/31426458" target="_blank" rel="noopener">一文看懂faster R-CNN</a><br><a href="https://blog.csdn.net/qq_43477550/article/details/105584364" target="_blank" rel="noopener">faster rcnn面试问题</a></p>
 <h3 id="rcnn系列发展路线"><a href="#rcnn系列发展路线" class="headerlink" title="rcnn系列发展路线"></a>rcnn系列发展路线</h3><p>RCNN-&gt;SPP将RCNN的selective search分别将图片作为输入修改为输入一张图片，在后续的feature map定位selective search的位置，这里SPP引入了SPP层 回归分类还是采用RCNN的东西，回归L2loss ，分类SVM</p>
 <p>SPP-&gt;fast RCNN SPP修改为ROI POOLING，且合并特征提取，bbox回归和分类，，分类器由SVM替换为softmax，回归换成L1还是去直接拟合坐标和宽高</p>
+<p><img src="https://s1.ax1x.com/2020/06/14/NStaAs.jpg" alt="NStaAs.jpg"></p>
 
       
     </div>
