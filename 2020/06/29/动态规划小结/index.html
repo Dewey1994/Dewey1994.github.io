@@ -96,29 +96,25 @@
 
 
 
-  <meta name="description" content="风格迁移">
+  <meta name="description" content="DP">
+<meta name="keywords" content="leetcode">
 <meta property="og:type" content="article">
-<meta property="og:title" content="风格迁移小结">
-<meta property="og:url" content="http://yoursite.com/2020/06/10/风格迁移小结/index.html">
+<meta property="og:title" content="动态规划小结">
+<meta property="og:url" content="http://yoursite.com/2020/06/29/动态规划小结/index.html">
 <meta property="og:site_name" content="Dewey&#39;s blog">
-<meta property="og:description" content="风格迁移">
+<meta property="og:description" content="DP">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:image" content="https://s1.ax1x.com/2020/06/10/tTySGF.png">
-<meta property="og:image" content="https://s1.ax1x.com/2020/06/11/tHM1Ld.png">
-<meta property="og:image" content="https://img2020.cnblogs.com/blog/1704791/202005/1704791-20200510091258297-1814861622.png">
-<meta property="og:image" content="https://img2020.cnblogs.com/blog/1704791/202005/1704791-20200510091258621-1096842037.png">
-<meta property="og:updated_time" content="2020-06-11T03:33:08.015Z">
+<meta property="og:updated_time" content="2020-06-30T03:28:06.810Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="风格迁移小结">
-<meta name="twitter:description" content="风格迁移">
-<meta name="twitter:image" content="https://s1.ax1x.com/2020/06/10/tTySGF.png">
+<meta name="twitter:title" content="动态规划小结">
+<meta name="twitter:description" content="DP">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2020/06/10/风格迁移小结/">
+  <link rel="canonical" href="http://yoursite.com/2020/06/29/动态规划小结/">
 
 
 
@@ -128,7 +124,7 @@
   };
 </script>
 
-  <title>风格迁移小结 | Dewey's blog</title>
+  <title>动态规划小结 | Dewey's blog</title>
   
 
 
@@ -348,7 +344,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/10/风格迁移小结/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/06/29/动态规划小结/">
 
     <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Dewey">
@@ -365,7 +361,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">风格迁移小结
+          <h1 class="post-title" itemprop="name headline">动态规划小结
 
               
             
@@ -391,7 +387,7 @@
                 
               
 
-              <time title="创建时间：2020-06-10 14:57:13" itemprop="dateCreated datePublished" datetime="2020-06-10T14:57:13+08:00">2020-06-10</time>
+              <time title="创建时间：2020-06-29 17:16:39" itemprop="dateCreated datePublished" datetime="2020-06-29T17:16:39+08:00">2020-06-29</time>
             
 
             
@@ -408,11 +404,29 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-11 11:33:08" itemprop="dateModified" datetime="2020-06-11T11:33:08+08:00">2020-06-11</time>
+                <time title="修改时间：2020-06-30 11:28:06" itemprop="dateModified" datetime="2020-06-30T11:28:06+08:00">2020-06-30</time>
               
             
           </span>
 
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/leetcode/" itemprop="url" rel="index"><span itemprop="name">leetcode</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -442,16 +456,12 @@
       
 
       
-        <p>风格迁移</p>
+        <p>DP</p>
 <a id="more"></a>
-<p><img src="https://s1.ax1x.com/2020/06/10/tTySGF.png" alt="tTySGF.png"></p>
-<p>content loss：img经过transform到vgg relu2-2和img直接输入vgg relu2-2做L2 loss，目的是让他们有相似的特征表示</p>
-<p>style loss GRAM矩阵有表征风格的能力，我们去拟合输入图像和网络，让其有相似风格</p>
-<h4 id="gram-matrix"><a href="#gram-matrix" class="headerlink" title="gram matrix"></a>gram matrix</h4><p><img src="https://s1.ax1x.com/2020/06/11/tHM1Ld.png" alt="协方差矩阵.png"></p>
-<p>n维欧式空间中任意k个向量之间两两的内积所组成的矩阵，称为这k个向量的格拉姆矩阵(Gram matrix)，很明显，这是一个对称矩阵。</p>
-<p><img src="https://img2020.cnblogs.com/blog/1704791/202005/1704791-20200510091258297-1814861622.png" alt=""></p>
-<p><img src="https://img2020.cnblogs.com/blog/1704791/202005/1704791-20200510091258621-1096842037.png" alt=""></p>
-<p>Gram Matrix实际上可看做是feature之间的偏心协方差矩阵（即没有减去均值的协方差矩阵），在feature map中，每一个数字都来自于一个特定滤波器在特定位置的卷积，因此每个数字就代表一个特征的强度，而Gram计算的实际上是两两特征之间的相关性，哪两个特征是同时出现的，哪两个是此消彼长的等等，同时，Gram的对角线元素，还体现了每个特征在图像中出现的量，因此，Gram有助于把握整个图像的大体风格。有了表示风格的Gram Matrix，要度量两个图像风格的差异，只需比较他们Gram Matrix的差异即可。</p>
+<p><a href="https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie/dong-tai-gui-hua-xiang-jie-jin-jie" target="_blank" rel="noopener">https://labuladong.gitbook.io/algo/dong-tai-gui-hua-xi-lie/dong-tai-gui-hua-xiang-jie-jin-jie</a></p>
+<h3 id="fib"><a href="#fib" class="headerlink" title="fib"></a>fib</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 原始递归fib</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n&lt;=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">return</span> fib(n<span class="number">-1</span>)+fib(n<span class="number">-2</span>)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 带memo的fib</span></span><br><span class="line">memo = &#123;&#125;</span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></span><br><span class="line">    <span class="keyword">if</span> n <span class="keyword">in</span> memo:</span><br><span class="line">        <span class="keyword">return</span> memo[n]</span><br><span class="line">    <span class="keyword">if</span> n&lt;=<span class="number">1</span>:</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    memo[n]=fib(n<span class="number">-1</span>)+fib(n<span class="number">-2</span>)</span><br><span class="line">    <span class="keyword">return</span> memp[n]</span><br><span class="line"></span><br><span class="line"></span><br><span class="line"><span class="comment"># 迭代</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">fib</span><span class="params">(n)</span>:</span></span><br><span class="line">    dp =[]*(n+<span class="number">1</span>)</span><br><span class="line">    dp[<span class="number">1</span>]=<span class="number">1</span></span><br><span class="line">    dp[<span class="number">2</span>]=<span class="number">2</span></span><br><span class="line">    <span class="keyword">for</span> i <span class="keyword">in</span> range(<span class="number">3</span>,n+<span class="number">1</span>):</span><br><span class="line">        dp[i]=dp[i<span class="number">-1</span>]+dp[i<span class="number">-2</span>]</span><br><span class="line">    <span class="keyword">return</span> dp[n]</span><br></pre></td></tr></table></figure>
+<h3 id="背包"><a href="#背包" class="headerlink" title="背包"></a>背包</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] = x <span class="comment"># 对于前 i 个物品，当前背包的容量为 j 时，若 x 为 true，则说明可以恰好将背包装满，</span></span><br><span class="line">            <span class="comment"># 若 x 为 false，则说明不能恰好将背包装满。</span></span><br><span class="line">i是物品，j是容量</span><br></pre></td></tr></table></figure>
+<h3 id="最长公共子序列"><a href="#最长公共子序列" class="headerlink" title="最长公共子序列"></a>最长公共子序列</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">dp[i][j] 代表字符串s1[<span class="number">0.</span>.i]与s2[<span class="number">0.</span>..j]最长的公共子序列，ij分别代表两字符串长度</span><br><span class="line"></span><br><span class="line">而背包的dp[i][j] ，i代表前i个物品可以装进背包 j代表当前背包容量</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -473,6 +483,12 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/leetcode/" rel="tag"># leetcode</a>
+          
+        </div>
+      
 
       
       
@@ -482,8 +498,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/18/深度学习小结/" rel="next" title="深度学习小结">
-                <i class="fa fa-chevron-left"></i> 深度学习小结
+              <a href="/2020/06/14/卷积小结/" rel="next" title="卷积小结">
+                <i class="fa fa-chevron-left"></i> 卷积小结
               </a>
             
           </div>
@@ -491,10 +507,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/06/11/刷题小结/" rel="prev" title="刷题小结">
-                刷题小结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -768,7 +780,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#gram-matrix"><span class="nav-number">1.</span> <span class="nav-text">gram matrix</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#fib"><span class="nav-number">1.</span> <span class="nav-text">fib</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#背包"><span class="nav-number">2.</span> <span class="nav-text">背包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最长公共子序列"><span class="nav-number">3.</span> <span class="nav-text">最长公共子序列</span></a></li></ol></div>
             
 
           </div>
