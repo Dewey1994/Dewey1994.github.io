@@ -105,12 +105,13 @@
 <meta property="og:description" content="卷积小结">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="https://img-blog.csdn.net/20180404150134375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3NjY19sZWFybmluZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast">
+<meta property="og:image" content="https://img-blog.csdnimg.cn/20190824162202269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvb2R4aW5faWU=,size_16,color_FFFFFF,t_70">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/14/NSgX3F.png">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-e123df730cbb163fff15987638bfb03e_720w.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-a20824492e3e8778a959ca3731dfeea3_720w.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-2cdae9b3ad2f1d07e2c738331dac6d8b_720w.jpg">
 <meta property="og:image" content="https://pic4.zhimg.com/v2-d95e089d13e1bf7fd572a0793fb9f4cb_b.jpg">
-<meta property="og:updated_time" content="2020-07-04T13:17:37.396Z">
+<meta property="og:updated_time" content="2020-07-09T15:02:57.562Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="卷积小结">
 <meta name="twitter:description" content="卷积小结">
@@ -411,7 +412,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-04 21:17:37" itemprop="dateModified" datetime="2020-07-04T21:17:37+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-09 23:02:57" itemprop="dateModified" datetime="2020-07-09T23:02:57+08:00">2020-07-09</time>
               
             
           </span>
@@ -468,6 +469,8 @@
 <h3 id="卷积计算"><a href="#卷积计算" class="headerlink" title="卷积计算"></a>卷积计算</h3><p><img src="https://img-blog.csdn.net/20180404150134375?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQvc3NjY19sZWFybmluZw==/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/SouthEast" alt=""></p>
 <p>输出feature map有多少个，卷积核个数就有多少个，输入feature map有多少个，每个卷积核的深度就有多深</p>
 <p>图上输出两个feature map，则有2个卷积核，输入channel为3，则每个卷积核深度为3，卷积核大小人工指定</p>
+<h3 id="膨胀卷积"><a href="#膨胀卷积" class="headerlink" title="膨胀卷积"></a>膨胀卷积</h3><p>增大感受野，但膨胀卷积是离散的采样，过大的膨胀卷积会使得feature map缺乏相关性，远距离获取的信息没有相关性</p>
+<p><img src="https://img-blog.csdnimg.cn/20190824162202269.png?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L2dvb2R4aW5faWU=,size_16,color_FFFFFF,t_70" alt=""></p>
 <h3 id="深度可分离卷积"><a href="#深度可分离卷积" class="headerlink" title="深度可分离卷积"></a>深度可分离卷积</h3><p>由depthwise和pointwise两种卷积组成</p>
 <p><a href="https://imgchr.com/i/NSgX3F" target="_blank" rel="noopener"><img src="https://s1.ax1x.com/2020/06/14/NSgX3F.png" alt="NSgX3F.png"></a></p>
 <p><img src="https://pic3.zhimg.com/80/v2-e123df730cbb163fff15987638bfb03e_720w.jpg" alt=""></p>
@@ -483,7 +486,11 @@
 <p>mobilenetv2：inverted residuals linear bottlenecks<br><img src="https://pic4.zhimg.com/v2-d95e089d13e1bf7fd572a0793fb9f4cb_b.jpg" alt=""></p>
 <p>1x1 conv不再采用Relu6 而是替换为线性函数</p>
 <p>mobilenetv3:NAS </p>
-
+<h3 id="转置卷积"><a href="#转置卷积" class="headerlink" title="转置卷积"></a>转置卷积</h3><p><a href="https://www.zhihu.com/search?type=content&amp;q=%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF" target="_blank" rel="noopener">https://www.zhihu.com/search?type=content&amp;q=%E8%BD%AC%E7%BD%AE%E5%8D%B7%E7%A7%AF</a></p>
+<p>正向卷积 Y=CX<br>转置卷积 X=C^T Y</p>
+<p>只能恢复X形状，具体数值由网络学习决定</p>
+<script type="math/tex; mode=display">f_{out}=\frac{f_{in}-k-2P}{S}+1</script><p>带空洞卷积的</p>
+<script type="math/tex; mode=display">f_{out}=\frac{f_{in}-k-2P-(k-1)(d-1)}{S}+1</script>
       
     </div>
 
@@ -601,7 +608,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -805,7 +812,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积计算"><span class="nav-number">1.</span> <span class="nav-text">卷积计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度可分离卷积"><span class="nav-number">2.</span> <span class="nav-text">深度可分离卷积</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积计算"><span class="nav-number">1.</span> <span class="nav-text">卷积计算</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#膨胀卷积"><span class="nav-number">2.</span> <span class="nav-text">膨胀卷积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深度可分离卷积"><span class="nav-number">3.</span> <span class="nav-text">深度可分离卷积</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#转置卷积"><span class="nav-number">4.</span> <span class="nav-text">转置卷积</span></a></li></ol></div>
             
 
           </div>

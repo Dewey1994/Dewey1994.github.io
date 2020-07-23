@@ -97,7 +97,7 @@
 
 
   <meta name="description" content="YOLO RCNN">
-<meta name="keywords" content="目标检测,深度学习">
+<meta name="keywords" content="深度学习,目标检测">
 <meta property="og:type" content="article">
 <meta property="og:title" content="检测">
 <meta property="og:url" content="http://yoursite.com/2019/06/30/yolo理解/index.html">
@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-e64a99b38f411c337f538eb5f093bdf3_720w.jpg">
 <meta property="og:image" content="http://p98.pstatp.com/large/pgc-image/1537960311955d415820c98">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/14/NStaAs.jpg">
-<meta property="og:updated_time" content="2020-07-04T13:18:48.163Z">
+<meta property="og:updated_time" content="2020-07-15T02:44:41.847Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="检测">
 <meta name="twitter:description" content="YOLO RCNN">
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-04 21:18:48" itemprop="dateModified" datetime="2020-07-04T21:18:48+08:00">2020-07-04</time>
+                <time title="修改时间：2020-07-15 10:44:41" itemprop="dateModified" datetime="2020-07-15T10:44:41+08:00">2020-07-15</time>
               
             
           </span>
@@ -524,6 +524,7 @@
 <p><a href="https://blog.csdn.net/qq_34199326/article/details/84109828" target="_blank" rel="noopener">https://blog.csdn.net/qq_34199326/article/details/84109828</a></p>
 <p>总结一下，YOLO系列就是根据通过grid cell（抽象将每一个1<em>1像素看作一个1</em>1的格子）操作的。首先，判断物体中心落入哪一个grid cell，哪个grid cell就负责检测这个目标，YOLOV1,YOLOV2有个缺点是每个cell确定了预测一个物体，那么他就不能预测其他物体，导致密集检测容易丢框，YOLOV3改进了这个地方，通过判断anchor与GT的最大IOU来根据anchor所在的grid cell，分配这个grid cell去判断</p>
 <p>YOLOV3 anchor回归策略与faster rcnn不太一样，首先,YOLOV3算的是pred box中心相对于相应grid cell左上角的offset（这个offset要进行sigmoid将其约束在（0，1）内），宽高与faster rcnn一样</p>
+<h4 id="SPP"><a href="#SPP" class="headerlink" title="SPP"></a>SPP</h4><p>SPP即(Spatial Pyramid Pooling, 空间金字塔池化结构)，原本是为了解决卷积神经网络输入尺寸固定的问题，具体可以参考这篇博客SPP，但在YOLOv3中并不是为了解决这个问题，单纯的只是借鉴了空间金字塔的思想，通过SPP模块实现了局部特征和全局特征的融合。SPP的具体结构图1.1中有示意，很多人困惑的是经过不同尺寸核的池化得到的特征图是如何concat到一起的，其实不同尺寸的池化所用的padding也是不一样的，为的就是保证得到的特征图尺度一致。</p>
 <h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><ul>
 <li>多尺度非feature map预测</li>
 <li>卷积预测</li>
@@ -627,9 +628,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
-          
             <a href="/tags/深度学习/" rel="tag"># 深度学习</a>
+          
+            <a href="/tags/目标检测/" rel="tag"># 目标检测</a>
           
         </div>
       
@@ -724,7 +725,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">45</span>
+                    <span class="site-state-item-count">46</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -928,7 +929,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV1理解"><span class="nav-number">1.</span> <span class="nav-text">YOLOV1理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV2"><span class="nav-number">2.</span> <span class="nav-text">YOLOV2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV3"><span class="nav-number">3.</span> <span class="nav-text">YOLOV3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">4.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-CNN"><span class="nav-number">5.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPPNET"><span class="nav-number">6.</span> <span class="nav-text">SPPNET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAST-RCNN"><span class="nav-number">7.</span> <span class="nav-text">FAST RCNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FASTER-R-CNN"><span class="nav-number">8.</span> <span class="nav-text">FASTER R-CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rcnn系列发展路线"><span class="nav-number">9.</span> <span class="nav-text">rcnn系列发展路线</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV1理解"><span class="nav-number">1.</span> <span class="nav-text">YOLOV1理解</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#reference"><span class="nav-number">1.1.</span> <span class="nav-text">reference</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV2"><span class="nav-number">2.</span> <span class="nav-text">YOLOV2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#YOLOV3"><span class="nav-number">3.</span> <span class="nav-text">YOLOV3</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SPP"><span class="nav-number">3.1.</span> <span class="nav-text">SPP</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SSD"><span class="nav-number">4.</span> <span class="nav-text">SSD</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#R-CNN"><span class="nav-number">5.</span> <span class="nav-text">R-CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#SPPNET"><span class="nav-number">6.</span> <span class="nav-text">SPPNET</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FAST-RCNN"><span class="nav-number">7.</span> <span class="nav-text">FAST RCNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#FASTER-R-CNN"><span class="nav-number">8.</span> <span class="nav-text">FASTER R-CNN</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#rcnn系列发展路线"><span class="nav-number">9.</span> <span class="nav-text">rcnn系列发展路线</span></a></li></ol></div>
             
 
           </div>
