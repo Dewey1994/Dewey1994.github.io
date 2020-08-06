@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-3aab53d50ab65e11ad3c9e3decf895c2_720w.jpg">
 <meta property="og:image" content="https://pic3.zhimg.com/80/v2-f6787a16c23950d129a7927269d5352a_720w.jpg">
 <meta property="og:image" content="https://s1.ax1x.com/2020/05/28/teIEKP.png">
-<meta property="og:updated_time" content="2020-07-15T02:44:42.611Z">
+<meta property="og:updated_time" content="2020-07-28T09:20:27.698Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="机器学习小结">
 <meta name="twitter:description" content="机器学习算法小结">
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-15 10:44:42" itemprop="dateModified" datetime="2020-07-15T10:44:42+08:00">2020-07-15</time>
+                <time title="修改时间：2020-07-28 17:20:27" itemprop="dateModified" datetime="2020-07-28T17:20:27+08:00">2020-07-28</time>
               
             
           </span>
@@ -467,6 +467,19 @@
 <h3 id="频率派和贝叶斯派"><a href="#频率派和贝叶斯派" class="headerlink" title="频率派和贝叶斯派"></a>频率派和贝叶斯派</h3><p>它们的区别：频率学派只关注从 抽样/实验 的结果中提取信息，而贝叶斯学派除了关心结果之外，还会设置一个一个主观的先验信息，从而进行分析得到后验信息作为最终结果。</p>
 <p>频率派认为参数是客观存在，不会改变，虽然未知，但却是固定值；贝叶斯派则认为参数是随机值，因为没有观察到，那么和是一个随机数也没有什么区别，因此参数也可以有分布</p>
 <p>频率派最常关心的是似然函数，而贝叶斯派最常关心的是后验分布。我们会发现，后验分布其实就是似然函数乘以先验分布再normalize一下使其积分到1。因此两者的很多方法都是相通的。贝叶斯派因为所有的参数都是随机变量，都有分布，因此可以使用一些基于采样的方法（如MCMC）使得我们更容易构建复杂模型。频率派的优点则是没有假设一个先验分布，因此更加客观，也更加无偏，在一些保守的领域（比如制药业、法律）比贝叶斯方法更受到信任。</p>
+<h3 id="概率分类法（贝叶斯）"><a href="#概率分类法（贝叶斯）" class="headerlink" title="概率分类法（贝叶斯）"></a>概率分类法（贝叶斯）</h3><p>基本问题</p>
+<ol>
+<li>假设有两个w1 w2</li>
+<li>假设某样本x，要么x属于w1 要么属于w2</li>
+</ol>
+<p>则我们最后所求为P(w1|x) P(w2|x) 且有P(w1|x)+P(w2|x)=1</p>
+<p>我们要判别的是</p>
+<p>若P(w1|x)&gt;P(w2|x)，则x属于w1<br>若P(w1|x)&lt;P(w2|x)，则x属于x2</p>
+<p>我们在CNN分类时，考虑的就是这个概率，给定x的条件下，x属于正例或者负例的概率</p>
+<p>我们用贝叶斯公式展开这个后验概率</p>
+<script type="math/tex; mode=display">P(\omega_1|x)=\frac{P(x,\omega_1)}{P(x)}=\frac{P(x|\omega_1)P(\omega_1)}{P(x)}</script><p>则上式我们可以换成</p>
+<p>若P(x|w1)P(w1)&gt;P(x|w2)P(w2) ，则x属于w1<br>若P(x|w1)P(w1)&lt;P(x|w2)P(w2)，则x属于w2</p>
+<p>其中P(w1)叫做先验概率，在贝叶斯估计中，先验概率是决定概率估计很重要的一个因素，一般来说，我们在不知道先验概率的情况下，我们就假定他们的概率一样，这就可以省去先验概率，从而去求解P(x|w1)，一个概率密度估计问题</p>
 <h3 id="感知机"><a href="#感知机" class="headerlink" title="感知机"></a>感知机</h3><p>感知机是一个<strong>二类分类的线性分类模型</strong>，感知机对应于输入空间中将实例划分为正负两类的分离超平面，属于判别模型</p>
 <h4 id="感知机模型"><a href="#感知机模型" class="headerlink" title="感知机模型"></a>感知机模型</h4><script type="math/tex; mode=display">f(x)=sign(\omega \cdot x + b)</script><h4 id="感知机学习策略（损失函数推导）（误分类点到超平面的距离）"><a href="#感知机学习策略（损失函数推导）（误分类点到超平面的距离）" class="headerlink" title="感知机学习策略（损失函数推导）（误分类点到超平面的距离）"></a>感知机学习策略（损失函数推导）（误分类点到超平面的距离）</h4><ul>
 <li>两个选择<ol>
@@ -504,8 +517,10 @@
 <p>大k值，就相当于用较大的邻域中的训练实例进行预测，近似误差增大，估计误差减小，与输入实例较远的点也会对预测起作用，k值得增大就意味着模型变得简单。</p>
 <p>在应用中，k值一般选用一个较小的数值，通常采用交叉验证法来选取最优的k值</p>
 <h4 id="kd-tree"><a href="#kd-tree" class="headerlink" title="kd tree"></a>kd tree</h4><p>构造平衡kd树，搜索kd树</p>
-<h3 id="朴素贝叶斯法（生成模型）"><a href="#朴素贝叶斯法（生成模型）" class="headerlink" title="朴素贝叶斯法（生成模型）"></a>朴素贝叶斯法（生成模型）</h3><p>朴素贝叶斯法是基于贝叶斯订定理和特征条件独立假设的<strong>分类方法</strong></p>
+<h3 id="朴素贝叶斯法（生成模型）"><a href="#朴素贝叶斯法（生成模型）" class="headerlink" title="朴素贝叶斯法（生成模型）"></a>朴素贝叶斯法（生成模型）</h3><p><strong>本质就是根据训练集统计概率，测试的时候查表得到相应的概率</strong></p>
+<p>朴素贝叶斯法是基于贝叶斯订定理和特征条件独立假设的<strong>分类方法</strong></p>
 <p>朴素贝叶斯法通过训练数据集，通过先验分布，条件概率分布（条件独立性）学习联合概率分布$P(X,Y)$</p>
+<p>对于测试中不存在的样本，我们在概率中的分子分母添加变量使得在出现不存在样本的情况下的概率不为0</p>
 <p><strong>后验概率最大化等价于期望风险最小化</strong></p>
 <p>学习策略 极大似然估计 贝叶斯估计</p>
 <p><img src="https://s1.ax1x.com/2020/04/30/JqTSOK.jpg" alt="JqTSOK.jpg"></p>
@@ -821,7 +836,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">46</span>
+                    <span class="site-state-item-count">48</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -1025,7 +1040,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#频率派和贝叶斯派"><span class="nav-number">1.</span> <span class="nav-text">频率派和贝叶斯派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机"><span class="nav-number">2.</span> <span class="nav-text">感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机模型"><span class="nav-number">2.1.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略（损失函数推导）（误分类点到超平面的距离）"><span class="nav-number">2.2.</span> <span class="nav-text">感知机学习策略（损失函数推导）（误分类点到超平面的距离）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）"><span class="nav-number">2.3.</span> <span class="nav-text">感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN-K近邻法"><span class="nav-number">3.</span> <span class="nav-text">KNN K近邻法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#距离度量"><span class="nav-number">3.1.</span> <span class="nav-text">距离度量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K值的选择"><span class="nav-number">3.2.</span> <span class="nav-text">K值的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kd-tree"><span class="nav-number">3.3.</span> <span class="nav-text">kd tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯法（生成模型）"><span class="nav-number">4.</span> <span class="nav-text">朴素贝叶斯法（生成模型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树"><span class="nav-number">5.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID3"><span class="nav-number">5.1.</span> <span class="nav-text">ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C4-5"><span class="nav-number">5.2.</span> <span class="nav-text">C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CART"><span class="nav-number">5.3.</span> <span class="nav-text">CART</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树算法小结"><span class="nav-number">5.4.</span> <span class="nav-text">决策树算法小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集成学习"><span class="nav-number">5.5.</span> <span class="nav-text">集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Bagging"><span class="nav-number">5.5.1.</span> <span class="nav-text">Bagging</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boosting"><span class="nav-number">5.5.2.</span> <span class="nav-text">boosting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stacking"><span class="nav-number">5.5.3.</span> <span class="nav-text">stacking</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机森林"><span class="nav-number">5.5.4.</span> <span class="nav-text">随机森林</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Adaboost"><span class="nav-number">5.5.5.</span> <span class="nav-text">Adaboost</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GBDT"><span class="nav-number">5.5.6.</span> <span class="nav-text">GBDT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理论和定理"><span class="nav-number">6.</span> <span class="nav-text">理论和定理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PAC理论"><span class="nav-number">6.1.</span> <span class="nav-text">PAC理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没有免费午餐定理"><span class="nav-number">6.2.</span> <span class="nav-text">没有免费午餐定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#奥卡姆剃刀原理"><span class="nav-number">6.3.</span> <span class="nav-text">奥卡姆剃刀原理</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#频率派和贝叶斯派"><span class="nav-number">1.</span> <span class="nav-text">频率派和贝叶斯派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率分类法（贝叶斯）"><span class="nav-number">2.</span> <span class="nav-text">概率分类法（贝叶斯）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#感知机"><span class="nav-number">3.</span> <span class="nav-text">感知机</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机模型"><span class="nav-number">3.1.</span> <span class="nav-text">感知机模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习策略（损失函数推导）（误分类点到超平面的距离）"><span class="nav-number">3.2.</span> <span class="nav-text">感知机学习策略（损失函数推导）（误分类点到超平面的距离）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）"><span class="nav-number">3.3.</span> <span class="nav-text">感知机学习算法（极小化误分类点到超平面的距离，采用随机梯度下降法）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#KNN-K近邻法"><span class="nav-number">4.</span> <span class="nav-text">KNN K近邻法</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#距离度量"><span class="nav-number">4.1.</span> <span class="nav-text">距离度量</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K值的选择"><span class="nav-number">4.2.</span> <span class="nav-text">K值的选择</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#kd-tree"><span class="nav-number">4.3.</span> <span class="nav-text">kd tree</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#朴素贝叶斯法（生成模型）"><span class="nav-number">5.</span> <span class="nav-text">朴素贝叶斯法（生成模型）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#决策树"><span class="nav-number">6.</span> <span class="nav-text">决策树</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#ID3"><span class="nav-number">6.1.</span> <span class="nav-text">ID3</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#C4-5"><span class="nav-number">6.2.</span> <span class="nav-text">C4.5</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#CART"><span class="nav-number">6.3.</span> <span class="nav-text">CART</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#决策树算法小结"><span class="nav-number">6.4.</span> <span class="nav-text">决策树算法小结</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#集成学习"><span class="nav-number">6.5.</span> <span class="nav-text">集成学习</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Bagging"><span class="nav-number">6.5.1.</span> <span class="nav-text">Bagging</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#boosting"><span class="nav-number">6.5.2.</span> <span class="nav-text">boosting</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#stacking"><span class="nav-number">6.5.3.</span> <span class="nav-text">stacking</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#随机森林"><span class="nav-number">6.5.4.</span> <span class="nav-text">随机森林</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Adaboost"><span class="nav-number">6.5.5.</span> <span class="nav-text">Adaboost</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#GBDT"><span class="nav-number">6.5.6.</span> <span class="nav-text">GBDT</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#理论和定理"><span class="nav-number">7.</span> <span class="nav-text">理论和定理</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#PAC理论"><span class="nav-number">7.1.</span> <span class="nav-text">PAC理论</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#没有免费午餐定理"><span class="nav-number">7.2.</span> <span class="nav-text">没有免费午餐定理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#奥卡姆剃刀原理"><span class="nav-number">7.3.</span> <span class="nav-text">奥卡姆剃刀原理</span></a></li></ol></li></ol></div>
             
 
           </div>
