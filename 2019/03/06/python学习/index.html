@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="初识super在类的继承中，如果重定义某个方法，该方法会覆盖父类的同名方法，但有时，我们希望能同时实现父类的功能，这时，我们就需要调用父类的方法了，可通过使用 super 来实现，比如：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-15T02:44:40.179Z">
+<meta property="og:updated_time" content="2020-08-11T01:45:23.645Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python小结">
 <meta name="twitter:description" content="初识super在类的继承中，如果重定义某个方法，该方法会覆盖父类的同名方法，但有时，我们希望能同时实现父类的功能，这时，我们就需要调用父类的方法了，可通过使用 super 来实现，比如：">
@@ -404,7 +404,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-15 10:44:40" itemprop="dateModified" datetime="2020-07-15T10:44:40+08:00">2020-07-15</time>
+                <time title="修改时间：2020-08-11 09:45:23" itemprop="dateModified" datetime="2020-08-11T09:45:23+08:00">2020-08-11</time>
               
             
           </span>
@@ -504,6 +504,32 @@
 <h3 id="python-垃圾回收"><a href="#python-垃圾回收" class="headerlink" title="python 垃圾回收"></a>python 垃圾回收</h3><p><a href="https://zhuanlan.zhihu.com/p/62282961" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/62282961</a></p>
 <p>引用计数为主，标记-清除和隔代回收为辅</p>
 <h3 id="python-闭包"><a href="#python-闭包" class="headerlink" title="python 闭包"></a>python 闭包</h3><p><a href="https://blog.csdn.net/marty_fu/article/details/7679297" target="_blank" rel="noopener">https://blog.csdn.net/marty_fu/article/details/7679297</a></p>
+<h3 id="GIL"><a href="#GIL" class="headerlink" title="GIL"></a>GIL</h3><p>python的thread是真正的系统thread</p>
+<p>GIL Global Interpreter Lock(全局解释器锁)</p>
+<p>GIL并不是Python的特性，它是在实现Python解析器(CPython)时所引入的一个概念。同样一段代码可以通过CPython，PyPy，Psyco等不同的Python执行环境来执行。像其中的JPython就没有GIL。然而因为CPython是大部分环境下默认的Python执行环境。所以在很多人的概念里CPython就是Python，也就想当然的把GIL归结为Python语言的缺陷。所以这里要先明确一点：GIL并不是Python的特性，Python完全可以不依赖于GIL。</p>
+<p>GIL只考虑了单核情况下的多线程运行</p>
+<p>每个进程内只有一个GIL锁，同一时间只允许一个线程抢占GIL并执行</p>
+<p>GIL的释放方式</p>
+<ol>
+<li>遇到了IO，释放GIL</li>
+<li>python2 ticks到了 or python3 时间到了15ms</li>
+</ol>
+<p>线程安全问题：由于tick or 时间到了 对于非原子操作可能产生出乎意料的影响，所以并不是安全的</p>
+<ul>
+<li>单核机器上,GIL是比较好的多线程并发的机制,但在多核机器上,GIL使得计算密集型Python应用无法充分利用多核;计算密集型可以采用多进程的方式运行，但是用多进程的效率也不一定会高，因为进程太重了</li>
+<li>GIL对于CPU密集不友好  对于IO密集友好</li>
+<li>GIL对于多核多线程：原因是单核下多线程，每次释放GIL，唤醒的那个线程都能获取到GIL锁，所以能够无缝执行，但多核下，CPU0释放GIL后，其他CPU上的线程都会进行竞争，但GIL可能会马上又被CPU0拿到，导致其他几个CPU上被唤醒后的线程会醒着等待到切换时间后又进入待调度状态，这样会造成线程颠簸(thrashing)，导致效率更低选用多进程</li>
+</ul>
+<p><a href="http://cenalulu.github.io/python/gil-in-python/" target="_blank" rel="noopener">http://cenalulu.github.io/python/gil-in-python/</a><br><a href="http://dabeaz.blogspot.com/2010/01/python-gil-visualized.html" target="_blank" rel="noopener">http://dabeaz.blogspot.com/2010/01/python-gil-visualized.html</a><br><a href="https://realpython.com/python-gil/#what-problem-did-the-gil-solve-for-python" target="_blank" rel="noopener">https://realpython.com/python-gil/#what-problem-did-the-gil-solve-for-python</a><br><a href="https://zhuanlan.zhihu.com/p/20953544" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/20953544</a><br><a href="https://zhuanlan.zhihu.com/p/75780308" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/75780308</a><br><a href="https://blog.csdn.net/weixin_41594007/article/details/79485847" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41594007/article/details/79485847</a></p>
+<p>问题2: 互斥锁和Gil锁的关系</p>
+<p>Gil锁  : 保证同一时刻只有一个线程能使用到cpu<br>互斥锁 : 多线程时,保证修改共享数据时有序的修改,不会产生数据修改混乱</p>
+<p>首先假设只有一个进程,这个进程中有两个线程 Thread1,Thread2, 要修改共享的数据date, 并且有互斥锁</p>
+<p>执行以下步骤</p>
+<p>(1)多线程运行，假设Thread1获得GIL可以使用cpu，这时Thread1获得 互斥锁lock,Thread1可以改date数据(但并<br>没有开始修改数据)</p>
+<p>(2)Thread1线程在修改date数据前发生了 i/o操作 或者 ticks计数满100 (注意就是没有运行到修改data数据),这个<br>时候 Thread1 让出了Gil,Gil锁可以被竞争</p>
+<p>(3) Thread1 和 Thread2 开始竞争 Gil (注意:如果Thread1是因为 i/o 阻塞 让出的Gil Thread2必定拿到Gil,如果<br>Thread1是因为ticks计数满100让出Gil 这个时候 Thread1 和 Thread2 公平竞争)</p>
+<p>(4)假设 Thread2正好获得了GIL, 运行代码去修改共享数据date,由于Thread1有互斥锁lock，所以Thread2无法更改共享数据<br>date,这时Thread2让出Gil锁 , GIL锁再次发生竞争 </p>
+<p>(5)假设Thread1又抢到GIL，由于其有互斥锁Lock所以其可以继续修改共享数据data,当Thread1修改完数据释放互斥锁lock,<br>Thread2在获得GIL与lock后才可对data进行修改</p>
 
       
     </div>
@@ -826,7 +852,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初识super"><span class="nav-number">1.</span> <span class="nav-text">初识super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入super"><span class="nav-number">2.</span> <span class="nav-text">深入super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super原理"><span class="nav-number">3.</span> <span class="nav-text">super原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器"><span class="nav-number">4.</span> <span class="nav-text">装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3-和-运算符"><span class="nav-number">5.</span> <span class="nav-text">Python3  和 * 运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append-extend"><span class="nav-number">6.</span> <span class="nav-text">append extend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range-xrange"><span class="nav-number">7.</span> <span class="nav-text">range xrange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#staticmethod-and-classmethod"><span class="nav-number">8.</span> <span class="nav-text">staticmethod and classmethod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python浅拷贝深拷贝"><span class="nav-number">9.</span> <span class="nav-text">python浅拷贝深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-垃圾回收"><span class="nav-number">10.</span> <span class="nav-text">python 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-闭包"><span class="nav-number">11.</span> <span class="nav-text">python 闭包</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#初识super"><span class="nav-number">1.</span> <span class="nav-text">初识super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#深入super"><span class="nav-number">2.</span> <span class="nav-text">深入super</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#super原理"><span class="nav-number">3.</span> <span class="nav-text">super原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#装饰器"><span class="nav-number">4.</span> <span class="nav-text">装饰器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Python3-和-运算符"><span class="nav-number">5.</span> <span class="nav-text">Python3  和 * 运算符</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#append-extend"><span class="nav-number">6.</span> <span class="nav-text">append extend</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#range-xrange"><span class="nav-number">7.</span> <span class="nav-text">range xrange</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#staticmethod-and-classmethod"><span class="nav-number">8.</span> <span class="nav-text">staticmethod and classmethod</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python浅拷贝深拷贝"><span class="nav-number">9.</span> <span class="nav-text">python浅拷贝深拷贝</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-垃圾回收"><span class="nav-number">10.</span> <span class="nav-text">python 垃圾回收</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#python-闭包"><span class="nav-number">11.</span> <span class="nav-text">python 闭包</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GIL"><span class="nav-number">12.</span> <span class="nav-text">GIL</span></a></li></ol></div>
             
 
           </div>
