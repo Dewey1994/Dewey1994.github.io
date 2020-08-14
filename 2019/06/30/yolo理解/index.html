@@ -109,7 +109,7 @@
 <meta property="og:image" content="https://pic4.zhimg.com/80/v2-e64a99b38f411c337f538eb5f093bdf3_720w.jpg">
 <meta property="og:image" content="http://p98.pstatp.com/large/pgc-image/1537960311955d415820c98">
 <meta property="og:image" content="https://s1.ax1x.com/2020/06/14/NStaAs.jpg">
-<meta property="og:updated_time" content="2020-07-15T02:44:41.847Z">
+<meta property="og:updated_time" content="2020-08-11T16:07:19.634Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="检测">
 <meta name="twitter:description" content="YOLO RCNN">
@@ -410,7 +410,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-15 10:44:41" itemprop="dateModified" datetime="2020-07-15T10:44:41+08:00">2020-07-15</time>
+                <time title="修改时间：2020-08-12 00:07:19" itemprop="dateModified" datetime="2020-08-12T00:07:19+08:00">2020-08-12</time>
               
             
           </span>
@@ -525,10 +525,12 @@
 <p>总结一下，YOLO系列就是根据通过grid cell（抽象将每一个1<em>1像素看作一个1</em>1的格子）操作的。首先，判断物体中心落入哪一个grid cell，哪个grid cell就负责检测这个目标，YOLOV1,YOLOV2有个缺点是每个cell确定了预测一个物体，那么他就不能预测其他物体，导致密集检测容易丢框，YOLOV3改进了这个地方，通过判断anchor与GT的最大IOU来根据anchor所在的grid cell，分配这个grid cell去判断</p>
 <p>YOLOV3 anchor回归策略与faster rcnn不太一样，首先,YOLOV3算的是pred box中心相对于相应grid cell左上角的offset（这个offset要进行sigmoid将其约束在（0，1）内），宽高与faster rcnn一样</p>
 <h4 id="SPP"><a href="#SPP" class="headerlink" title="SPP"></a>SPP</h4><p>SPP即(Spatial Pyramid Pooling, 空间金字塔池化结构)，原本是为了解决卷积神经网络输入尺寸固定的问题，具体可以参考这篇博客SPP，但在YOLOv3中并不是为了解决这个问题，单纯的只是借鉴了空间金字塔的思想，通过SPP模块实现了局部特征和全局特征的融合。SPP的具体结构图1.1中有示意，很多人困惑的是经过不同尺寸核的池化得到的特征图是如何concat到一起的，其实不同尺寸的池化所用的padding也是不一样的，为的就是保证得到的特征图尺度一致。</p>
-<h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><ul>
+<h3 id="SSD"><a href="#SSD" class="headerlink" title="SSD"></a>SSD</h3><p>提取了6个feature map用来预测，随feature map尺度大小的降低，先验框的尺度线性增加</p>
+<p><strong>hard negative mining</strong>：通常的做法是，先对于所有的anchor boxes计算出分类损失值（size_average=False)，也就是计算出每个anchor boxes所对应的classification loss，然后将所有正样本的classification loss值取出，将正样本anchor boxes的数量记作pos_num，再对于剩下的所有负样本anchor boxes的classification loss进行从大到小的排序，最后从排序好的负样本anchor boxes的loss中取出前3*num_pos个classification loss，再与所有的正样本分类损失值相加，最终除以的分母是num_pos。</p>
+<ul>
 <li>多尺度非feature map预测</li>
 <li>卷积预测</li>
-<li>HEM采样负样本，使得负样本大约为正样本的3倍</li>
+<li>hard negative mining 按loss从大到小sort，取topk使得与positive sample 3:1</li>
 <li>augmentation</li>
 <li>loss  loc:smoothL1 loss  cls:softmax loss</li>
 </ul>
