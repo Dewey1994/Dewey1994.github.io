@@ -104,10 +104,13 @@
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="Loss小结">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-07-07T03:33:30.162Z">
+<meta property="og:image" content="https://pic1.zhimg.com/80/v2-d32d8fd6e32ecca603ea9678695b7241_720w.jpg">
+<meta property="og:image" content="https://picb.zhimg.com/80/v2-5189de83711cd7bc66bcf4db685d03c6_720w.jpg">
+<meta property="og:updated_time" content="2020-08-14T03:07:43.047Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="loss小结">
 <meta name="twitter:description" content="Loss小结">
+<meta name="twitter:image" content="https://pic1.zhimg.com/80/v2-d32d8fd6e32ecca603ea9678695b7241_720w.jpg">
 
 
 
@@ -404,7 +407,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-07-07 11:33:30" itemprop="dateModified" datetime="2020-07-07T11:33:30+08:00">2020-07-07</time>
+                <time title="修改时间：2020-08-14 11:07:43" itemprop="dateModified" datetime="2020-08-14T11:07:43+08:00">2020-08-14</time>
               
             
           </span>
@@ -472,7 +475,24 @@
 \end{cases}</script><h3 id="focal-loss"><a href="#focal-loss" class="headerlink" title="focal loss"></a>focal loss</h3><p>focal loss: a 平衡正负样本重要性，focal loss能区分easy/Hard样本 a=0.25也就是让正负样本重要性比例为1:3</p>
 <h3 id="GHM"><a href="#GHM" class="headerlink" title="GHM"></a>GHM</h3><p>GHM：改进focal loss，类别的不平衡可以归结为难易样本的不平衡，难易样本的不平衡可以归结为梯度的不平衡<br>其中，如果让模型过多关注难分样本会引发一些问题，比如样本中的outliers，总而言之，我们不能过多关注易分样本，和难分样本，我们通过梯度函数来抑制简单样本和困难样本，也就是用二分类交叉熵和梯度密度函数的倒数相乘即可</p>
 <h3 id="softmax"><a href="#softmax" class="headerlink" title="softmax"></a>softmax</h3><script type="math/tex; mode=display">\text{Softmax}(x_{i}) = \frac{exp(x_i)}{\sum_j exp(x_j)}</script><p><a href="https://www.zhihu.com/question/294679135" target="_blank" rel="noopener">https://www.zhihu.com/question/294679135</a></p>
-<h3 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h3><script type="math/tex; mode=display">\text{Sigmoid}(x) = \frac{1}{1 + \exp(-x)}</script><h3 id="iou-giou-diou-ciou"><a href="#iou-giou-diou-ciou" class="headerlink" title="iou giou diou ciou"></a>iou giou diou ciou</h3>
+<h3 id="sigmoid"><a href="#sigmoid" class="headerlink" title="sigmoid"></a>sigmoid</h3><script type="math/tex; mode=display">\text{Sigmoid}(x) = \frac{1}{1 + \exp(-x)}</script><h3 id="smooth-L1-iou-giou-diou-ciou"><a href="#smooth-L1-iou-giou-diou-ciou" class="headerlink" title="smooth L1 iou giou diou ciou"></a>smooth L1 iou giou diou ciou</h3><h4 id="smooth-L1"><a href="#smooth-L1" class="headerlink" title="smooth L1"></a>smooth L1</h4><p>Fast RCNN中提出</p>
+<p>L2损失函数在训练初期，导数大，导致训练不稳定<br>L1损失函数在训练后期，损失函数在0处附近波动，很难收敛到更高的精度<br>smooth L1避免了L1L2的缺点</p>
+<h4 id="iou-loss"><a href="#iou-loss" class="headerlink" title="iou loss"></a>iou loss</h4><p>认为smooth L1中独立的回归四个点这种做法假设了这4个点是独立的，但是他们是有相关性的</p>
+<p>实际评价标准是IOU，多个检测框可能有相同的smooth L1 loss，但IOU相差很大</p>
+<p>提出IOU LOSS</p>
+<h4 id="GIOU-loss"><a href="#GIOU-loss" class="headerlink" title="GIOU loss"></a>GIOU loss</h4><ol>
+<li>两个框没有相交，无法反应两者距离的大小，IOU=0，无法优化，失去可导的性质</li>
+<li>IoU无法精确的反映两者的重合度大小</li>
+</ol>
+<p>约束为框A和框B的最小外接矩形</p>
+<h4 id="DIOU-LOSS-amp-CIOU-LOSS"><a href="#DIOU-LOSS-amp-CIOU-LOSS" class="headerlink" title="DIOU LOSS &amp; CIOU LOSS"></a>DIOU LOSS &amp; CIOU LOSS</h4><p>当目标框完全包裹预测框的时候，IoU和GIoU的值都一样，此时GIoU退化为IoU, 无法区分其相对位置关系</p>
+<p><img src="https://pic1.zhimg.com/80/v2-d32d8fd6e32ecca603ea9678695b7241_720w.jpg" alt=""></p>
+<p>好的目标框回归损失应该考虑三个重要的几何因素：<strong>重叠面积，中心点距离，长宽比</strong>。</p>
+<p><img src="https://picb.zhimg.com/80/v2-5189de83711cd7bc66bcf4db685d03c6_720w.jpg" alt=""></p>
+<p>DIOU LOSS只考虑了重叠面积和中心点距离</p>
+<p><strong>DIOU是考虑了框A和框B的最小外接矩形的对角线距离</strong></p>
+<p>CIOU LOSS三个都考虑了，在DIOU的基础上加了对于宽高的约束</p>
+
       
     </div>
 
@@ -794,7 +814,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hinge-LOSS"><span class="nav-number">1.</span> <span class="nav-text">Hinge LOSS</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#CE-loss-cross-entropy-loss"><span class="nav-number"></span> <span class="nav-text">CE loss(cross entropy loss)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L1（MAE）-L2-MSE"><span class="nav-number"></span> <span class="nav-text">L1（MAE） L2(MSE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#focal-loss"><span class="nav-number"></span> <span class="nav-text">focal loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GHM"><span class="nav-number"></span> <span class="nav-text">GHM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#softmax"><span class="nav-number"></span> <span class="nav-text">softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid"><span class="nav-number"></span> <span class="nav-text">sigmoid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#iou-giou-diou-ciou"><span class="nav-number"></span> <span class="nav-text">iou giou diou ciou</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hinge-LOSS"><span class="nav-number">1.</span> <span class="nav-text">Hinge LOSS</span></a></li></ol><li class="nav-item nav-level-3"><a class="nav-link" href="#CE-loss-cross-entropy-loss"><span class="nav-number"></span> <span class="nav-text">CE loss(cross entropy loss)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#L1（MAE）-L2-MSE"><span class="nav-number"></span> <span class="nav-text">L1（MAE） L2(MSE)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#focal-loss"><span class="nav-number"></span> <span class="nav-text">focal loss</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GHM"><span class="nav-number"></span> <span class="nav-text">GHM</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#softmax"><span class="nav-number"></span> <span class="nav-text">softmax</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#sigmoid"><span class="nav-number"></span> <span class="nav-text">sigmoid</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#smooth-L1-iou-giou-diou-ciou"><span class="nav-number"></span> <span class="nav-text">smooth L1 iou giou diou ciou</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#smooth-L1"><span class="nav-number">1.</span> <span class="nav-text">smooth L1</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#iou-loss"><span class="nav-number">2.</span> <span class="nav-text">iou loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GIOU-loss"><span class="nav-number">3.</span> <span class="nav-text">GIOU loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#DIOU-LOSS-amp-CIOU-LOSS"><span class="nav-number">4.</span> <span class="nav-text">DIOU LOSS &amp; CIOU LOSS</span></a></li></ol></li></div>
             
 
           </div>
