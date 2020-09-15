@@ -1,0 +1,1159 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next pisces use-motion" lang="zh-CN">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2">
+
+<link rel="stylesheet" href="/css/main.css?v=6.7.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/logo.ico?v=6.7.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=6.7.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=6.7.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Pisces',
+    version: '6.7.0',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+  
+
+
+
+
+  <meta name="description" content="数据库">
+<meta name="keywords" content="数据库">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据库">
+<meta property="og:url" content="http://yoursite.com/2020/09/14/数据库/index.html">
+<meta property="og:site_name" content="Dewey&#39;s blog">
+<meta property="og:description" content="数据库">
+<meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2020-09-15T06:22:24.783Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据库">
+<meta name="twitter:description" content="数据库">
+
+
+
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2020/09/14/数据库/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>数据库 | Dewey's blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope="" itemtype="http://schema.org/WebPage" lang="zh-CN">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope="" itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Dewey's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+      
+        <p class="site-subtitle">Better to run than curse the road.</p>
+      
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="切换导航栏">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>标签</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>分类</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-archives">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+
+  
+</nav>
+
+
+
+  
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+            
+
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope="" itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/14/数据库/">
+
+    <span hidden itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Dewey">
+      <meta itemprop="description" content="record my life">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope="" itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Dewey's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据库
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2020-09-14 21:32:54" itemprop="dateCreated datePublished" datetime="2020-09-14T21:32:54+08:00">2020-09-14</time>
+            
+
+            
+              
+
+              
+                
+                <span class="post-meta-divider">|</span>
+                
+
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">更新于</span>
+                
+                <time title="修改时间：2020-09-15 14:22:24" itemprop="dateModified" datetime="2020-09-15T14:22:24+08:00">2020-09-15</time>
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope="" itemtype="http://schema.org/Thing"><a href="/categories/数据库/" itemprop="url" rel="index"><span itemprop="name">数据库</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="数据库"><a href="#数据库" class="headerlink" title="数据库"></a>数据库</h1><a id="more"></a>
+<p>候选键 主键 外键</p>
+<p>候选键：能唯一标识每一行数据的属性可以称为候选键</p>
+<p>主键是候选键的子集，且是人为选定的</p>
+<p>外键：在其他表中为主键，在其他表中称为外键</p>
+<h2 id="数据库三大范式："><a href="#数据库三大范式：" class="headerlink" title="数据库三大范式："></a>数据库三大范式：</h2><p>第一范式：每一列都是不可分割的基本数据项，同一列中不能有多个值，即实体中的某个属性不能有多个值或者不能有重复的属性。（<strong>第一范式就是无重复的列</strong>）<strong>确保每列保持原子性</strong></p>
+<p>如果出现重复的属性，就可能需要定义一个新的实体，新的实体由重复的属性构成，新实体与原实体之间为一对多关系。第一范式的模式要求属性值不可再分裂成更小部分，即属性项不能是属性组合或是由一组属性构成。</p>
+<p>第二范式：在满足第一范式的基础上，要求数据库表中的每行必须可以被唯一地区分（<strong>非主键列完全依赖于主键，而不能是依赖于主键的一部分</strong>）  【主键有多个关键字时，只依赖主键得某一部分要把它拆开】<strong>确保表中的每列都和主键相关</strong></p>
+<p>第三范式：<strong>非主键列只依赖于主键，不依赖于其他非主键。</strong> <strong>确保每列都和主键列直接相关,而不是间接相关</strong></p>
+<p>MyISAM InnoDB区别</p>
+<ul>
+<li><p><strong>Innodb引擎</strong>：Innodb引擎提供了对数据库ACID事务的支持。并且还提供了行级锁和外键的约束。它的设计的目标就是处理大数据容量的数据库系统。 <strong>支持行级锁和表级锁，默认行级锁，MyISAM只支持表级锁</strong></p>
+</li>
+<li><p><strong>MyIASM引擎</strong>(原本Mysql的默认引擎)：不提供事务的支持，也不支持行级锁和外键。</p>
+<p>MyISAM强调性能，查询操作具有原子性，速度高于InnoDB</p>
+<p>InnoDB是聚簇索引，MyISAM是非聚簇索引</p>
+</li>
+</ul>
+<p>何谓外键约束，外键为另一个表的主键，在当前表中，外键的值要属于以它为主键表的值得集合</p>
+<h2 id="MySIAM-与-InnoDB-区别"><a href="#MySIAM-与-InnoDB-区别" class="headerlink" title="MySIAM 与 InnoDB 区别"></a>MySIAM 与 InnoDB 区别</h2><div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>myisam</th>
+<th>innoDB</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>记录存储顺序</td>
+<td>按记录存储顺序保存</td>
+<td>按主键大小有序插入</td>
+</tr>
+<tr>
+<td>外键约束&amp;事务</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>锁机制</td>
+<td>表级锁</td>
+<td>表级锁 行级锁</td>
+</tr>
+<tr>
+<td>select insert update delete</td>
+<td>select更快</td>
+<td>insert update delete更快</td>
+</tr>
+<tr>
+<td>哈希索引</td>
+<td>不支持</td>
+<td>支持</td>
+</tr>
+<tr>
+<td>全文索引</td>
+<td>支持</td>
+<td>不支持</td>
+</tr>
+</tbody>
+</table>
+</div>
+<ul>
+<li>innodb 索引是聚簇索引，myisam是非聚簇索引（聚簇索引：数据与索引一起存储于叶子结点（非叶子结点还是存储索引），非聚簇索引：数据与索引分开存（到叶子节点后需要一个辅助索引来找到当前数据））</li>
+<li>InnoDB的主键索引的叶子节点存储着行数据，因此主键索引非常高效。</li>
+<li>MyISAM索引的叶子节点存储的是行数据地址，需要再寻址一次才能得到数据。</li>
+</ul>
+<p>mysql默认使用行级锁</p>
+<ul>
+<li>锁定的数据量越小，并发程度越高，系统开销越大（会使用更多的锁）</li>
+</ul>
+<h2 id="索引类型："><a href="#索引类型：" class="headerlink" title="索引类型："></a>索引类型：</h2><ul>
+<li>主键索引，不允许为NULL，一个表只允许有一个主键</li>
+<li>唯一索引，允许为NULL，一个表允许多列创建唯一索引</li>
+<li>普通索引，基本的索引</li>
+<li>全文索引，搜索引擎使用的一种关键技术</li>
+</ul>
+<p>mysql索引默认b+树索引，有b+树索引和哈希索引，哈希索引适用于查找单条记录</p>
+<p>创建索引的原则：</p>
+<ul>
+<li>最左前缀匹配原则，mysql一直向右匹配知道遇到范围查询（尽量把使用最频繁的往左边放）</li>
+<li>较频繁作为查询条件的字段创建索引</li>
+<li>更新频繁字段不适合创建索引</li>
+<li>尽量做扩展索引，不要新建索引</li>
+</ul>
+<h2 id="事务"><a href="#事务" class="headerlink" title="事务"></a>事务</h2><p>（想法是并行）隔离级别：读不提交，读提交，重复读，序列化（串行） mysql 默认重复读级别</p>
+<h3 id="SQL-标准定义了四个隔离级别"><a href="#SQL-标准定义了四个隔离级别" class="headerlink" title="SQL 标准定义了四个隔离级别"></a><strong>SQL 标准定义了四个隔离级别</strong></h3><ul>
+<li><strong>READ-UNCOMMITTED(读取未提交)：</strong> 最低的隔离级别，允许读取尚未提交的数据变更，<strong>可能会导致脏读、幻读或不可重复读</strong>。</li>
+<li><strong>READ-COMMITTED(读取已提交)：</strong> 允许读取并发事务已经提交的数据，<strong>可以阻止脏读，但是幻读或不可重复读仍有可能发生</strong>。</li>
+<li><strong>REPEATABLE-READ(可重复读)：</strong> 对同一字段的多次读取结果都是一致的，除非数据是被本身事务自己所修改，<strong>可以阻止脏读和不可重复读，但幻读仍有可能发生</strong>。</li>
+<li><strong>SERIALIZABLE(可串行化)：</strong> 最高的隔离级别，完全服从ACID的隔离级别。所有的事务依次逐个执行，这样事务之间就完全不可能产生干扰，也就是说，<strong>该级别可以防止脏读、不可重复读以及幻读</strong>。</li>
+</ul>
+<p>四大特性:ACID 原子性，一致性，隔离性，持久性</p>
+<h3 id="并发事务带来的问题"><a href="#并发事务带来的问题" class="headerlink" title="并发事务带来的问题"></a>并发事务带来的问题</h3><ul>
+<li>脏读(Drity Read)：某个事务已更新一份数据，另一个事务在此时读取了同一份数据，由于某些原因，前一个RollBack了操作，则后一个事务所读取的数据就会是不正确的。</li>
+<li>不可重复读(Non-repeatable read):在一个事务的两次查询之中数据不一致，这可能是两次查询过程中间插入了一个事务更新的原有的数据。（delete update 锁行就行）</li>
+<li>幻读(Phantom Read):在一个事务的两次查询中数据笔数不一致，例如有一个事务查询了几列(Row)数据，而另一个事务却在此时插入了新的几列数据，先前的事务在接下来的查询中，就会发现有几列数据是它先前所没有的。（insert  所表才行）</li>
+</ul>
+<p>共享锁（读锁），排它锁（写锁）</p>
+<p>乐观锁，悲观锁</p>
+<h2 id="游标"><a href="#游标" class="headerlink" title="游标"></a>游标</h2><p>游标是系统为用户开设的一个数据缓冲区，存放SQL语句的执行结果，每个游标区都有一个名字。用户可以通过游标逐一获取记录并赋给主变量，交由主语言进一步处理。</p>
+<h2 id="触发器"><a href="#触发器" class="headerlink" title="触发器"></a>触发器</h2><p>触发器是用户定义在关系表上的一类由事件驱动的特殊的存储过程。<strong>触发器是指一段代码，当触发某个事件时，自动执行这些代码。</strong></p>
+<p>使用场景</p>
+<ul>
+<li>可以通过数据库中的相关表实现级联更改。</li>
+<li>实时监控某张表中的某个字段的更改而需要做出相应的处理。</li>
+<li>例如可以生成某些业务的编号。</li>
+<li>注意不要滥用，否则会造成数据库及应用程序的维护困难。</li>
+<li>大家需要牢记以上基础知识点，重点是理解数据类型CHAR和VARCHAR的差异，表存储引擎InnoDB和MyISAM的区别。</li>
+</ul>
+<h3 id="五种关联查询"><a href="#五种关联查询" class="headerlink" title="五种关联查询"></a>五种关联查询</h3><ul>
+<li>交叉连接（CROSS JOIN）</li>
+<li>内连接（INNER JOIN）</li>
+<li>外连接（LEFT JOIN/RIGHT JOIN）</li>
+<li>联合查询（UNION与UNION ALL）</li>
+<li>全连接（FULL JOIN）（mysql不支持）</li>
+</ul>
+<p>交叉连接（笛卡尔积）</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table1,table2, ... </span><br><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table1 <span class="keyword">cross</span> <span class="keyword">join</span> table2 <span class="keyword">cross</span> <span class="keyword">join</span> table3 ...</span><br></pre></td></tr></table></figure>
+<p>内连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table1 <span class="keyword">inner</span> <span class="keyword">join</span> table2 <span class="keyword">on</span> table1.id=table2.id</span><br><span class="line"></span><br><span class="line">slect * <span class="keyword">from</span> table1,table2 <span class="keyword">where</span> table1.id=table2.id</span><br></pre></td></tr></table></figure>
+<p>外连接</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table1 <span class="keyword">left</span>(<span class="keyword">right</span>) <span class="keyword">outer</span> <span class="keyword">join</span> table2 <span class="keyword">on</span> table1.id=table2.id</span><br></pre></td></tr></table></figure>
+<p>联合查询</p>
+<figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">select</span> * <span class="keyword">from</span> table1 <span class="keyword">union</span> <span class="keyword">select</span> * <span class="keyword">from</span> b <span class="keyword">union</span> ...</span><br></pre></td></tr></table></figure>
+<ul>
+<li>就是把多个结果集集中在一起，UNION前的结果为基准，需要注意的是联合查询的列数要相等，相同的记录行会合并</li>
+<li>如果使用UNION ALL，不会合并重复的记录行</li>
+<li>效率 UNION 高于 UNION ALL</li>
+</ul>
+<p>union &amp; union all的区别：union 对于重复记录会合并  union all 对于重复记录不合并</p>
+<h2 id="char-varchar区别"><a href="#char-varchar区别" class="headerlink" title="char varchar区别"></a>char varchar区别</h2><p><strong>char的特点</strong></p>
+<ul>
+<li>char表示定长字符串，长度是固定的；</li>
+<li>如果插入数据的长度小于char的固定长度时，则用空格填充；</li>
+<li>因为长度固定，所以存取速度要比varchar快很多，甚至能快50%，但正因为其长度固定，所以会占据多余的空间，是空间换时间的做法；</li>
+<li>对于char来说，最多能存放的字符个数为255，和编码无关</li>
+</ul>
+<p><strong>varchar的特点</strong></p>
+<ul>
+<li>varchar表示可变长字符串，长度是可变的；</li>
+<li>插入的数据是多长，就按照多长来存储；</li>
+<li>varchar在存取方面与char相反，它存取慢，因为长度不固定，但正因如此，不占据多余的空间，是时间换空间的做法；</li>
+<li>对于varchar来说，最多能存放的字符个数为65532</li>
+</ul>
+<h2 id="drop、delete与truncate的区别"><a href="#drop、delete与truncate的区别" class="headerlink" title="drop、delete与truncate的区别"></a>drop、delete与truncate的区别</h2><p>三者都表示删除，但是三者有一些差别：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th></th>
+<th>Delete</th>
+<th>Truncate</th>
+<th>Drop</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>类型</td>
+<td>属于DML（数据操纵语言）</td>
+<td>属于DDL（数据定义语言）</td>
+<td>属于DDL</td>
+</tr>
+<tr>
+<td>回滚</td>
+<td>可回滚</td>
+<td>不可回滚</td>
+<td>不可回滚</td>
+</tr>
+<tr>
+<td>删除内容</td>
+<td>表结构还在，删除表的全部或者一部分数据行</td>
+<td>表结构还在，删除表中的所有数据</td>
+<td>从数据库中删除表，所有的数据行，索引和权限也会被删除</td>
+</tr>
+<tr>
+<td>删除速度</td>
+<td>删除速度慢，需要逐行删除</td>
+<td>删除速度快</td>
+<td>删除速度最快</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>关于主键是聚簇索引，如果没有主键，InnoDB会选择一个唯一键来作为聚簇索引，如果没有唯一键，会生成一个隐式的主键。</p>
+
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2020/08/06/背包问题/" rel="next" title="背包问题">
+                <i class="fa fa-chevron-left"></i> 背包问题
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Dewey</p>
+              <p class="site-description motion-element" itemprop="description">record my life</p>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives/">
+                
+                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-name">日志</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  <a href="/categories/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">33</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  <a href="/tags/index.html">
+                    
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">27</span>
+                    <span class="site-state-item-name">标签</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+            <div class="links-of-author motion-element">
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="https://github.com/Dewey1994" title="GitHub &rarr; https://github.com/Dewey1994" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  
+                  
+                    
+                  
+                  
+                    
+                  
+                  <a href="mailto:401692632@qq.com" title="Email &rarr; mailto:401692632@qq.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i>Email</a>
+                </span>
+              
+            </div>
+          
+
+          
+
+          
+          
+
+          
+            
+          
+          
+
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库三大范式："><span class="nav-number">1.1.</span> <span class="nav-text">数据库三大范式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySIAM-与-InnoDB-区别"><span class="nav-number">1.2.</span> <span class="nav-text">MySIAM 与 InnoDB 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引类型："><span class="nav-number">1.3.</span> <span class="nav-text">索引类型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.4.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-标准定义了四个隔离级别"><span class="nav-number">1.4.1.</span> <span class="nav-text">SQL 标准定义了四个隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发事务带来的问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">并发事务带来的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标"><span class="nav-number">1.5.</span> <span class="nav-text">游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器"><span class="nav-number">1.6.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种关联查询"><span class="nav-number">1.6.1.</span> <span class="nav-text">五种关联查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-varchar区别"><span class="nav-number">1.7.</span> <span class="nav-text">char varchar区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop、delete与truncate的区别"><span class="nav-number">1.8.</span> <span class="nav-text">drop、delete与truncate的区别</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Dewey</span>
+
+  
+
+  
+</div>
+
+
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动 v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Pisces</a> v6.7.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=2.1.3"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+  
+
+
+  <script src="/js/src/utils.js?v=6.7.0"></script>
+
+  <script src="/js/src/motion.js?v=6.7.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/src/affix.js?v=6.7.0"></script>
+
+  <script src="/js/src/schemes/pisces.js?v=6.7.0"></script>
+
+
+
+  
+  <script src="/js/src/scrollspy.js?v=6.7.0"></script>
+<script src="/js/src/post-details.js?v=6.7.0"></script>
+
+
+
+  
+
+
+  <script src="/js/src/bootstrap.js?v=6.7.0"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+</body>
+</html>

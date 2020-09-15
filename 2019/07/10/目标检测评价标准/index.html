@@ -105,7 +105,7 @@
 <meta property="og:description" content="介绍目标检测的评价标准">
 <meta property="og:locale" content="zh-CN">
 <meta property="og:image" content="http://ww1.sinaimg.cn/large/7211dbc2ly1g4uk0dd3qhj20f70bfdhe.jpg">
-<meta property="og:updated_time" content="2020-06-15T15:55:26.036Z">
+<meta property="og:updated_time" content="2020-08-29T02:09:11.089Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="目标检测评价标准">
 <meta name="twitter:description" content="介绍目标检测的评价标准">
@@ -406,7 +406,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-06-15 23:55:26" itemprop="dateModified" datetime="2020-06-15T23:55:26+08:00">2020-06-15</time>
+                <time title="修改时间：2020-08-29 10:09:11" itemprop="dateModified" datetime="2020-08-29T10:09:11+08:00">2020-08-29</time>
               
             
           </span>
@@ -487,13 +487,19 @@
 <h3 id="Accuracy"><a href="#Accuracy" class="headerlink" title="Accuracy"></a>Accuracy</h3><p>准确率=预测正确的样本数/所有样本数，即预测正确的样本比例，在目标检测领域，不用这个度量标准。</p>
 <h3 id="Precision"><a href="#Precision" class="headerlink" title="Precision"></a>Precision</h3><p>精确率是指分类正确的正样本个数占分类器判定为正样本的样本个数的比例</p>
 <script type="math/tex; mode=display">Precision=\frac{TP}{TP+FP}</script><h3 id="Recall"><a href="#Recall" class="headerlink" title="Recall"></a>Recall</h3><p>召回率是指正确的正样本个数占真正样本个数的比例</p>
-<script type="math/tex; mode=display">Recall=\frac{TP}{TP+FN}</script><h3 id="AP-平均精度"><a href="#AP-平均精度" class="headerlink" title="AP 平均精度"></a>AP 平均精度</h3><p>以Recall为横轴，Precision为纵轴画出一条PR曲线，PR曲线下面的就定义为AP，一般要smooth而不是直接用这个歪的</p>
+<script type="math/tex; mode=display">Recall=\frac{TP}{TP+FN}</script><h3 id="AP-平均精度"><a href="#AP-平均精度" class="headerlink" title="AP 平均精度"></a>AP 平均精度</h3><p><a href="https://zhuanlan.zhihu.com/p/60834912" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/60834912</a></p>
+<p><strong>一句话概括AP：AP表示Recall从0~1的平均精度值</strong>。比如说Recall=0.1时，Precision=y1；Recall=0.2时，Precision=y2；…… ；Recall=1.0时，Precision=yn。那么可以以Recall为横轴，Precision为纵轴画一条曲线，曲线下的面积就是AP。</p>
+<p><strong>一句话概括mAP：mAP表示多个物体类别上的平均AP</strong>。注意，mAP有两次平均，一次在Recall取不同值时平均，一次在类别上平均。</p>
+<p>一般意思上就是取PR曲线的下的面积，也就是对曲线积分，但voc coco各有调整，VOC选择11个内插点求mAP，coco选择不同IOU阈值，不同尺度，以及101个点进行mAP计算</p>
+<p>以Recall为横轴，Precision为纵轴画出一条PR曲线，PR曲线下面的就定义为AP，一般要smooth而不是直接用这个歪的</p>
 <p><a href="https://www.cnblogs.com/hanhao970620/p/12422473.html" target="_blank" rel="noopener">https://www.cnblogs.com/hanhao970620/p/12422473.html</a></p>
 <p><img src="http://ww1.sinaimg.cn/large/7211dbc2ly1g4uk0dd3qhj20f70bfdhe.jpg" alt="AP示例"></p>
 <h3 id="MAP"><a href="#MAP" class="headerlink" title="MAP"></a>MAP</h3><p>数据集总所有类别的AP求均值即为MAP</p>
 <h3 id="ROC-AUC"><a href="#ROC-AUC" class="headerlink" title="ROC AUC"></a>ROC AUC</h3><p>ROC曲线的横坐标为假阳性（FPR）率，纵坐标为真阳性率(TPR)</p>
 <script type="math/tex; mode=display">FPR=\frac{FP}{N}</script><script type="math/tex; mode=display">TPR=\frac{TP}{P}</script><p>AUC为ROC曲线积分</p>
 <p>ROC相对于PR曲线的优点在于，当正负样本的分布发生变化，ROC曲线的形状能基本保持不变，而PR曲线则会发生剧烈变化，如果研究者更想看特定数据集下的性能，PR曲线较好</p>
+<p>AUC：一个正例，一个负例，预测为正的概率值比预测为负的概率值还要大的可能性</p>
+<p>首先AUC值是一个概率值，当你随机挑选一个正样本以及负样本，当前的分类算法根据计算得到的Score值将这个正样本排在负样本前面的概率就是AUC值，AUC值越大，当前分类算法越有可能将正样本排在负样本前面，从而能够更好地分类。</p>
 
       
     </div>
@@ -614,7 +620,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -691,7 +697,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -756,7 +764,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>

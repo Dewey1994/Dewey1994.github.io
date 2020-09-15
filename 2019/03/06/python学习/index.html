@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="初识super在类的继承中，如果重定义某个方法，该方法会覆盖父类的同名方法，但有时，我们希望能同时实现父类的功能，这时，我们就需要调用父类的方法了，可通过使用 super 来实现，比如：">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-08-11T01:45:23.645Z">
+<meta property="og:updated_time" content="2020-08-18T01:19:37.427Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="python小结">
 <meta name="twitter:description" content="初识super在类的继承中，如果重定义某个方法，该方法会覆盖父类的同名方法，但有时，我们希望能同时实现父类的功能，这时，我们就需要调用父类的方法了，可通过使用 super 来实现，比如：">
@@ -404,7 +404,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-08-11 09:45:23" itemprop="dateModified" datetime="2020-08-11T09:45:23+08:00">2020-08-11</time>
+                <time title="修改时间：2020-08-18 09:19:37" itemprop="dateModified" datetime="2020-08-18T09:19:37+08:00">2020-08-18</time>
               
             
           </span>
@@ -497,7 +497,12 @@
 <h3 id="Python3-和-运算符"><a href="#Python3-和-运算符" class="headerlink" title="Python3  和 * 运算符"></a>Python3 <em> 和 *</em> 运算符</h3><p><a href="https://blog.csdn.net/yilovexing/article/details/80577510" target="_blank" rel="noopener">https://blog.csdn.net/yilovexing/article/details/80577510</a></p>
 <h3 id="append-extend"><a href="#append-extend" class="headerlink" title="append extend"></a>append extend</h3><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">d1 = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">d1.append([<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>])</span><br><span class="line">print(d1) <span class="comment"># ['a', 'b', 'c', ['x', 'y', 'z']]</span></span><br><span class="line"></span><br><span class="line">d2 = [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]</span><br><span class="line">d2.extend([<span class="string">'x'</span>, <span class="string">'y'</span>, <span class="string">'z'</span>])</span><br><span class="line">print(d2) <span class="comment"># ['a', 'b', 'c', 'x', 'y', 'z']</span></span><br></pre></td></tr></table></figure>
 <h3 id="range-xrange"><a href="#range-xrange" class="headerlink" title="range xrange"></a>range xrange</h3><p>range生成list<br>xrange生成生成器</p>
-<h3 id="staticmethod-and-classmethod"><a href="#staticmethod-and-classmethod" class="headerlink" title="staticmethod and classmethod"></a>staticmethod and classmethod</h3><p><a href="https://www.cnblogs.com/agnewee/p/5653936.html" target="_blank" rel="noopener">https://www.cnblogs.com/agnewee/p/5653936.html</a></p>
+<h3 id="staticmethod-and-classmethod"><a href="#staticmethod-and-classmethod" class="headerlink" title="staticmethod and classmethod"></a>staticmethod and classmethod</h3><p>共同：不需要实例化就可使用</p>
+<p>如果在@staticmethod中要调用到这个类的一些属性方法，只能直接类名.属性名或类名.方法名。</p>
+<p>而@classmethod因为持有cls参数，可以来调用类的属性，类的方法，实例化对象等，避免硬编码。</p>
+<p>staticmethod就像c++里的static一样让成员函数变为一个不需要实例化就可以访问的函数</p>
+<p>classmethod而是更符合oop范式，能做到很好的封装<br>当有子类继承时，子类也会拥有该方法</p>
+<p><a href="https://blog.csdn.net/handsomekang/article/details/9615239" target="_blank" rel="noopener">https://blog.csdn.net/handsomekang/article/details/9615239</a><br><a href="https://www.cnblogs.com/agnewee/p/5653936.html" target="_blank" rel="noopener">https://www.cnblogs.com/agnewee/p/5653936.html</a></p>
 <h3 id="python浅拷贝深拷贝"><a href="#python浅拷贝深拷贝" class="headerlink" title="python浅拷贝深拷贝"></a>python浅拷贝深拷贝</h3><p>浅拷贝：只拷贝父对象，不拷贝对象内部的子对象（还是引用）<br>深拷贝：完全拷贝父对象，和对象内部的子对象(不是引用)</p>
 <p><a href="https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html" target="_blank" rel="noopener">https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html</a></p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> copy</span><br><span class="line">a = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]]  <span class="comment">#原始对象</span></span><br><span class="line"></span><br><span class="line">b = a  <span class="comment">#赋值，传对象的引用</span></span><br><span class="line">c = copy.copy(a)  <span class="comment">#对象拷贝，浅拷贝</span></span><br><span class="line">d = copy.deepcopy(a)  <span class="comment">#对象拷贝，深拷贝</span></span><br><span class="line"></span><br><span class="line">a.append(<span class="number">5</span>)  <span class="comment">#修改对象a</span></span><br><span class="line">a[<span class="number">4</span>].append(<span class="string">'c'</span>)  <span class="comment">#修改对象a中的['a', 'b']数组对象</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">print</span> <span class="string">'a = '</span>, a</span><br><span class="line"><span class="keyword">print</span> <span class="string">'b = '</span>, b</span><br><span class="line"><span class="keyword">print</span> <span class="string">'c = '</span>, c</span><br><span class="line"><span class="keyword">print</span> <span class="string">'d = '</span>, d</span><br><span class="line"></span><br><span class="line">输出结果：</span><br><span class="line">a =  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>]</span><br><span class="line">b =  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>], <span class="number">5</span>]</span><br><span class="line">c =  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>, <span class="string">'c'</span>]]</span><br><span class="line">d =  [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>, [<span class="string">'a'</span>, <span class="string">'b'</span>]]</span><br></pre></td></tr></table></figure>
@@ -518,7 +523,7 @@
 <ul>
 <li>单核机器上,GIL是比较好的多线程并发的机制,但在多核机器上,GIL使得计算密集型Python应用无法充分利用多核;计算密集型可以采用多进程的方式运行，但是用多进程的效率也不一定会高，因为进程太重了</li>
 <li>GIL对于CPU密集不友好  对于IO密集友好</li>
-<li>GIL对于多核多线程：原因是单核下多线程，每次释放GIL，唤醒的那个线程都能获取到GIL锁，所以能够无缝执行，但多核下，CPU0释放GIL后，其他CPU上的线程都会进行竞争，但GIL可能会马上又被CPU0拿到，导致其他几个CPU上被唤醒后的线程会醒着等待到切换时间后又进入待调度状态，这样会造成线程颠簸(thrashing)，导致效率更低选用多进程</li>
+<li>GIL对于多核多线程：原因是单核下多线程，每次释放GIL，唤醒的那个线程都能获取到GIL锁，所以能够无缝执行，但多核下，CPU0释放GIL后，其他CPU上的线程都会进行竞争，但GIL可能会马上又被CPU0拿到，导致其他几个CPU上被唤醒后的线程会醒着等待到切换时间后又进入待调度状态，这样会造成线程颠簸(thrashing)，导致效率更低,选用多进程</li>
 </ul>
 <p><a href="http://cenalulu.github.io/python/gil-in-python/" target="_blank" rel="noopener">http://cenalulu.github.io/python/gil-in-python/</a><br><a href="http://dabeaz.blogspot.com/2010/01/python-gil-visualized.html" target="_blank" rel="noopener">http://dabeaz.blogspot.com/2010/01/python-gil-visualized.html</a><br><a href="https://realpython.com/python-gil/#what-problem-did-the-gil-solve-for-python" target="_blank" rel="noopener">https://realpython.com/python-gil/#what-problem-did-the-gil-solve-for-python</a><br><a href="https://zhuanlan.zhihu.com/p/20953544" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/20953544</a><br><a href="https://zhuanlan.zhihu.com/p/75780308" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/75780308</a><br><a href="https://blog.csdn.net/weixin_41594007/article/details/79485847" target="_blank" rel="noopener">https://blog.csdn.net/weixin_41594007/article/details/79485847</a></p>
 <p>问题2: 互斥锁和Gil锁的关系</p>
@@ -648,7 +653,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">48</span>
+                    <span class="site-state-item-count">49</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -725,7 +730,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">32</span>
+                      
+                    
+                    <span class="site-state-item-count">33</span>
                     <span class="site-state-item-name">分类</span>
                   </a>
                 </div>
@@ -790,7 +797,9 @@
                     
                       
                     
-                    <span class="site-state-item-count">26</span>
+                      
+                    
+                    <span class="site-state-item-count">27</span>
                     <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
