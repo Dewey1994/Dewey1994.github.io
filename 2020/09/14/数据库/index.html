@@ -104,10 +104,13 @@
 <meta property="og:site_name" content="Dewey&#39;s blog">
 <meta property="og:description" content="数据库">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2020-09-15T06:22:24.783Z">
+<meta property="og:image" content="https://www.yiibai.com/uploads/allimg/201509/1-150913101012959.png">
+<meta property="og:image" content="https://pic2.zhimg.com/80/v2-351cc2f582f83199f16e1a23fd22bc1a_720w.jpg">
+<meta property="og:updated_time" content="2020-09-16T08:55:37.230Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据库">
 <meta name="twitter:description" content="数据库">
+<meta name="twitter:image" content="https://www.yiibai.com/uploads/allimg/201509/1-150913101012959.png">
 
 
 
@@ -404,7 +407,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2020-09-15 14:22:24" itemprop="dateModified" datetime="2020-09-15T14:22:24+08:00">2020-09-15</time>
+                <time title="修改时间：2020-09-16 16:55:37" itemprop="dateModified" datetime="2020-09-16T16:55:37+08:00">2020-09-16</time>
               
             
           </span>
@@ -534,8 +537,7 @@
 <li>全文索引，搜索引擎使用的一种关键技术</li>
 </ul>
 <p>mysql索引默认b+树索引，有b+树索引和哈希索引，哈希索引适用于查找单条记录</p>
-<p>创建索引的原则：</p>
-<ul>
+<h3 id="创建索引的原则"><a href="#创建索引的原则" class="headerlink" title="创建索引的原则"></a>创建索引的原则</h3><ul>
 <li>最左前缀匹配原则，mysql一直向右匹配知道遇到范围查询（尽量把使用最频繁的往左边放）</li>
 <li>较频繁作为查询条件的字段创建索引</li>
 <li>更新频繁字段不适合创建索引</li>
@@ -587,6 +589,7 @@
 <li>效率 UNION 高于 UNION ALL</li>
 </ul>
 <p>union &amp; union all的区别：union 对于重复记录会合并  union all 对于重复记录不合并</p>
+<p>group by ,order by ,having </p>
 <h2 id="char-varchar区别"><a href="#char-varchar区别" class="headerlink" title="char varchar区别"></a>char varchar区别</h2><p><strong>char的特点</strong></p>
 <ul>
 <li>char表示定长字符串，长度是固定的；</li>
@@ -641,6 +644,40 @@
 </table>
 </div>
 <p>关于主键是聚簇索引，如果没有主键，InnoDB会选择一个唯一键来作为聚簇索引，如果没有唯一键，会生成一个隐式的主键。</p>
+<h1 id="hadoop"><a href="#hadoop" class="headerlink" title="hadoop"></a>hadoop</h1><p>架构：</p>
+<ul>
+<li>加工/计算层（也就是所谓的计算引擎，spark也是在这个地方的改进，成为了第二代的计算引擎）（mapreduce）</li>
+<li>存储层（HDFS） </li>
+<li>hadoop YARN 作业调度和集群资源管理的框架</li>
+</ul>
+<h1 id="mapreduce"><a href="#mapreduce" class="headerlink" title="mapreduce"></a>mapreduce</h1><p><img src="https://www.yiibai.com/uploads/allimg/201509/1-150913101012959.png" alt="img"></p>
+<ol>
+<li>Map 任务 (分割及映射)</li>
+<li>Reduce 任务 (重排，还原)</li>
+</ol>
+<p>细分步骤</p>
+<ol>
+<li>输入拆分</li>
+<li>mapping 得到<key,value></key,value></li>
+<li>shuffle 合并mapping得到的结果</li>
+<li>reduce 合并输出结果</li>
+</ol>
+<p>spark</p>
+<ul>
+<li>spark core</li>
+<li>spark sql</li>
+<li>spark streaming</li>
+<li>MLlib</li>
+<li>graphX</li>
+</ul>
+<p><img src="https://pic2.zhimg.com/80/v2-351cc2f582f83199f16e1a23fd22bc1a_720w.jpg" alt="img"></p>
+<p>特点：</p>
+<ul>
+<li>提供 Cache 机制来支持需要反复迭代计算或者多次数据共享,减少数据读取的 IO 开销</li>
+<li>提供了一套支持 DAG 图的分布式并行计算的编程框架,减少多次计算之间中间结果写到 Hdfs 的开销</li>
+<li>使用多线程池模型减少 Task 启动开稍, shuffle 过程中避免不必要的 sort 操作并减少磁盘 IO 操作。(Hadoop 的 Map 和 reduce 之间的 shuffle 需要 sort) </li>
+</ul>
+<p><a href="https://zhuanlan.zhihu.com/p/34436165" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/34436165</a></p>
 
       
     </div>
@@ -686,6 +723,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/09/25/知识蒸馏/" rel="prev" title="知识蒸馏">
+                知识蒸馏 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -755,7 +796,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">49</span>
+                    <span class="site-state-item-count">50</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -963,7 +1004,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库三大范式："><span class="nav-number">1.1.</span> <span class="nav-text">数据库三大范式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySIAM-与-InnoDB-区别"><span class="nav-number">1.2.</span> <span class="nav-text">MySIAM 与 InnoDB 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引类型："><span class="nav-number">1.3.</span> <span class="nav-text">索引类型：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.4.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-标准定义了四个隔离级别"><span class="nav-number">1.4.1.</span> <span class="nav-text">SQL 标准定义了四个隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发事务带来的问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">并发事务带来的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标"><span class="nav-number">1.5.</span> <span class="nav-text">游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器"><span class="nav-number">1.6.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种关联查询"><span class="nav-number">1.6.1.</span> <span class="nav-text">五种关联查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-varchar区别"><span class="nav-number">1.7.</span> <span class="nav-text">char varchar区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop、delete与truncate的区别"><span class="nav-number">1.8.</span> <span class="nav-text">drop、delete与truncate的区别</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#数据库"><span class="nav-number">1.</span> <span class="nav-text">数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据库三大范式："><span class="nav-number">1.1.</span> <span class="nav-text">数据库三大范式：</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#MySIAM-与-InnoDB-区别"><span class="nav-number">1.2.</span> <span class="nav-text">MySIAM 与 InnoDB 区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#索引类型："><span class="nav-number">1.3.</span> <span class="nav-text">索引类型：</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#创建索引的原则"><span class="nav-number">1.3.1.</span> <span class="nav-text">创建索引的原则</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#事务"><span class="nav-number">1.4.</span> <span class="nav-text">事务</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#SQL-标准定义了四个隔离级别"><span class="nav-number">1.4.1.</span> <span class="nav-text">SQL 标准定义了四个隔离级别</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#并发事务带来的问题"><span class="nav-number">1.4.2.</span> <span class="nav-text">并发事务带来的问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#游标"><span class="nav-number">1.5.</span> <span class="nav-text">游标</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#触发器"><span class="nav-number">1.6.</span> <span class="nav-text">触发器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#五种关联查询"><span class="nav-number">1.6.1.</span> <span class="nav-text">五种关联查询</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#char-varchar区别"><span class="nav-number">1.7.</span> <span class="nav-text">char varchar区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#drop、delete与truncate的区别"><span class="nav-number">1.8.</span> <span class="nav-text">drop、delete与truncate的区别</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#hadoop"><span class="nav-number">2.</span> <span class="nav-text">hadoop</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mapreduce"><span class="nav-number">3.</span> <span class="nav-text">mapreduce</span></a></li></ol></div>
             
 
           </div>
